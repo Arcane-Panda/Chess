@@ -16,3 +16,5 @@ Rules for how the pieces move, and which squares they can move too.
 Promotions
 
 For now, just pawns, queens, and kings.
+
+![Chess GUI](https://github.com/Arcane-Panda/Chess/blob/master/chessGui.png)
