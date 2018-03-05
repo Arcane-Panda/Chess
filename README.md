@@ -19,4 +19,4 @@ For now, just pawns, queens, and kings.
 
 ![Chess GUI](https://github.com/Arcane-Panda/Chess/blob/master/chessGui.png)
 
-![chess (1)](https://github.com/MaxChen11/Chess/blob/master/chess%20(1).png)
+![chess (1)](https://github.com/Arcane-Panda/Chess/blob/master/chess%20(1).png)
