@@ -9,45 +9,15 @@ int main()
   {'p','p',' ',' ',' ',' ','p','p'}, {'K','p',' ',' ',' ',' ','p','Q'},
   {'Q','p',' ',' ',' ',' ','p','K'}, {'p','p',' ',' ',' ',' ','p','p'},
   {'p','p',' ',' ',' ',' ','p','p'}, {'p','p',' ',' ',' ',' ','p','p'},};
-  for (int i = 0; i < 8; i++)
+
+  for (int j = 0; j < 8; j++)
+  {
+    for (int i = 0; i < 8; i++)
     {
-      cout << board[i][0];
+      cout << board[i][j];
     }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][1];
+    cout << endl;
   }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][2];
-  }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][3];
-  }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][4];
-  }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][5];
-  }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][6];
-  }
-cout << endl;
-for (int i = 0; i < 8; i++)
-  {
-    cout << board[i][7];
-  }
-cout << endl;
+
   return 0;
 }
