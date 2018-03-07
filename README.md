@@ -20,3 +20,5 @@ For now, just pawns, queens, and kings.
 ![Chess GUI](https://github.com/Arcane-Panda/Chess/blob/master/chessGui.png)
 
 ![Class Diagram](https://github.com/Arcane-Panda/Chess/blob/master/chess%20(1).png)
+
+Gantt chart: https://docs.google.com/spreadsheets/d/15_Wllvj9o1PbPSzZzgs7mvNbjeBVx2nXZKnUjQufH68/edit?usp=sharing
