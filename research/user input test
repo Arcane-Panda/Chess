@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+char board[8][8] = { {'p','p',' ',' ',' ',' ','p','p'}, {'p','p',' ',' ',' ',' ','p','p'},
+  {'p','p',' ',' ',' ',' ','p','p'}, {'K','p',' ',' ',' ',' ','p','Q'},
+  {'Q','p',' ',' ',' ',' ','p','K'}, {'p','p',' ',' ',' ',' ','p','p'},
+  {'p','p',' ',' ',' ',' ','p','p'}, {'p','p',' ',' ',' ',' ','p','p'},};
+
+string selection = "";
+int selectConfirm;
+string selConfOne;
+string selConfTwo;
+bool confirm = false;
+
+int main() {
+  cout << "Type the location of a board piece to select it" << endl;
+  cout << "i.e. A1" << endl;
+while (confirm == false) {
+  cin >> selection;
+  cout << "You selected " << selection << endl;
+  cout << "Confirm selection? Type 1 for yes or 0 for no" << endl;
+  cin >> selectConfirm;
+  if (selectConfirm == 0) {
+      confirm = false;
+  } else if (selectConfirm == 1) {
+    selConfOne = selection.substr(0,0);
+    selConfTwo = selection.substr(1,1);
+    cout << "You selected " << selConfOne << selConfTwo;
+      confirm = true;
+    }
+  }
+}
