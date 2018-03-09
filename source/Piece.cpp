@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//Lucas Zagal
 class Piece
 {
 public:
