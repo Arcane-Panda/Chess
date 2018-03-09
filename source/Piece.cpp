@@ -7,13 +7,16 @@ class Piece
 public:
   Piece(){};
   Piece(char typ, int x, int y, bool isWhite) ;
-  int xpos, ypos;
-  char type;
   char getType(void);
   int getXpos(void);
   int getYpos(void);
   bool getWhite(void);
+  int setCoords(int newX, int newY);  
+private:
+  int xpos, ypos;
+  char type;
   bool white;
+  
 };
 Piece::Piece(char typ, int x, int y, bool isWhite)
 {
@@ -41,6 +44,12 @@ int Piece::getYpos(void)
 bool Piece::getWhite(void)
 {
   return white;
+}
+
+int Piece::setCoords(int newX, int newY)
+{
+  x = newX;
+  y = newY;
 }
 
 
@@ -76,7 +85,7 @@ Piece board[8][8];
   Piece WK('K',3,7,true);
 
 
-  board[BP1.getXpos()][BP1.getYpos()] = BP1;
+  board[0][1] = BP1;
   board[1][1] = BP2;
   board[2][1] = BP3;
   board[3][1] = BP4;
@@ -99,10 +108,4 @@ Piece board[8][8];
 
   board[4][7] = WQ;
   board[3][7] = WK;
-
-  
-
-
-
-
 }
