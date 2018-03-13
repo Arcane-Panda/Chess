@@ -1,4 +1,5 @@
 //Lucas Zagal
+// combined piece class and board renderer
 #include <iostream>
 #include <cstdio>
 using namespace std;
