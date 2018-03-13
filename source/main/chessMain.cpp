@@ -1,0 +1,332 @@
+//Lucas Zagal
+// combined piece class and board renderer
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+class Piece
+{
+public:
+  Piece(){};
+  Piece(char typ, int x, int y, bool isWhite) ;
+  char getType(void);
+  int getXpos(void);
+  int getYpos(void);
+  bool getWhite(void);
+  void setCoords(int newX, int newY);
+  void getMoveX(void);
+
+private:
+  int xpos, ypos;
+  char type;
+  bool white;
+  bool firstMove;
+
+
+};
+Piece::Piece(char typ, int x, int y, bool isWhite)
+{
+  type = typ;
+  xpos = x;
+  ypos = y;
+  white = isWhite;
+  firstMove = true;
+}
+
+char Piece::getType(void)
+{
+  return type;
+}
+
+int Piece::getXpos(void)
+{
+  return xpos;
+}
+
+int Piece::getYpos(void)
+{
+  return ypos;
+}
+
+bool Piece::getWhite(void)
+{
+  return white;
+}
+
+void Piece::setCoords(int newX, int newY)
+{
+
+  xpos = newX;
+  ypos = newY;
+
+}
+
+void Piece::getMoveX(void)
+{
+  if(type == 'P')
+  {
+
+  }
+}
+
+
+
+
+Piece pieces[20];
+
+
+
+bool piece = true;
+bool piece1 = true;
+
+
+
+
+
+
+ int main()
+{
+  Piece BP1('P',0,1,false);
+  Piece BP2('P',1,1,false);
+  Piece BP3('P',2,1,false);
+  Piece BP4('P',3,1,false);
+  Piece BP5('P',4,1,false);
+  Piece BP6('P',5,1,false);
+  Piece BP7('P',6,1,false);
+  Piece BP8('P',7,1,false);
+
+  Piece BQ('Q',3,0,false);
+
+  Piece BK('K',4,0,false);
+
+  Piece WP1('P',0,6,true);
+  Piece WP2('P',1,6,true);
+  Piece WP3('P',2,6,true);
+  Piece WP4('P',3,6,true);
+  Piece WP5('P',4,6,true);
+  Piece WP6('P',5,6,true);
+  Piece WP7('P',6,6,true);
+  Piece WP8('P',7,6,true);
+
+  Piece WQ('Q',4,7,true);
+
+  Piece WK('K',3,7,true);
+
+
+  pieces[0] = BP1;
+  pieces[1] = BP2;
+  pieces[2] = BP3;
+  pieces[3] = BP4;
+  pieces[4] = BP5;
+  pieces[5] = BP6;
+  pieces[6] = BP7;
+  pieces[7] = BP8;
+
+  pieces[8] = BQ;
+  pieces[9] = BK;
+
+  pieces[10] = WP1;
+  pieces[11] = WP2;
+  pieces[12] = WP3;
+  pieces[13] = WP4;
+  pieces[14] = WP5;
+  pieces[15] = WP6;
+  pieces[16] = WP7;
+  pieces[17] = WP8;
+
+  pieces[18] = WQ;
+  pieces[19] = WK;
+  string selection = "";
+  int selectConfirm;
+int pieceConfirm;
+
+string selConfOne;
+string selConfTwo;
+int arrayX;
+int arrayY;
+  while(1==1)
+  {
+  //by zach greenberg
+  system("clear");
+  int arrayLength = sizeof(pieces)/sizeof(*pieces);
+
+
+    for(int j=0;j < 8; j+=2){ // rows
+
+     for( int l =0; l < 8;l+=2 ){ //Columns
+
+        for(int i = 0; i < arrayLength; i++){ // pieces
+
+          if(pieces[i].getYpos() == j && pieces[i].getXpos() ==l && piece == true){
+
+            printf("\x1b[37;40m %c \x1b[0m" ,pieces[i].getType());//black
+            piece = false;
+
+          }
+        }
+        if(piece){
+
+           printf("\x1b[37;40m   \x1b[0m" );// black
+
+          }
+       for(int i = 0; i < arrayLength; i++){
+        if(pieces[i].getYpos() == j && pieces[i].getXpos() ==l+1 && piece1 == true){
+
+            printf("\x1b[37;42m %c \x1b[0m" , pieces[i].getType());//green
+            piece1 = false;
+         }
+       }
+
+       if(piece1){
+           printf("\x1b[37;42m   \x1b[0m" );//green
+       }
+       piece = true;
+       piece1 = true;
+     }
+     printf("\n");
+
+     for( int l = 0; l < 8;l+=2 ){ // Columns
+
+        for(int i = 0; i < arrayLength; i++){ // pieces
+
+          if(pieces[i].getYpos() == j+1 && pieces[i].getXpos() == l && piece == true){
+
+            printf("\x1b[37;42m %c \x1b[0m" , pieces[i].getType());//green
+            piece = false;
+
+          }
+        }
+
+        if(piece){
+          printf("\x1b[37;42m   \x1b[0m" );//green
+
+
+          }
+
+         for(int i = 0; i < arrayLength; i++){
+          if(pieces[i].getYpos() == j+1 && pieces[i].getXpos() == l+1 && piece1 == true){
+
+            printf("\x1b[37;40m %c \x1b[0m" , pieces[i].getType());//black
+            piece1 = false;
+         }
+        }
+
+       if(piece1){
+
+
+         printf("\x1b[37;40m   \x1b[0m" );// black
+       }
+       piece = true;
+       piece1 = true;
+     }
+     printf("\n");
+    }
+
+
+
+//pyae sone
+
+
+  cout << "Type the location of a board piece to select it" << endl;
+  cout << "i.e. A1" << endl;
+
+    cin >> selection;
+    cout << "You selected " << selection << endl;
+    cout << "Confirm selection? Type 1 for yes or 0 for no" << endl;
+    cin >> selectConfirm;
+    if (selectConfirm == 0) {
+      cout << "Type the location of a board piece to select it" << endl;
+      cout << "i.e. A1" << endl;
+    } else if (selectConfirm == 1) {
+       selConfOne = selection.substr(0,1);
+       selConfTwo = selection.substr(1,1);
+       cout << "You selected " << selConfOne << selConfTwo << endl;
+        if (selConfOne == "A") {
+          arrayX = 0;
+        } else if (selConfOne == "B") {
+          arrayX = 1;
+        } else if (selConfOne == "C") {
+          arrayX = 2;
+        } else if (selConfOne == "D") {
+          arrayX = 3;
+        } else if (selConfOne == "E") {
+          arrayX = 4;
+        } else if (selConfOne == "F") {
+          arrayX = 5;
+        } else if (selConfOne == "G") {
+          arrayX = 6;
+        } else if (selConfOne == "H") {
+          arrayX = 7;
+        }
+        if (selConfTwo == "1") {
+          arrayY = 7;
+        } else if (selConfTwo == "2") {
+          arrayY = 6;
+        } else if (selConfTwo == "3") {
+          arrayY = 5;
+        } else if (selConfTwo == "4") {
+          arrayY = 4;
+        } else if (selConfTwo == "5") {
+          arrayY = 3;
+        } else if (selConfTwo == "6") {
+          arrayY = 2;
+        } else if (selConfTwo == "7") {
+          arrayY = 1;
+        } else if (selConfTwo == "8") {
+          arrayY = 0;
+        }
+
+    }
+
+
+    for (int i = 0; i < sizeof(pieces); i++)
+    {
+      if (pieces[i].getYpos() == arrayY && pieces[i].getXpos() == arrayX)
+      {
+        cout << "Where you wanna move it?" << endl;
+        cin >> selection;
+        selConfOne = selection.substr(0,1);
+        selConfTwo = selection.substr(1,1);
+        cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
+        if (selConfOne == "A") {
+          arrayX = 0;
+        } else if (selConfOne == "B") {
+          arrayX = 1;
+        } else if (selConfOne == "C") {
+          arrayX = 2;
+        } else if (selConfOne == "D") {
+          arrayX = 3;
+        } else if (selConfOne == "E") {
+          arrayX = 4;
+        } else if (selConfOne == "F") {
+          arrayX = 5;
+        } else if (selConfOne == "G") {
+          arrayX = 6;
+        } else if (selConfOne == "H") {
+          arrayX = 7;
+        }
+        if (selConfTwo == "1") {
+          arrayY = 7;
+        } else if (selConfTwo == "2") {
+          arrayY = 6;
+        } else if (selConfTwo == "3") {
+          arrayY = 5;
+        } else if (selConfTwo == "4") {
+          arrayY = 4;
+        } else if (selConfTwo == "5") {
+          arrayY = 3;
+        } else if (selConfTwo == "6") {
+          arrayY = 2;
+        } else if (selConfTwo == "7") {
+          arrayY = 1;
+        } else if (selConfTwo == "8") {
+          arrayY = 0;
+        }
+        pieces[i].setCoords(arrayX,arrayY);
+      }
+    }
+
+
+}
+return 0;
+}
