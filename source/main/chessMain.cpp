@@ -58,13 +58,14 @@ void Piece::setCoords(int newX, int newY)
 
   xpos = newX;
   ypos = newY;
+  firstMove = false;
 
 }
 
 bool Piece::getFirst(void)
 {
   return firstMove;
-  firstMove = false;
+  //firstMove = false;
 }
 
 
@@ -351,7 +352,6 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
             } else if(arrayY - pieces[i].getYpos() == -1)
             {
               pieces[i].setCoords(arrayX,arrayY);
-              pieces[i].getFirst();
             } else
             {
               cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
@@ -364,12 +364,14 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
             } else if(arrayY - pieces[i].getYpos() == 1)
             {
               pieces[i].setCoords(arrayX,arrayY);
-              pieces[i].getFirst();
             } else
             {
               cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
             }
           }
+        } else
+        {
+          pieces[i].setCoords(arrayX,arrayY);
         }
       }
     }
