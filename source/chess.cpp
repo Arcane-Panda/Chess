@@ -50,8 +50,7 @@ bool Piece::getWhite(void)
 
 int Piece::setCoords(int newX, int newY)
 {
-//  x = newX;
-//  y = newY;
+
   xpos = newX;
   ypos = newY;
 
