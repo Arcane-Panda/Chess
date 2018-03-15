@@ -1,0 +1,32 @@
+if(arrayY- pieces[i].getYpos() == -1 && arrayX == pieces[i].getXpos())
+          {
+            //move up
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY- pieces[i].getYpos() == -1 && arrayX - pieces[i].getXpos() == 1)
+          {
+            //move right up
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY- pieces[i].getYpos() == -1 && arrayX - pieces[i].getXpos() == -1)
+          {
+            //move left up
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY == pieces[i].getYpos()  && arrayX - pieces[i].getXpos() == -1)
+          {
+            //move left
+            pieces[i].setCoords(arrayX,arrayY);
+          }else if(arrayY == pieces[i].getYpos()  && arrayX - pieces[i].getXpos() == 1)
+          {
+            //move right
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX - pieces[i].getXpos() == -1)
+          {
+            //move down left
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX - pieces[i].getXpos() == 1)
+          {
+            //move down right
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX == pieces[i].getXpos())
+          {
+            //move down
+            pieces[i].setCoords(arrayX,arrayY);
