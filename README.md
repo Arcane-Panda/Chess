@@ -17,7 +17,7 @@ Promotions
 
 For now, just pawns, queens, and kings.
 
-![Chess GUI](https://github.com/Arcane-Panda/Chess/blob/master/chessGui.png)
+![Chess GUI](https://github.com/Arcane-Panda/Chess/blob/master/images/realGUI.png)
 
 ![Class Diagram](https://github.com/Arcane-Panda/Chess/blob/master/chess%20(1).png)
 
