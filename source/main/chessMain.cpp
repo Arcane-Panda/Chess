@@ -59,6 +59,7 @@ void Piece::setCoords(int newX, int newY)
   xpos = newX;
   ypos = newY;
   firstMove = false;
+  cout << "\n\n\n\n\n\n\n\n";
 
 }
 
@@ -145,14 +146,15 @@ string selConfOne;
 string selConfTwo;
 int arrayX;
 int arrayY;
+int arrayLength = sizeof(pieces)/sizeof(*pieces);
   while(1==1)
   {
   //by zach greenberg
   //system("clear");
-  int arrayLength = sizeof(pieces)/sizeof(*pieces);
 
 
-cout<< endl << endl<< "    A  B  C  D  E  F  G  H " << endl;
+
+cout  << endl << endl<< "    A  B  C  D  E  F  G  H " << endl;
   for(int j=0;j < 8; j+=2){ // rows
 
    cout<< " " << 8-j << " ";
@@ -294,10 +296,13 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
           arrayY = 0;
         }
 
+    } else
+    {
+      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
     }
 
 
-    for (int i = 0; i < sizeof(pieces); i++)
+    for (int i = 0; i < arrayLength; i++)
     {
       if (pieces[i].getYpos() == arrayY && pieces[i].getXpos() == arrayX)
       {
@@ -305,7 +310,7 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
         cin >> selection;
         selConfOne = selection.substr(0,1);
         selConfTwo = selection.substr(1,1);
-        cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
+      //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
         if (selConfOne == "A" || selConfOne == "a") {
           arrayX = 0;
         } else if (selConfOne == "B" || selConfOne == "b") {
@@ -340,28 +345,29 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
         } else if (selConfTwo == "8") {
           arrayY = 0;
         }
+        //lucas zagal
         //Check moves here//
         if (pieces[i].getType() == 'P')
         {
           if(pieces[i].getWhite() == true)
           {
 
-            if(arrayY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true)
+            if(arrayY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && arrayX == pieces[i].getXpos())
             {
               pieces[i].setCoords(arrayX,arrayY);
-            } else if(arrayY - pieces[i].getYpos() == -1)
+            } else if(arrayY - pieces[i].getYpos() == -1 && arrayX == pieces[i].getXpos())
             {
               pieces[i].setCoords(arrayX,arrayY);
             } else
             {
-              cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+              cout << endl << endl << endl << endl<< endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
             }
           } else
           {
-            if(arrayY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true)
+            if(arrayY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true && arrayX == pieces[i].getXpos())
             {
               pieces[i].setCoords(arrayX,arrayY);
-            } else if(arrayY - pieces[i].getYpos() == 1)
+            } else if(arrayY - pieces[i].getYpos() == 1 && arrayX == pieces[i].getXpos())
             {
               pieces[i].setCoords(arrayX,arrayY);
             } else
@@ -369,7 +375,7 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
               cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
             }
           }
-        } else
+        } else if(pieces[i].getType() == 'Q')
         {
           pieces[i].setCoords(arrayX,arrayY);
         }
