@@ -112,7 +112,7 @@ bool piece1 = true;
 
   Piece WQ('Q',4,7,true);
 
-  Piece WK('K',3,7,true);
+  Piece WK('K',3,7,true); 
 
 
   pieces[0] = BP1;
@@ -139,7 +139,7 @@ bool piece1 = true;
   pieces[18] = WQ;
   pieces[19] = WK;
   string selection = "";
-  int selectConfirm;
+  char selectConfirm;
 int pieceConfirm;
 
 string selConfOne;
@@ -252,12 +252,12 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
 
     cin >> selection;
     cout << "You selected " << selection << endl;
-    cout << "Confirm selection? Type 1 for yes or 0 for no" << endl;
+    cout << "Confirm selection? y/n" << endl;
     cin >> selectConfirm;
-    if (selectConfirm == 0) {
+    if (selectConfirm == 'n') {
       cout << "Type the location of a board piece to select it" << endl;
       cout << "i.e. A1" << endl;
-    } else if (selectConfirm == 1) {
+    } else if (selectConfirm == 'y') {
        selConfOne = selection.substr(0,1);
        selConfTwo = selection.substr(1,1);
       // cout << "You selected " << selConfOne << selConfTwo << endl;
@@ -378,11 +378,49 @@ cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
         } else if(pieces[i].getType() == 'Q')
         {
           pieces[i].setCoords(arrayX,arrayY);
+        } else if(pieces[i].getType() == 'K')
+        {
+
+          if(arrayY- pieces[i].getYpos() == -1 && arrayX == pieces[i].getXpos())
+          {
+            //move up
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY- pieces[i].getYpos() == -1 && arrayX - pieces[i].getXpos() == 1)
+          {
+            //move right up
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY- pieces[i].getYpos() == -1 && arrayX - pieces[i].getXpos() == -1)
+          {
+            //move left up
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY == pieces[i].getYpos()  && arrayX - pieces[i].getXpos() == -1)
+          {
+            //move left
+            pieces[i].setCoords(arrayX,arrayY);
+          }else if(arrayY == pieces[i].getYpos()  && arrayX - pieces[i].getXpos() == 1)
+          {
+            //move right
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX - pieces[i].getXpos() == -1)
+          {
+            //move down left
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX - pieces[i].getXpos() == 1)
+          {
+            //move down right
+            pieces[i].setCoords(arrayX,arrayY);
+          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX == pieces[i].getXpos())
+          {
+            //move down
+            pieces[i].setCoords(arrayX,arrayY);
+          } else
+          {
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
+          }
         }
       }
     }
 
-
-}
 return 0;
 }
