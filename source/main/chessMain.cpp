@@ -428,7 +428,7 @@ void setRandomTypes()
 //pyae sone
   userInput();
 
-  //Lucas Zagal
+  //lucas zagal
   for (int i = 0; i < arrayLength; i ++)
   {
     if (pieces[i].getXpos() == oldArrayX && pieces[i].getYpos() == oldArrayY)
