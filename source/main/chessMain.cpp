@@ -1,18 +1,15 @@
-// combined piece class and board renderer
-
-
-//Lucas Zagal
-
 #include <iostream>
 #include <cstdio>
+#include <cstdlib>
 using namespace std;
-
+//Lucas Zagal
 class Piece
 {
 public:
   Piece(){};
   Piece(char typ, int x, int y, bool isWhite) ;
   char getType(void);
+  void setType(char input);
   int getXpos(void);
   int getYpos(void);
   bool getWhite(void);
@@ -72,6 +69,11 @@ bool Piece::getFirst(void)
   //firstMove = false;
 }
 
+void Piece::setType(char input)
+{
+  type = input;
+}
+
 
 //global variables
 Piece BP1('P',0,1,false);
@@ -117,6 +119,8 @@ int oldArrayY;
 int newArrayX;
 int newArrayY;
 int arrayLength = sizeof(pieces)/sizeof(*pieces);
+string mode = "Random";
+int randomInt;
 
 // functions
 
@@ -389,8 +393,33 @@ void King(int i)
     cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
   }
 }
+
+
+void setRandomTypes()
+{
+  for (int i = 0; i < arrayLength; i++)
+    {
+      randomInt = rand();
+      if(pieces[i].getType() != 'K')
+        {
+          if (randomInt <= 1073741820)
+            {
+              pieces[i].setType('P');
+            } else
+              {
+                pieces[i].setType('Q');
+              }
+        }
+    }
+}
+
  int main()
 {
+
+  if (mode == "Random")
+  {
+    setRandomTypes();
+  }
   while(1==1)
   {
   //by zach greenberg
