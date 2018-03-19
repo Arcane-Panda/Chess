@@ -1,6 +1,5 @@
 // by zach greenberg
 
-
 #include <iostream>
 #include <string>
 #include <cstdio>
@@ -14,6 +13,7 @@ bool incorectSelect = false;
 bool startMenu = true;
 bool instructionsMenu = false;
 bool modeMenu = false;
+string mode;
 
 void gameStart(){
 
@@ -84,7 +84,7 @@ void modes(){
     cout<<"                                                  "<< endl;
     cout<<"                Please select a mode              "<< endl;
     cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"                      Random                      "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -104,9 +104,11 @@ void modes(){
 
     if(menuSelect == "Exit"|| menuSelect == "exit"){
       modeMenu = false;
-    } else {
+    } else if(menuSelect == "Random" || menuSelect == "random") {
+    mode = "Random";    
+  } else {
     incorectSelect = true;
-    }
+  }
   }
 }
 
