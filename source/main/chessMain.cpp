@@ -112,8 +112,10 @@ int pieceConfirm;
 
 string selConfOne;
 string selConfTwo;
-int arrayX;
-int arrayY;
+int oldArrayX;
+int oldArrayY;
+int newArrayX;
+int newArrayY;
 int arrayLength = sizeof(pieces)/sizeof(*pieces);
 
 // functions
@@ -213,30 +215,6 @@ void display(){
 }
 
 void userInput(){
-
-
-
-}
-
- int main()
-{
-
-
-
-  while(1==1)
-  {
-  //by zach greenberg
-  //system("clear");
-
-
-display();
-
-//pyae sone
-
-userInput();
-
-
-
   cout << "Type the location of a board piece to select it" << endl;
   cout << "i.e. A1" << endl;
 
@@ -252,38 +230,38 @@ userInput();
        selConfTwo = selection.substr(1,1);
       // cout << "You selected " << selConfOne << selConfTwo << endl;
         if (selConfOne == "A" || selConfOne == "a") {
-          arrayX = 0;
+          oldArrayX = 0;
         } else if (selConfOne == "B" || selConfOne == "b") {
-          arrayX = 1;
+          oldArrayX = 1;
         } else if (selConfOne == "C" || selConfOne == "c") {
-          arrayX = 2;
+          oldArrayX = 2;
         } else if (selConfOne == "D" || selConfOne == "d") {
-          arrayX = 3;
+          oldArrayX = 3;
         } else if (selConfOne == "E" || selConfOne == "e") {
-          arrayX = 4;
+          oldArrayX = 4;
         } else if (selConfOne == "F" || selConfOne == "f") {
-          arrayX = 5;
+          oldArrayX = 5;
         } else if (selConfOne == "G" || selConfOne == "g") {
-          arrayX = 6;
+          oldArrayX = 6;
         } else if (selConfOne == "H" || selConfOne == "h") {
-          arrayX = 7;
+          oldArrayX = 7;
         }
         if (selConfTwo == "1") {
-          arrayY = 7;
+          oldArrayY = 7;
         } else if (selConfTwo == "2") {
-          arrayY = 6;
+          oldArrayY = 6;
         } else if (selConfTwo == "3") {
-          arrayY = 5;
+          oldArrayY = 5;
         } else if (selConfTwo == "4") {
-          arrayY = 4;
+          oldArrayY = 4;
         } else if (selConfTwo == "5") {
-          arrayY = 3;
+          oldArrayY = 3;
         } else if (selConfTwo == "6") {
-          arrayY = 2;
+          oldArrayY = 2;
         } else if (selConfTwo == "7") {
-          arrayY = 1;
+          oldArrayY = 1;
         } else if (selConfTwo == "8") {
-          arrayY = 0;
+          oldArrayY = 0;
         }
 
     } else
@@ -293,7 +271,7 @@ userInput();
 
     for (int i = 0; i < arrayLength; i++)
     {
-      if (pieces[i].getYpos() == arrayY && pieces[i].getXpos() == arrayX)
+      if (pieces[i].getYpos() == oldArrayY && pieces[i].getXpos() == oldArrayX)
       {
         cout << "Select the space to where you wish to move your selection" << endl;
         cin >> selection;
@@ -301,115 +279,142 @@ userInput();
         selConfTwo = selection.substr(1,1);
       //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
         if (selConfOne == "A" || selConfOne == "a") {
-          arrayX = 0;
+          newArrayX = 0;
         } else if (selConfOne == "B" || selConfOne == "b") {
-          arrayX = 1;
+          newArrayX = 1;
         } else if (selConfOne == "C" || selConfOne == "c") {
-          arrayX = 2;
+          newArrayX = 2;
         } else if (selConfOne == "D" || selConfOne == "d") {
-          arrayX = 3;
+          newArrayX = 3;
         } else if (selConfOne == "E" || selConfOne == "e") {
-          arrayX = 4;
+          newArrayX = 4;
         } else if (selConfOne == "F" || selConfOne == "f") {
-          arrayX = 5;
+          newArrayX = 5;
         } else if (selConfOne == "G" || selConfOne == "g") {
-          arrayX = 6;
+          newArrayX = 6;
         } else if (selConfOne == "H" || selConfOne == "h") {
-          arrayX = 7;
+          newArrayX = 7;
         }
         if (selConfTwo == "1") {
-          arrayY = 7;
+          newArrayY = 7;
         } else if (selConfTwo == "2") {
-          arrayY = 6;
+          newArrayY = 6;
         } else if (selConfTwo == "3") {
-          arrayY = 5;
+          newArrayY = 5;
         } else if (selConfTwo == "4") {
-          arrayY = 4;
+          newArrayY = 4;
         } else if (selConfTwo == "5") {
-          arrayY = 3;
+          newArrayY = 3;
         } else if (selConfTwo == "6") {
-          arrayY = 2;
+          newArrayY = 2;
         } else if (selConfTwo == "7") {
-          arrayY = 1;
+          newArrayY = 1;
         } else if (selConfTwo == "8") {
-          arrayY = 0;
-        }
-        //lucas zagal
-        //Check moves here//
-        if (pieces[i].getType() == 'P')
-        {
-          if(pieces[i].getWhite() == true)
-          {
-
-            if(arrayY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && arrayX == pieces[i].getXpos())
-            {
-              pieces[i].setCoords(arrayX,arrayY);
-            } else if(arrayY - pieces[i].getYpos() == -1 && arrayX == pieces[i].getXpos())
-            {
-              pieces[i].setCoords(arrayX,arrayY);
-            } else
-            {
-              cout << endl << endl << endl << endl<< endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-            }
-          } else
-          {
-            if(arrayY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true && arrayX == pieces[i].getXpos())
-            {
-              pieces[i].setCoords(arrayX,arrayY);
-            } else if(arrayY - pieces[i].getYpos() == 1 && arrayX == pieces[i].getXpos())
-            {
-              pieces[i].setCoords(arrayX,arrayY);
-            } else
-            {
-              cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-            }
-          }
-        } else if(pieces[i].getType() == 'Q')
-        {
-          pieces[i].setCoords(arrayX,arrayY);
-        } else if(pieces[i].getType() == 'K')
-        {
-
-          if(arrayY- pieces[i].getYpos() == -1 && arrayX == pieces[i].getXpos())
-          {
-            //move up
-            pieces[i].setCoords(arrayX,arrayY);
-          } else if(arrayY- pieces[i].getYpos() == -1 && arrayX - pieces[i].getXpos() == 1)
-          {
-            //move right up
-            pieces[i].setCoords(arrayX,arrayY);
-          } else if(arrayY- pieces[i].getYpos() == -1 && arrayX - pieces[i].getXpos() == -1)
-          {
-            //move left up
-            pieces[i].setCoords(arrayX,arrayY);
-          } else if(arrayY == pieces[i].getYpos()  && arrayX - pieces[i].getXpos() == -1)
-          {
-            //move left
-            pieces[i].setCoords(arrayX,arrayY);
-          }else if(arrayY == pieces[i].getYpos()  && arrayX - pieces[i].getXpos() == 1)
-          {
-            //move right
-            pieces[i].setCoords(arrayX,arrayY);
-          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX - pieces[i].getXpos() == -1)
-          {
-            //move down left
-            pieces[i].setCoords(arrayX,arrayY);
-          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX - pieces[i].getXpos() == 1)
-          {
-            //move down right
-            pieces[i].setCoords(arrayX,arrayY);
-          } else if(arrayY - pieces[i].getYpos() == 1 && arrayX == pieces[i].getXpos())
-          {
-            //move down
-            pieces[i].setCoords(arrayX,arrayY);
-          } else
-          {
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-          }
-          }
+          newArrayY = 0;
         }
       }
-    }
+}
 
-return 0;
+
+}
+
+
+
+void Pawn(int i)
+{
+  if(pieces[i].getWhite() == true)
+  {
+
+    if(newArrayY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && newArrayX == pieces[i].getXpos())
+    {
+      pieces[i].setCoords(newArrayX,newArrayY);
+    } else if(newArrayY - pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos())
+    {
+      pieces[i].setCoords(newArrayX,newArrayY);
+    } else
+    {
+      cout << endl << endl << endl << endl<< endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
+  } else
+  {
+    if(newArrayY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true && newArrayX == pieces[i].getXpos())
+    {
+      pieces[i].setCoords(newArrayX,newArrayY);
+    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos())
+    {
+      pieces[i].setCoords(newArrayX,newArrayY);
+    } else
+    {
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
+  }
+}
+
+void King(int i)
+{
+  if(newArrayY- pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos())
+  {
+    //move up
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == 1)
+  {
+    //move right up
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == -1)
+  {
+    //move left up
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == -1)
+  {
+    //move left
+    pieces[i].setCoords(newArrayX,newArrayY);
+  }else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == 1)
+  {
+    //move right
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == -1)
+  {
+    //move down left
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == 1)
+  {
+    //move down right
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos())
+  {
+    //move down
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else
+  {
+    cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+  }
+}
+ int main()
+{
+  while(1==1)
+  {
+  //by zach greenberg
+  display();
+
+//pyae sone
+  userInput();
+
+  //Lucas Zagal
+  for (int i = 0; i < arrayLength; i ++)
+  {
+    if (pieces[i].getXpos() == oldArrayX && pieces[i].getYpos() == oldArrayY)
+    {
+      if (pieces[i].getType() == 'P')
+      {
+        Pawn(i);
+      } else if (pieces[i].getType() == 'K')
+      {
+        King(i);
+      } else if (pieces[i].getType() == 'Q')
+      {
+        //queen movement method
+      }
+    }
+  }
+}
 }
