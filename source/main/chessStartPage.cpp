@@ -12,24 +12,123 @@ string menuSelect;
 string incorect;
 bool incorectSelect = false;
 bool startMenu = true;
+bool instructionsMenu = false;
+bool modeMenu = false;
 
-int main() {
+void gameStart(){
 
+  cout<< "started";
+}
 
-  while(startMenu){
-    cout << "\e[8;24;50t"<< endl<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    //  system("clear");
+void instructions(){
+
+  while(instructionsMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
     if(incorectSelect == false){
       incorect = "                                                  ";
     }else{
       incorect = " Please select a valid menu                       ";
     }
 
-    //  cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                 Welcome to Chess!                "<< endl;
     cout<<"                                                  "<< endl;
+    cout<<"                   Instructions                   "<< endl;
+    cout<<"                        ...                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      instructionsMenu = false;
+    }else {
+    incorectSelect = true;
+    }
+  }
+}
+
+void modes(){
+
+  while(modeMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                Please select a mode              "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      modeMenu = false;
+    } else {
+    incorectSelect = true;
+    }
+  }
+}
+
+void startPage(){
+
+  while(startMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
+    cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                       Start                      "<< endl;
@@ -41,6 +140,7 @@ int main() {
     cout<<"                       Exit                       "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
     cout<<incorect<< endl;
     incorectSelect = false;
     cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
@@ -48,16 +148,24 @@ int main() {
 
 
     if(menuSelect == "Start"|| menuSelect == "start"){
-      cout<<"1";
-    } else if(menuSelect == "Instuctions"|| menuSelect == "instuctions"){
-      cout<<"2";
+      gameStart();
+    }else if(menuSelect == "Instructions"|| menuSelect == "instructions"){
+      instructionsMenu = true;
+      instructions();
     } else if(menuSelect == "Modes"|| menuSelect == "modes"){
-      cout<<"3";
+      modeMenu = true;
+      modes();
     } else if(menuSelect == "Exit"|| menuSelect == "exit"){
       startMenu = false;
     } else {
     incorectSelect = true;
     }
   }
+}
+
+int main() {
+
+  startPage();
+
   return 0;
 }
