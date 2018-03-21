@@ -22,3 +22,9 @@ For now, just pawns, queens, and kings.
 ![Class Diagram](https://github.com/Arcane-Panda/Chess/blob/master/chess%20(1).png)
 
 Gantt chart: https://docs.google.com/spreadsheets/d/15_Wllvj9o1PbPSzZzgs7mvNbjeBVx2nXZKnUjQufH68/edit?usp=sharing
+
+
+### Download Instructions
+Go to the source folder, click on main, and download the chessMain.cpp
+
+The reason we have everything in one file, is because for some wierd reason that has to do with network admin permissions, header files don't work.
