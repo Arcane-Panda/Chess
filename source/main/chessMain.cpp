@@ -75,7 +75,7 @@ void Piece::setType(char input)
   type = input;
 }
 
-vector <int> v;
+
 //global variables
 Piece BP1('P',0,1,false);
 Piece BP2('P',1,1,false);
@@ -99,10 +99,11 @@ Piece WP6('P',5,6,true);
 Piece WP7('P',6,6,true);
 Piece WP8('P',7,6,true);
 
-Piece WQ('Q',4,7,true);
+Piece WQ('Q',3,7,true);
 
-Piece WK('K',3,7,true);
-
+Piece WK('K',4,7,true);
+vector<int> possibleMovesX;
+vector<int> possibleMovesY;
 Piece pieces[20] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK};
 
 
@@ -123,6 +124,7 @@ int arrayLength = sizeof(pieces)/sizeof(*pieces);
 string mode = "Rando";
 int randomInt;
 bool validMove = false;
+int possibleMove;
 
 // functions
 
@@ -489,15 +491,31 @@ void setRandomTypes()
         }
     }
 }
-
+//make this bool
 void check(int i)
 {
-  for (int i = 0; i < arrayLength; i++)
+  possibleMovesX.clear();
+  possibleMovesY.clear();
+  if (pieces[i].getType() == 'P')
   {
-    if (pieces[i].getWhite() == true)
+    if (pieces[i].getWhite())
     {
+      // white pawn diagonal right
+      possibleMove = pieces[i].getXpos() + 1;
+      possibleMovesX.push_back(possibleMove);
+      possibleMove = pieces[i].getYpos() - 1;
+      possibleMovesY.push_back(possibleMove);
 
+      //white pawn diagonal left
+      possibleMove = pieces[i].getXpos() - 1;
+      possibleMovesX.push_back(possibleMove);
+      possibleMove = pieces[i].getYpos() - 1;
+      possibleMovesY.push_back(possibleMove);
     }
+  }
+  for (int i = 0; i < possibleMovesX.size(); i++)
+  {
+    cout << possibleMovesX[i] << " " << possibleMovesY[i] << endl;
   }
 }
 
@@ -523,31 +541,31 @@ void promotion(int i)
   }
   while(1==1)
   {
-  //by zach greenberg
-  display();
+    //by zach greenberg
+    display();
 
-//pyae sone
-  userInput();
+    //pyae sone
+    userInput();
 
-  //lucas zagal
-  for (int i = 0; i < arrayLength; i ++)
-  {
-    if (pieces[i].getXpos() == oldArrayX && pieces[i].getYpos() == oldArrayY)
+    //lucas zagal
+    for (int i = 0; i < arrayLength; i ++)
     {
-      if (pieces[i].getType() == 'P')
+      if (pieces[i].getXpos() == oldArrayX && pieces[i].getYpos() == oldArrayY)
       {
-        Pawn(i);
-        promotion(i);
-        check(i);
-      } else if (pieces[i].getType() == 'K')
-      {
-        King(i);
-      } else if (pieces[i].getType() == 'Q')
-      {
+        if (pieces[i].getType() == 'P')
+        {
+          Pawn(i);
+          promotion(i);
+          check(i);
+        } else if (pieces[i].getType() == 'K')
+        {
+          King(i);
+        } else if (pieces[i].getType() == 'Q')
+        {
         // pyae sone
         Queen(i);
+        }
       }
     }
   }
-}
 }
