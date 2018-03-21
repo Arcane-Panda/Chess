@@ -515,6 +515,7 @@ void check(int i)
   }
   for (int i = 0; i < possibleMovesX.size(); i++)
   {
+    cout << "These are spaces that the pawn can take" << endl;
     cout << possibleMovesX[i] << " " << possibleMovesY[i] << endl;
   }
 }
