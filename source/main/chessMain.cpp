@@ -354,44 +354,62 @@ void Pawn(int i)
   }
 }
 
-void King(int i)
-{
-  if(newArrayY- pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos())
-  {
-    //move up
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == 1)
-  {
-    //move right up
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == -1)
-  {
-    //move left up
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == -1)
-  {
-    //move left
-    pieces[i].setCoords(newArrayX,newArrayY);
-  }else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == 1)
-  {
-    //move right
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == -1)
-  {
-    //move down left
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == 1)
-  {
-    //move down right
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos())
-  {
-    //move down
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else
-  {
-    cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-  }
+void King(int i){
+
+  validMove = false;
+
+    if(newArrayY- pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos())
+    {
+      //move up
+      validMove = true;
+    } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == 1)
+    {
+      //move right up
+      validMove = true;
+    } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == -1)
+    {
+      //move left up
+      validMove = true;
+    } else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == -1)
+    {
+      //move left
+      validMove = true;
+    }else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == 1)
+    {
+      //move right
+      validMove = true;
+    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == -1)
+    {
+      //move down left
+      validMove = true;
+    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == 1)
+    {
+      //move down right
+      validMove = true;
+    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos())
+    {
+      //move down
+      validMove = true;
+    } else{
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+      validMove = false;
+    }
+    if(validMove){
+      for(int j = 0; j < arrayLength; j++){
+        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+          if(pieces[j].getWhite() == pieces[i].getWhite()){
+            validMove = false;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
+          else{
+            pieces[j].setCoords(9,9);
+          }
+        }
+      }
+      if(validMove){
+        pieces[i].setCoords(newArrayX,newArrayY);
+      }
+    }
 }
 
 void Queen(int i)
