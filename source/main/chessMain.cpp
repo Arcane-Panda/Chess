@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
 using namespace std;
 //Lucas Zagal
 class Piece
@@ -74,7 +75,7 @@ void Piece::setType(char input)
   type = input;
 }
 
-
+vector <int> v;
 //global variables
 Piece BP1('P',0,1,false);
 Piece BP2('P',1,1,false);
@@ -121,6 +122,7 @@ int newArrayY;
 int arrayLength = sizeof(pieces)/sizeof(*pieces);
 string mode = "Rando";
 int randomInt;
+bool validMove = false;
 
 // functions
 
@@ -221,7 +223,7 @@ void display(){
 void userInput(){
   cout << "Type the location of a board piece to select it" << endl;
   cout << "i.e. A1" << endl;
-
+// make sure that selected space isn't empty
     cin >> selection;
     cout << "You selected " << selection << endl;
     cout << "Confirm selection? y/n" << endl;
@@ -232,7 +234,6 @@ void userInput(){
     } else if (selectConfirm == 'y') {
        selConfOne = selection.substr(0,1);
        selConfTwo = selection.substr(1,1);
-      // cout << "You selected " << selConfOne << selConfTwo << endl;
         if (selConfOne == "A" || selConfOne == "a") {
           oldArrayX = 0;
         } else if (selConfOne == "B" || selConfOne == "b") {
@@ -354,8 +355,8 @@ void Pawn(int i)
   }
 }
 
-void King(int i){
-
+void King(int i)
+{
   validMove = false;
 
     if(newArrayY- pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos())
@@ -412,6 +413,8 @@ void King(int i){
     }
 }
 
+
+
 void Queen(int i)
 {
   if (newArrayX - pieces[i].getXpos() == newArrayY - pieces[i].getYpos()) {
@@ -422,17 +425,20 @@ void Queen(int i)
     pieces[i].setCoords(newArrayX,newArrayY);
   } else if ((newArrayX - pieces[i].getXpos())*-1 == (newArrayY - pieces[i].getYpos())*-1) {
     pieces[i].setCoords(newArrayX,newArrayY);
-  } else {
+  } else if (1==1){
      for (int j = -8; j < 8; j++) {
       if (newArrayX - pieces[i].getYpos() == j && newArrayX == pieces[i].getXpos()) {
         pieces[i].setCoords(newArrayX,newArrayY);
       } else if (newArrayX - pieces[i].getXpos() == j && newArrayY == pieces[i].getYpos()) {
         pieces[i].setCoords(newArrayX,newArrayY);
-      } else {
-        cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
       }
-    }
+
+}
+} else
+  {
+    cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
   }
+
 }
 
 
@@ -440,6 +446,7 @@ void setRandomTypes()
 {
   for (int i = 0; i < arrayLength; i++)
     {
+      randomInt = rand();
       randomInt = rand();
       if(pieces[i].getType() != 'K')
         {
@@ -452,6 +459,30 @@ void setRandomTypes()
               }
         }
     }
+}
+
+void check(int i)
+{
+  for (int i = 0; i < arrayLength; i++)
+  {
+    if (pieces[i].getWhite() == true)
+    {
+
+    }
+  }
+}
+
+void promotion(int i)
+{
+  if (pieces[i].getWhite() && pieces[i].getYpos() == 0)
+  {
+    pieces[i].setType('Q');
+    cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
+  } else if(pieces[i].getYpos() == 7)
+  {
+    pieces[i].setType('Q');
+    cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
+  }
 }
 
  int main()
@@ -477,6 +508,8 @@ void setRandomTypes()
       if (pieces[i].getType() == 'P')
       {
         Pawn(i);
+        promotion(i);
+        check(i);
       } else if (pieces[i].getType() == 'K')
       {
         King(i);
@@ -489,5 +522,3 @@ void setRandomTypes()
   }
 }
 }
-
-
