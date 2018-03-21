@@ -119,7 +119,7 @@ int oldArrayY;
 int newArrayX;
 int newArrayY;
 int arrayLength = sizeof(pieces)/sizeof(*pieces);
-string mode = "Random";
+string mode = "Rando";
 int randomInt;
 
 // functions
@@ -394,6 +394,29 @@ void King(int i)
   }
 }
 
+void Queen(int i)
+{
+  if (newArrayX - pieces[i].getXpos() == newArrayY - pieces[i].getYpos()) {
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if (newArrayX - pieces[i].getXpos() == (newArrayY - pieces[i].getYpos())*-1) {
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if ((newArrayX - pieces[i].getXpos())*-1 == newArrayY - pieces[i].getYpos()) {
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else if ((newArrayX - pieces[i].getXpos())*-1 == (newArrayY - pieces[i].getYpos())*-1) {
+    pieces[i].setCoords(newArrayX,newArrayY);
+  } else {
+     for (int j = -8; j < 8; j++) {
+      if (newArrayX - pieces[i].getYpos() == j && newArrayX == pieces[i].getXpos()) {
+        pieces[i].setCoords(newArrayX,newArrayY);
+      } else if (newArrayX - pieces[i].getXpos() == j && newArrayY == pieces[i].getYpos()) {
+        pieces[i].setCoords(newArrayX,newArrayY);
+      } else {
+        cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+      }
+    }
+  }
+}
+
 
 void setRandomTypes()
 {
@@ -441,9 +464,12 @@ void setRandomTypes()
         King(i);
       } else if (pieces[i].getType() == 'Q')
       {
-        //queen movement method
+        // pyae sone
+        Queen(i);
       }
     }
   }
 }
 }
+
+
