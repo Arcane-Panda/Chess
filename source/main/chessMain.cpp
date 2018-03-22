@@ -491,8 +491,8 @@ void setRandomTypes()
         }
     }
 }
-//make this bool
-void check(int i)
+
+bool check(int i)
 {
   possibleMovesX.clear();
   possibleMovesY.clear();
@@ -517,6 +517,20 @@ void check(int i)
   {
     cout << "These are spaces that the pawn can take" << endl;
     cout << possibleMovesX[i] << " " << possibleMovesY[i] << endl;
+  }
+  
+  for (int i = 0; i < possibleMovesX.size(); i++)
+  {
+      if(BK.getXpos() == possibleMovesX[i] && BK.getYpos() == possibleMovesY[i])
+      {
+        return true;
+      } else if (WK.getXpos() == possibleMovesX[i] && WK.getYpos() == possibleMovesY[i])
+      {
+        return true;
+      } else
+      {
+        return false;
+      }
   }
 }
 
