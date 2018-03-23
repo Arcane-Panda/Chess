@@ -571,7 +571,7 @@ void promotion(int i)
   {
     pieces[i].setType('Q');
     cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
-  } else if(pieces[i].getYpos() == 7)
+  } else if(pieces[i].getYpos() == 7 && pieces[i].getWhite() == false)
   {
     pieces[i].setType('Q');
     cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
