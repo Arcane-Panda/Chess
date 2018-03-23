@@ -549,20 +549,20 @@ bool check(int i)
     cout << "These are spaces that the pawn can take" << endl;
     cout << possibleMovesX[i] << " " << possibleMovesY[i] << endl;
   }
-  
+
   for (int i = 0; i < possibleMovesX.size(); i++)
   {
       if(BK.getXpos() == possibleMovesX[i] && BK.getYpos() == possibleMovesY[i])
       {
+        cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
         return true;
       } else if (WK.getXpos() == possibleMovesX[i] && WK.getYpos() == possibleMovesY[i])
       {
+          cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
         return true;
-      } else
-      {
-        return false;
       }
   }
+  return false;
 }
 
 void promotion(int i)
@@ -577,6 +577,8 @@ void promotion(int i)
     cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
  int main()
 {
@@ -603,6 +605,7 @@ void promotion(int i)
           Pawn(i);
           promotion(i);
           check(i);
+
         } else if (pieces[i].getType() == 'K')
         {
           King(i);
