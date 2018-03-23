@@ -334,6 +334,7 @@ void Pawn(int i){
   if(pieces[i].getWhite() == true){
 
     if(newArrayY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && newArrayX == pieces[i].getXpos()){
+      //double move white
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
         if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
@@ -345,18 +346,34 @@ void Pawn(int i){
       }
 
     }else if(newArrayY - pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos()){
+      //single move white
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
         if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
           validMove = false;
         }
       }
+    }else if(newArrayY - pieces[i].getYpos() == -1 && (newArrayX == pieces[i].getXpos() + 1 || newArrayX == pieces[i].getXpos() -1 )){
+      // attacking white
+      validMove = false;
+      for(int j = 0; j < arrayLength; j++){
+
+        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+          if(pieces[i].getWhite() == pieces[j].getWhite()){
+             validMove = false;
+          }else{
+          validMove = true;
+          pieces[j].setCoords(9,9);
+        }
+       }
+      }
     }else{
       validMove = false;
     }
-  }else{
+  }else{ // black
     if(newArrayY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true && newArrayX == pieces[i].getXpos())
     {
+      // double move black
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
         if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
@@ -366,16 +383,30 @@ void Pawn(int i){
           validMove = false;
         }
       }
-    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos())
-    {
+    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos()){
+      //single move black
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
         if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
           validMove = false;
         }
       }
-    }else
-    {
+    }else if(newArrayY - pieces[i].getYpos() == 1 && (newArrayX == pieces[i].getXpos() + 1 || newArrayX == pieces[i].getXpos() - 1  )){
+      // attack black
+      validMove = false;
+        for(int j = 0; j < arrayLength; j++){
+
+           if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+              if(pieces[j].getWhite() == pieces[i].getWhite()){
+                 validMove = false;
+              }else{
+              validMove = true;
+              pieces[j].setCoords(9,9);
+            }
+          }
+        }
+
+    }else{
       validMove = false;
     }
   }
