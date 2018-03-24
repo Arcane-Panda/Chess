@@ -477,30 +477,36 @@ void King(int i)
 
 
 
-void Queen(int i)
-{
+void Queen(int i){
+  validMove = false;
+
   if (newArrayX - pieces[i].getXpos() == newArrayY - pieces[i].getYpos()) {
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if (newArrayX - pieces[i].getXpos() == (newArrayY - pieces[i].getYpos())*-1) {
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if ((newArrayX - pieces[i].getXpos())*-1 == newArrayY - pieces[i].getYpos()) {
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if ((newArrayX - pieces[i].getXpos())*-1 == (newArrayY - pieces[i].getYpos())*-1) {
-    pieces[i].setCoords(newArrayX,newArrayY);
-  } else if (1==1){
-     for (int j = -8; j < 8; j++) {
-      if (newArrayX - pieces[i].getYpos() == j && newArrayX == pieces[i].getXpos()) {
-        pieces[i].setCoords(newArrayX,newArrayY);
-      } else if (newArrayX - pieces[i].getXpos() == j && newArrayY == pieces[i].getYpos()) {
-        pieces[i].setCoords(newArrayX,newArrayY);
+    validMove = true;
+
+  }else if (newArrayX - pieces[i].getXpos() == (newArrayY - pieces[i].getYpos())*-1) {
+    validMove = true;
+  }else if ((newArrayX - pieces[i].getXpos())*-1 == newArrayY - pieces[i].getYpos()) {
+    validMove = true;
+
+  }else if ((newArrayX - pieces[i].getXpos())*-1 == (newArrayY - pieces[i].getYpos())*-1) {
+    validMove = true;
+
+  }else{
+    for (int j = -8; j < 8; j++) {
+      if(newArrayX - pieces[i].getYpos() == j && newArrayX == pieces[i].getXpos()) {
+
+        validMove = true;
+      }else if (newArrayX - pieces[i].getXpos() == j && newArrayY == pieces[i].getYpos()) {
+        validMove = true;
       }
 
-}
-} else
-  {
+    }
+  }
+  if(validMove == true){
+    pieces[i].setCoords(newArrayX,newArrayY);
+  }else{
     cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
   }
-
 }
 
 
