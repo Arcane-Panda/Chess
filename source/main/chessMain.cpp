@@ -496,14 +496,14 @@ bool King(int i, int newX, int newY, bool moving){
 
 
 
-void Queen(int i){
+bool Queen(int i, int newX, int newY, bool moving){
   validMove = false;
-
-  if (newArrayX - pieces[i].getXpos() == newArrayY - pieces[i].getYpos()) {
-
+  
+  if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
+    
     validMove = true;
-    if((newArrayX - pieces[i].getXpos()) > 0){
-      for(int l = 1; l < newArrayX  -  pieces[i].getXpos(); l++){
+    if((newX - pieces[i].getXpos()) > 0){
+      for(int l = 1; l < newX  -  pieces[i].getXpos(); l++){
         for(int j = 0; j < arrayLength; j++){
           if(pieces[j].getYpos() == l + pieces[i].getYpos() && pieces[j].getXpos() == l + pieces[i].getXpos()){
             validMove = false;
@@ -511,20 +511,20 @@ void Queen(int i){
         }
       }
     }else{
-      for(int l = 1; l <  pieces[i].getXpos() - newArrayX; l++){
+      for(int l = 1; l <  pieces[i].getXpos() - newX; l++){
         for(int j = 0; j < arrayLength; j++){
-          if(pieces[j].getYpos() == l + newArrayY && pieces[j].getXpos() == l + newArrayX){
+          if(pieces[j].getYpos() == l + newY && pieces[j].getXpos() == l + newX){
             validMove = false;
           }
         }
       }
     }
-
-  }else if (newArrayX - pieces[i].getXpos() == (newArrayY - pieces[i].getYpos())*-1) {
-
+    
+  }else if (newX - pieces[i].getXpos() == (newY - pieces[i].getYpos())*-1) {
+    
     validMove = true;
-    if((newArrayX - pieces[i].getXpos()) > 0){
-      for(int l = 1; l < newArrayX - pieces[i].getXpos(); l++){
+    if((newX - pieces[i].getXpos()) > 0){
+      for(int l = 1; l < newX - pieces[i].getXpos(); l++){
         for(int j = 0; j < arrayLength; j++){
           if(pieces[j].getYpos() == pieces[i].getYpos() - l && pieces[j].getXpos() == pieces[i].getXpos() + l){
             validMove = false;
@@ -532,79 +532,86 @@ void Queen(int i){
         }
       }
     }else{
-      for(int l = 1; l <  pieces[i].getXpos() - newArrayX; l++){
+      for(int l = 1; l <  pieces[i].getXpos() - newX; l++){
         for(int j = 0; j < arrayLength; j++){
-          if(pieces[j].getYpos() == newArrayY - l && pieces[j].getXpos() == newArrayX + l){
+          if(pieces[j].getYpos() == newY - l && pieces[j].getXpos() == newX + l){
             validMove = false;
           }
         }
       }
     }
-
-  }else if(newArrayX == pieces[i].getXpos()) {
-
+    
+  }else if(newX == pieces[i].getXpos()) {
+    
     validMove = true;
-    if((newArrayY - pieces[i].getYpos()) > 0){
-      for(int l = pieces[i].getYpos()+1; l < newArrayY; l++){
+    if((newY - pieces[i].getYpos()) > 0){
+      for(int l = pieces[i].getYpos()+1; l < newY; l++){
         for(int j = 0; j < arrayLength; j++){
-          if(pieces[j].getYpos() == l && pieces[j].getXpos() == newArrayX){
+          if(pieces[j].getYpos() == l && pieces[j].getXpos() == newX){
             validMove = false;
           }
         }
       }
-
+      
     }else{
-      for(int l = newArrayY +1; l <  pieces[i].getYpos(); l++){
+      for(int l = newY +1; l <  pieces[i].getYpos(); l++){
         for(int j = 0; j < arrayLength; j++){
-          if(pieces[j].getYpos() == l && pieces[j].getXpos() == newArrayX){
+          if(pieces[j].getYpos() == l && pieces[j].getXpos() == newX){
             validMove = false;
           }
         }
       }
     }
-
-  }else if (newArrayY == pieces[i].getYpos()) {
-
+    
+  }else if (newY == pieces[i].getYpos()) {
+    
     validMove = true;
-    if((newArrayX - pieces[i].getXpos()) > 0){
-      for(int l = pieces[i].getXpos()+1; l < newArrayX; l++){
+    if((newX - pieces[i].getXpos()) > 0){
+      for(int l = pieces[i].getXpos()+1; l < newX; l++){
         for(int j = 0; j < arrayLength; j++){
-          if(pieces[j].getXpos() == l && pieces[j].getYpos() == newArrayY){
+          if(pieces[j].getXpos() == l && pieces[j].getYpos() == newY){
             validMove = false;
           }
         }
       }
-
+      
     }else{
-      for(int l = newArrayX +1; l <  pieces[i].getXpos(); l++){
+      for(int l = newX +1; l <  pieces[i].getXpos(); l++){
         for(int j = 0; j < arrayLength; j++){
-          if(pieces[j].getXpos() == l && pieces[j].getYpos() == newArrayY){
+          if(pieces[j].getXpos() == l && pieces[j].getYpos() == newY){
             validMove = false;
           }
         }
       }
     }
-
+    
   }else{
     validMove = false;
   }
   if(validMove == true){
     for(int j = 0; j < arrayLength; j++){
-      if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+      if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
         if(pieces[j].getWhite() == pieces[i].getWhite()){
           validMove = false;
-          cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-        }
-        else{
-          pieces[j].setCoords(9,9);
+          return false;
+        }else{
+          if(moving){
+            pieces[j].setCoords(9,9);
+          }
         }
       }
     }
     if(validMove){
-      pieces[i].setCoords(newArrayX,newArrayY);
+      if(moving){
+        pieces[i].setCoords(newArrayX,newArrayY);
+      }
+      return true;
     }
   }else{
-    cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    if(moving){
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
+    return false;
   }
 }
 
