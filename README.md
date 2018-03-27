@@ -28,3 +28,5 @@ Gantt chart: https://docs.google.com/spreadsheets/d/15_Wllvj9o1PbPSzZzgs7mvNbjeB
 Go to the source folder, click on main, and download the chessMain.cpp
 
 The reason we have everything in one file, is because for some weird reason that has to do with network admin permissions, header files don't work.
+
+Please note that this currently only runs in the bash terminal
