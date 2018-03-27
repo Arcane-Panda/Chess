@@ -327,38 +327,38 @@ void userInput(){
 
 
 
-void Pawn(int i){
-
+bool Pawn(int i, newX, newY){
+  
   validMove = false;
-
+  
   if(pieces[i].getWhite() == true){
-
-    if(newArrayY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && newArrayX == pieces[i].getXpos()){
+    
+    if(newY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && newX == pieces[i].getXpos()){
       //double move white
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
-        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+        if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           validMove = false;
         }
-        if(pieces[j].getYpos() == newArrayY + 1 && pieces[j].getXpos() == newArrayX){
+        if(pieces[j].getYpos() == newY + 1 && pieces[j].getXpos() == newX){
           validMove = false;
         }
       }
-
-    }else if(newArrayY - pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos()){
+      
+    }else if(newY - pieces[i].getYpos() == -1 && newX == pieces[i].getXpos()){
       //single move white
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
-        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+        if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           validMove = false;
         }
       }
-    }else if(newArrayY - pieces[i].getYpos() == -1 && (newArrayX == pieces[i].getXpos() + 1 || newArrayX == pieces[i].getXpos() -1 )){
+    }else if(newY - pieces[i].getYpos() == -1 && (newX == pieces[i].getXpos() + 1 || newX == pieces[i].getXpos() -1 )){
       // attacking white
       validMove = false;
       for(int j = 0; j < arrayLength; j++){
-
-        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+        
+        if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           if(pieces[i].getWhite() == pieces[j].getWhite()){
             validMove = false;
           }else{
@@ -371,32 +371,32 @@ void Pawn(int i){
       validMove = false;
     }
   }else{ // black
-    if(newArrayY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true && newArrayX == pieces[i].getXpos())
+    if(newY - pieces[i].getYpos() == 2 && pieces[i].getFirst() == true && newX == pieces[i].getXpos())
     {
       // double move black
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
-        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+        if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           validMove = false;
         }
-        if(pieces[j].getYpos() == newArrayY - 1 && pieces[j].getXpos() == newArrayX){
+        if(pieces[j].getYpos() == newY - 1 && pieces[j].getXpos() == newX){
           validMove = false;
         }
       }
-    } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos()){
+    } else if(newY - pieces[i].getYpos() == 1 && newX == pieces[i].getXpos()){
       //single move black
       validMove = true;
       for(int j = 0; j < arrayLength; j++){
-        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+        if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           validMove = false;
         }
       }
-    }else if(newArrayY - pieces[i].getYpos() == 1 && (newArrayX == pieces[i].getXpos() + 1 || newArrayX == pieces[i].getXpos() - 1  )){
+    }else if(newY - pieces[i].getYpos() == 1 && (newX == pieces[i].getXpos() + 1 || newX == pieces[i].getXpos() - 1  )){
       // attack black
       validMove = false;
       for(int j = 0; j < arrayLength; j++){
-
-        if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+        
+        if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           if(pieces[j].getWhite() == pieces[i].getWhite()){
             validMove = false;
           }else{
@@ -405,15 +405,16 @@ void Pawn(int i){
           }
         }
       }
-
+      
     }else{
       validMove = false;
     }
   }
   if(validMove){
-    pieces[i].setCoords(newArrayX,newArrayY);
+    return true;
+  
   }else{
-    cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    return false;
   }
 }
 
