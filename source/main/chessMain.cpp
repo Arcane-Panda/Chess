@@ -418,52 +418,50 @@ bool Pawn(int i, newX, newY){
   }
 }
 
-void King(int i)
-{
+bool King(int i, newX, newY){
+  
   validMove = false;
-
-  if(newArrayY- pieces[i].getYpos() == -1 && newArrayX == pieces[i].getXpos())
+  
+  if(newY- pieces[i].getYpos() == -1 && newX == pieces[i].getXpos())
   {
     //move up
     validMove = true;
-  } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == 1)
+  } else if(newY- pieces[i].getYpos() == -1 && newX - pieces[i].getXpos() == 1)
   {
     //move right up
     validMove = true;
-  } else if(newArrayY- pieces[i].getYpos() == -1 && newArrayX - pieces[i].getXpos() == -1)
+  } else if(newY- pieces[i].getYpos() == -1 && newX - pieces[i].getXpos() == -1)
   {
     //move left up
     validMove = true;
-  } else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == -1)
+  } else if(newY == pieces[i].getYpos()  && newX - pieces[i].getXpos() == -1)
   {
     //move left
     validMove = true;
-  }else if(newArrayY == pieces[i].getYpos()  && newArrayX - pieces[i].getXpos() == 1)
+  }else if(newY == pieces[i].getYpos()  && newX - pieces[i].getXpos() == 1)
   {
     //move right
     validMove = true;
-  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == -1)
+  } else if(newY - pieces[i].getYpos() == 1 && newX - pieces[i].getXpos() == -1)
   {
     //move down left
     validMove = true;
-  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX - pieces[i].getXpos() == 1)
+  } else if(newY - pieces[i].getYpos() == 1 && newX - pieces[i].getXpos() == 1)
   {
     //move down right
     validMove = true;
-  } else if(newArrayY - pieces[i].getYpos() == 1 && newArrayX == pieces[i].getXpos())
+  } else if(newY - pieces[i].getYpos() == 1 && newX == pieces[i].getXpos())
   {
     //move down
     validMove = true;
-  } else{
-    cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+  }else{
     validMove = false;
   }
   if(validMove){
     for(int j = 0; j < arrayLength; j++){
-      if(pieces[j].getYpos() == newArrayY && pieces[j].getXpos() == newArrayX){
+      if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
         if(pieces[j].getWhite() == pieces[i].getWhite()){
-          validMove = false;
-          cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          return false;
         }
         else{
           pieces[j].setCoords(9,9);
@@ -471,8 +469,10 @@ void King(int i)
       }
     }
     if(validMove){
-      pieces[i].setCoords(newArrayX,newArrayY);
+      return true;
     }
+  }else{
+    return false;
   }
 }
 
