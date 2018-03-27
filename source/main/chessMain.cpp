@@ -428,10 +428,10 @@ bool Pawn(int i, int newX, int newY, bool moving){
   }
 }
 
-bool King(int i, newX, newY){
-  
+bool King(int i, int newX, int newY, bool moving){
+
   validMove = false;
-  
+
   if(newY- pieces[i].getYpos() == -1 && newX == pieces[i].getXpos())
   {
     //move up
@@ -474,14 +474,22 @@ bool King(int i, newX, newY){
           return false;
         }
         else{
-          pieces[j].setCoords(9,9);
+          if(moving){
+            pieces[j].setCoords(9,9);
+          }
         }
       }
     }
     if(validMove){
+      if(moving){
+        pieces[i].setCoords(newArrayX,newArrayY);
+      }
       return true;
     }
   }else{
+    if(moving){
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
     return false;
   }
 }
