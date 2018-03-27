@@ -327,12 +327,12 @@ void userInput(){
 
 
 
-bool Pawn(int i, newX, newY){
-  
+bool Pawn(int i, int newX, int newY, bool moving){
+
   validMove = false;
-  
+
   if(pieces[i].getWhite() == true){
-    
+
     if(newY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && newX == pieces[i].getXpos()){
       //double move white
       validMove = true;
@@ -344,7 +344,7 @@ bool Pawn(int i, newX, newY){
           validMove = false;
         }
       }
-      
+
     }else if(newY - pieces[i].getYpos() == -1 && newX == pieces[i].getXpos()){
       //single move white
       validMove = true;
@@ -357,13 +357,15 @@ bool Pawn(int i, newX, newY){
       // attacking white
       validMove = false;
       for(int j = 0; j < arrayLength; j++){
-        
+
         if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           if(pieces[i].getWhite() == pieces[j].getWhite()){
             validMove = false;
           }else{
             validMove = true;
-            pieces[j].setCoords(9,9);
+            if(moving){
+              pieces[j].setCoords(9,9);
+            }
           }
         }
       }
@@ -395,25 +397,33 @@ bool Pawn(int i, newX, newY){
       // attack black
       validMove = false;
       for(int j = 0; j < arrayLength; j++){
-        
+
         if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           if(pieces[j].getWhite() == pieces[i].getWhite()){
             validMove = false;
           }else{
             validMove = true;
-            pieces[j].setCoords(9,9);
+            if(moving){
+              pieces[j].setCoords(9,9);  
+            }
           }
         }
       }
-      
+
     }else{
       validMove = false;
     }
   }
   if(validMove){
+    if(moving){
+      pieces[i].setCoords(newArrayX,newArrayY);
+    }
     return true;
-  
+
   }else{
+    if(moving){
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
     return false;
   }
 }
