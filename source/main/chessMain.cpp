@@ -636,55 +636,102 @@ void setRandomTypes()
   }
 }
 
-bool check(int i)
-{
+
+bool check(bool white){
+
   possibleMovesX.clear();
   possibleMovesY.clear();
-  if (pieces[i].getType() == 'P')
-  {
-    if (pieces[i].getWhite())
-    {
-      // white pawn diagonal right
-      possibleMove = pieces[i].getXpos() + 1;
-      possibleMovesX.push_back(possibleMove);
-      possibleMove = pieces[i].getYpos() - 1;
-      possibleMovesY.push_back(possibleMove);
 
-      //white pawn diagonal left
-      possibleMove = pieces[i].getXpos() - 1;
-      possibleMovesX.push_back(possibleMove);
-      possibleMove = pieces[i].getYpos() - 1;
-      possibleMovesY.push_back(possibleMove);
+  for(int i = 0; i < arrayLength; i++){
+
+    if(pieces[i].getWhite() != white){
+
+      if(pieces[i].getType() == 'P'){
+
+        if(pieces[i].getWhite()){
+
+          // white pawn diagonal right
+
+          possibleMove = pieces[i].getXpos() + 1;
+          possibleMovesX.push_back(possibleMove);
+          possibleMove = pieces[i].getYpos() - 1;
+          possibleMovesY.push_back(possibleMove);
+
+          //white pawn diagonal left
+          possibleMove = pieces[i].getXpos() - 1;
+          possibleMovesX.push_back(possibleMove);
+          possibleMove = pieces[i].getYpos() - 1;
+          possibleMovesY.push_back(possibleMove);
+        }else{
+
+        }
+
+      }
+
+
+      if(pieces[i].getType() == 'Q'){
+
+        for(int x = 0; x < 9; x++){
+          for(int y = 0; y < 9; y++){
+            if(Queen(i, x,y,false)){
+
+              possibleMovesX.push_back(x);
+              possibleMovesY.push_back(y);
+            }
+          }
+        }
+
+      }
+      if(pieces[i].getType() == 'K'){
+
+        for(int x = 0; x < 9; x++){
+          for(int y = 0; y < 9; y++){
+            if(King(i, x,y,false)){
+
+              possibleMovesX.push_back(x);
+              possibleMovesY.push_back(y);
+            }
+          }
+        }
+
+      }
+
     }
-  }
-  for (int i = 0; i < possibleMovesX.size(); i++)
-  {
-    cout << "These are spaces that the pawn can take" << endl;
-    cout << possibleMovesX[i] << " " << possibleMovesY[i] << endl;
+
+
+
   }
 
-  for (int i = 0; i < possibleMovesX.size(); i++)
-  {
-    if(BK.getXpos() == possibleMovesX[i] && BK.getYpos() == possibleMovesY[i])
-    {
-      cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
-      return true;
-    } else if (WK.getXpos() == possibleMovesX[i] && WK.getYpos() == possibleMovesY[i])
-    {
-      cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
-      return true;
+  for (int i = 0; i < possibleMovesX.size(); i++){
+
+    if(white){
+      if (WK.getXpos() == possibleMovesX[i] && WK.getYpos() == possibleMovesY[i]){
+
+        cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
+        return true;
+      }
+    }else{
+      if(BK.getXpos() == possibleMovesX[i] && BK.getYpos() == possibleMovesY[i]){
+
+        cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
+        return true;
+      }
     }
+
   }
   return false;
 }
 
-void promotion(int i)
-{
-  if (pieces[i].getWhite() && pieces[i].getYpos() == 0)
-  {
+
+
+
+void promotion(int i){
+  if (pieces[i].getWhite() && pieces[i].getYpos() == 0 && pieces[i].getType() == 'P'){
+
     pieces[i].setType('Q');
     cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
-  } else if(pieces[i].getYpos() == 7 && pieces[i].getWhite() == false)
+
+  } else if(pieces[i].getYpos() == 7 && pieces[i].getWhite() == false && pieces[i].getType() == 'P')
   {
     pieces[i].setType('Q');
     cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
