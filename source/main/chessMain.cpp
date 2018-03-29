@@ -650,19 +650,50 @@ bool check(bool white){
 
         if(pieces[i].getWhite()){
 
-          // white pawn diagonal right
 
-          possibleMove = pieces[i].getXpos() + 1;
-          possibleMovesX.push_back(possibleMove);
-          possibleMove = pieces[i].getYpos() - 1;
-          possibleMovesY.push_back(possibleMove);
+          if(pieces[i].getXpos() > 0 && pieces[i].getXpos() < 8 && pieces[i].getYpos() < 8){
 
-          //white pawn diagonal left
-          possibleMove = pieces[i].getXpos() - 1;
-          possibleMovesX.push_back(possibleMove);
-          possibleMove = pieces[i].getYpos() - 1;
-          possibleMovesY.push_back(possibleMove);
+            // white pawn diagonal right
+            possibleMovesX.push_back(pieces[i].getXpos() + 1);
+            possibleMovesY.push_back(pieces[i].getYpos() - 1);
+            //white pawn diagonal left
+            possibleMovesX.push_back( pieces[i].getXpos() - 1);
+            possibleMovesY.push_back( pieces[i].getYpos() - 1);
+
+          }else if(pieces[i].getXpos() == 0 && pieces[i].getYpos() < 8){
+            // white pawn diagonal right
+            possibleMovesX.push_back(pieces[i].getXpos() + 1);
+            possibleMovesY.push_back(pieces[i].getYpos() - 1);
+
+          }else if(pieces[i].getXpos() == 8 && pieces[i].getYpos() < 8){
+            // white pawn diagonal right
+            possibleMovesX.push_back(pieces[i].getXpos() + 1);
+            possibleMovesY.push_back(pieces[i].getYpos() - 1);
+
+          }
+
         }else{
+
+          if(pieces[i].getXpos() > 0 && pieces[i].getXpos() < 8 && pieces[i].getYpos() > 0){
+
+            // white pawn diagonal right
+            possibleMovesX.push_back(pieces[i].getXpos() + 1);
+            possibleMovesY.push_back(pieces[i].getYpos() + 1);
+            //white pawn diagonal left
+            possibleMovesX.push_back( pieces[i].getXpos() - 1);
+            possibleMovesY.push_back( pieces[i].getYpos() + 1);
+
+          }else if(pieces[i].getXpos() == 0 && pieces[i].getYpos() > 0){
+            // white pawn diagonal right
+            possibleMovesX.push_back(pieces[i].getXpos() + 1);
+            possibleMovesY.push_back(pieces[i].getYpos() + 1);
+
+          }else if(pieces[i].getXpos() == 8 && pieces[i].getYpos() > 0){
+            // white pawn diagonal right
+            possibleMovesX.push_back(pieces[i].getXpos() + 1);
+            possibleMovesY.push_back(pieces[i].getYpos() + 1);
+
+          }
 
         }
 
@@ -777,7 +808,7 @@ int main()
         {
           if (pieces[i].getType() == 'P')
           {
-            if(Pawn(i, newArrayX, newArrayY))
+            if(Pawn(i, newArrayX, newArrayY, true))
             {
               pieces[i].setCoords(newArrayX,newArrayY);
               passTurn();
@@ -785,7 +816,7 @@ int main()
             }
           } else if (pieces[i].getType() == 'K')
           {
-            if(King(i, newArrayX, newArrayY))
+            if(King(i, newArrayX, newArrayY, true))
             {
               pieces[i].setCoords(newArrayX,newArrayY);
               passTurn();
@@ -793,7 +824,7 @@ int main()
           } else if (pieces[i].getType() == 'Q')
           {
             // pyae sone
-            if(Queen(i, newArrayX, newArrayY))
+            if(Queen(i, newArrayX, newArrayY, true))
             {
               pieces[i].setCoords(newArrayX,newArrayY);
               passTurn();
@@ -805,7 +836,7 @@ int main()
           {
             if(Pawn(i, newArrayX, newArrayY,true))
             {
-          
+
               passTurn();
               promotion(i);
             }
@@ -813,14 +844,14 @@ int main()
           {
             if(King(i, newArrayX, newArrayY,true))
             {
-              
+
               passTurn();
             }
           } else if (pieces[i].getType() == 'Q')
           {
             // pyae sone
             if(Queen(i, newArrayX, newArrayY,true))
-            {           
+            {
               passTurn();
             }
           }
@@ -832,3 +863,4 @@ int main()
     }
   }
 }
+
