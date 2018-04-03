@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -810,15 +811,21 @@ int main()
           {
             if(Pawn(i, newArrayX, newArrayY, true))
             {
-              pieces[i].setCoords(newArrayX,newArrayY);
               passTurn();
               promotion(i);
+
+              if(check(true)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+
+
+              }
             }
           } else if (pieces[i].getType() == 'K')
           {
             if(King(i, newArrayX, newArrayY, true))
             {
-              pieces[i].setCoords(newArrayX,newArrayY);
               passTurn();
             }
           } else if (pieces[i].getType() == 'Q')
@@ -826,8 +833,14 @@ int main()
             // pyae sone
             if(Queen(i, newArrayX, newArrayY, true))
             {
-              pieces[i].setCoords(newArrayX,newArrayY);
-              passTurn();
+
+              if(check(true)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+                passTurn();
+
+              }
             }
           }
         } else if (pieces[i].getWhite() == false && whiteTurn == false)
