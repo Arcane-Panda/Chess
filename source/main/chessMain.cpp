@@ -79,7 +79,7 @@ void Piece::setType(char input)
 
 //global variables
 Piece BP1('P',0,1,false);
-Piece BP2('P',1,1,false);
+Piece BP2('P',5,0,false); // 1,1
 Piece BP3('P',2,1,false);
 Piece BP4('P',3,1,false);
 Piece BP5('P',4,1,false);
@@ -105,6 +105,9 @@ Piece WQ('Q',3,7,true);
 Piece WK('K',4,7,true);
 vector<int> possibleMovesX;
 vector<int> possibleMovesY;
+int oldX;
+int oldY;
+bool playing = true;
 Piece pieces[20] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK};
 
 
@@ -618,8 +621,8 @@ bool Queen(int i, int newX, int newY, bool moving){
   }
 }
 
-void setRandomTypes()
-{
+void setRandomTypes(){
+
   for (int i = 0; i < arrayLength; i++)
   {
     randomInt = rand();
@@ -643,69 +646,66 @@ bool check(bool white){
   possibleMovesX.clear();
   possibleMovesY.clear();
 
-  for(int i = 0; i < arrayLength; i++){
+  for(int j = 0; j < arrayLength; j++){
 
-    if(pieces[i].getWhite() != white){
+    if(pieces[j].getWhite() != white){
 
-      if(pieces[i].getType() == 'P'){
+      if(pieces[j].getType() == 'P'){
 
-        if(pieces[i].getWhite()){
+        if(pieces[j].getWhite()){
 
 
-          if(pieces[i].getXpos() > 0 && pieces[i].getXpos() < 8 && pieces[i].getYpos() < 8){
+          if(pieces[j].getXpos() > 0 && pieces[j].getXpos() < 8 && pieces[j].getYpos() < 8){
 
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[i].getXpos() + 1);
-            possibleMovesY.push_back(pieces[i].getYpos() - 1);
+            possibleMovesX.push_back(pieces[j].getXpos() + 1);
+            possibleMovesY.push_back(pieces[j].getYpos() - 1);
             //white pawn diagonal left
-            possibleMovesX.push_back( pieces[i].getXpos() - 1);
-            possibleMovesY.push_back( pieces[i].getYpos() - 1);
+            possibleMovesX.push_back( pieces[j].getXpos() - 1);
+            possibleMovesY.push_back( pieces[j].getYpos() - 1);
 
-          }else if(pieces[i].getXpos() == 0 && pieces[i].getYpos() < 8){
+          }else if(pieces[j].getXpos() == 0 && pieces[j].getYpos() < 8){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[i].getXpos() + 1);
-            possibleMovesY.push_back(pieces[i].getYpos() - 1);
+            possibleMovesX.push_back(pieces[j].getXpos() + 1);
+            possibleMovesY.push_back(pieces[j].getYpos() - 1);
 
-          }else if(pieces[i].getXpos() == 8 && pieces[i].getYpos() < 8){
+          }else if(pieces[j].getXpos() == 8 && pieces[j].getYpos() < 8){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[i].getXpos() + 1);
-            possibleMovesY.push_back(pieces[i].getYpos() - 1);
+            possibleMovesX.push_back(pieces[j].getXpos() + 1);
+            possibleMovesY.push_back(pieces[j].getYpos() - 1);
 
           }
 
         }else{
 
-          if(pieces[i].getXpos() > 0 && pieces[i].getXpos() < 8 && pieces[i].getYpos() > 0){
+          if(pieces[j].getXpos() > 0 && pieces[j].getXpos() < 8 && pieces[j].getYpos() > 0){
 
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[i].getXpos() + 1);
-            possibleMovesY.push_back(pieces[i].getYpos() + 1);
+            possibleMovesX.push_back(pieces[j].getXpos() + 1);
+            possibleMovesY.push_back(pieces[j].getYpos() + 1);
             //white pawn diagonal left
-            possibleMovesX.push_back( pieces[i].getXpos() - 1);
-            possibleMovesY.push_back( pieces[i].getYpos() + 1);
+            possibleMovesX.push_back( pieces[j].getXpos() - 1);
+            possibleMovesY.push_back( pieces[j].getYpos() + 1);
 
-          }else if(pieces[i].getXpos() == 0 && pieces[i].getYpos() > 0){
+          }else if(pieces[j].getXpos() == 0 && pieces[j].getYpos() > 0){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[i].getXpos() + 1);
-            possibleMovesY.push_back(pieces[i].getYpos() + 1);
+            possibleMovesX.push_back(pieces[j].getXpos() + 1);
+            possibleMovesY.push_back(pieces[j].getYpos() + 1);
 
-          }else if(pieces[i].getXpos() == 8 && pieces[i].getYpos() > 0){
+          }else if(pieces[j].getXpos() == 8 && pieces[j].getYpos() > 0){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[i].getXpos() + 1);
-            possibleMovesY.push_back(pieces[i].getYpos() + 1);
+            possibleMovesX.push_back(pieces[j].getXpos() + 1);
+            possibleMovesY.push_back(pieces[j].getYpos() + 1);
 
           }
 
         }
 
-      }
-
-
-      if(pieces[i].getType() == 'Q'){
+      }else if(pieces[j].getType() == 'Q'){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
-            if(Queen(i, x,y,false)){
+            if(Queen(j, x,y,false)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
@@ -713,12 +713,11 @@ bool check(bool white){
           }
         }
 
-      }
-      if(pieces[i].getType() == 'K'){
+      }else if(pieces[j].getType() == 'K'){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
-            if(King(i, x,y,false)){
+            if(King(j, x,y,false)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
@@ -730,22 +729,17 @@ bool check(bool white){
 
     }
 
-
-
   }
 
-  for (int i = 0; i < possibleMovesX.size(); i++){
+
+  for (int j = 0; j < possibleMovesX.size(); j++){
 
     if(white){
-      if (WK.getXpos() == possibleMovesX[i] && WK.getYpos() == possibleMovesY[i]){
-
-        cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
+      if (WK.getXpos() == possibleMovesX[j] && WK.getYpos() == possibleMovesY[j]){
         return true;
       }
     }else{
-      if(BK.getXpos() == possibleMovesX[i] && BK.getYpos() == possibleMovesY[i]){
-
-        cout << endl << endl << endl << endl << "\033[1;92mCheck\033[0m\n" << endl;
+      if(BK.getXpos() == possibleMovesX[j] && BK.getYpos() == possibleMovesY[j]){
         return true;
       }
     }
@@ -754,7 +748,68 @@ bool check(bool white){
   return false;
 }
 
+bool checkMate(bool white){
 
+  if(check(white)){
+    for(int l = 0; l < arrayLength; l++){
+      if(pieces[l].getWhite() == white){
+        oldX = pieces[l].getXpos();
+        oldY = pieces[l].getYpos();
+
+        if(pieces[l].getType() == 'P'){
+
+          for(int x = 0; x < 9; x++){
+            for(int y = 0; y < 9; y++){
+              if(Pawn(l, x,y,false)){
+                Pawn(l, x,y,true);
+                if(check(white) == false){
+                  return false;
+                }
+                pieces[l].setCoords(oldX,oldY);
+              }
+            }
+          }
+
+
+        }else if(pieces[l].getType() == 'Q'){
+
+
+          for(int x = 0; x < 9; x++){
+            for(int y = 0; y < 9; y++){
+              if(Queen(l, x,y,false)){
+                Queen(l, x,y,true);
+                if(check(white) == false){
+                  return false;
+                }
+                pieces[l].setCoords(oldX,oldY);
+              }
+            }
+          }
+
+        }else if(pieces[l].getType() == 'K'){
+
+          for(int x = 0; x < 9; x++){
+            for(int y = 0; y < 9; y++){
+              if(Queen(l, x,y,false)){
+                Queen(l, x,y,true);
+                if(check(white) == false){
+                  return false;
+                }
+                pieces[l].setCoords(oldX,oldY);
+              }
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+    return true;
+  }
+  return false;
+}
 
 
 void promotion(int i){
@@ -770,29 +825,27 @@ void promotion(int i){
   }
 }
 
-void passTurn()
-{
-  if (whiteTurn == true)
-  {
+void passTurn(){
+
+  if (whiteTurn == true){
     whiteTurn = false;
     cout << endl << endl << endl << endl << "\033[1;92mBlack Turn\033[0m\n" << endl;
-  } else if (whiteTurn == false)
-  {
+  }else if (whiteTurn == false){
     whiteTurn = true;
     cout << endl << endl << endl << endl << "\033[1;92mWhite Turn\033[0m\n" << endl;
   }
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 
-int main()
-{
+int main(){
 
   if (mode == "Random")
   {
     setRandomTypes();
   }
-  while(1==1)
+  while(playing)
   {
     //by zach greenberg
     display();
@@ -807,31 +860,15 @@ int main()
       {
         if (pieces[i].getWhite() ==  true && whiteTurn == true)
         {
+          if(checkMate(true)){
+            playing = false;
+            cout<< endl << endl << endl << endl << "Check Mate. Black Player wins" << endl;
+          }
+
+
           if (pieces[i].getType() == 'P')
           {
             if(Pawn(i, newArrayX, newArrayY, true))
-            {
-              passTurn();
-              promotion(i);
-
-              if(check(true)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-
-
-              }
-            }
-          } else if (pieces[i].getType() == 'K')
-          {
-            if(King(i, newArrayX, newArrayY, true))
-            {
-              passTurn();
-            }
-          } else if (pieces[i].getType() == 'Q')
-          {
-            // pyae sone
-            if(Queen(i, newArrayX, newArrayY, true))
             {
 
               if(check(true)){
@@ -839,33 +876,73 @@ int main()
                 cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
               }else{
                 passTurn();
-
+                promotion(i);
+              }
+            }
+          }else if (pieces[i].getType() == 'K')
+          {
+            if(King(i, newArrayX, newArrayY, true))
+            {
+              if(check(true)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+                passTurn();
+              }
+            }
+          } else if (pieces[i].getType() == 'Q')
+          {
+            // pyae sone
+            if(Queen(i, newArrayX, newArrayY, true))
+            {
+              if(check(true)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+                passTurn();
               }
             }
           }
         } else if (pieces[i].getWhite() == false && whiteTurn == false)
         {
+          if(checkMate(false)){
+            playing = false;
+            cout<< endl << endl << endl << endl << "Check Mate. White Player wins" << endl;
+          }
           if (pieces[i].getType() == 'P')
           {
             if(Pawn(i, newArrayX, newArrayY,true))
             {
-
-              passTurn();
-              promotion(i);
+              if(check(false)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+                passTurn();
+                promotion(i);
+              }
             }
           } else if (pieces[i].getType() == 'K')
           {
             if(King(i, newArrayX, newArrayY,true))
             {
-
-              passTurn();
+              if(check(false)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+                passTurn();
+              }
             }
           } else if (pieces[i].getType() == 'Q')
           {
             // pyae sone
             if(Queen(i, newArrayX, newArrayY,true))
             {
-              passTurn();
+              if(check(false)){
+                pieces[i].setCoords(oldArrayX,oldArrayY);
+                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+              }else{
+                passTurn();
+              }
             }
           }
         } else
@@ -876,4 +953,3 @@ int main()
     }
   }
 }
-
