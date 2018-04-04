@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -646,62 +647,62 @@ bool check(bool white){
   possibleMovesX.clear();
   possibleMovesY.clear();
 
-  for(int j = 0; j < arrayLength; j++){
+  for(int c = 0; c < arrayLength; c++){
 
-    if(pieces[j].getWhite() != white){
+    if(pieces[c].getWhite() != white){
 
-      if(pieces[j].getType() == 'P'){
+      if(pieces[c].getType() == 'P'){
 
-        if(pieces[j].getWhite()){
+        if(pieces[c].getWhite()){
 
 
-          if(pieces[j].getXpos() > 0 && pieces[j].getXpos() < 8 && pieces[j].getYpos() < 8){
+          if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() < 8){
 
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[j].getXpos() + 1);
-            possibleMovesY.push_back(pieces[j].getYpos() - 1);
+            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesY.push_back(pieces[c].getYpos() - 1);
             //white pawn diagonal left
-            possibleMovesX.push_back( pieces[j].getXpos() - 1);
-            possibleMovesY.push_back( pieces[j].getYpos() - 1);
+            possibleMovesX.push_back( pieces[c].getXpos() - 1);
+            possibleMovesY.push_back( pieces[c].getYpos() - 1);
 
-          }else if(pieces[j].getXpos() == 0 && pieces[j].getYpos() < 8){
+          }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() < 8){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[j].getXpos() + 1);
-            possibleMovesY.push_back(pieces[j].getYpos() - 1);
+            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesY.push_back(pieces[c].getYpos() - 1);
 
-          }else if(pieces[j].getXpos() == 8 && pieces[j].getYpos() < 8){
+          }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() < 8){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[j].getXpos() + 1);
-            possibleMovesY.push_back(pieces[j].getYpos() - 1);
+            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesY.push_back(pieces[c].getYpos() - 1);
 
           }
 
         }else{
 
-          if(pieces[j].getXpos() > 0 && pieces[j].getXpos() < 8 && pieces[j].getYpos() > 0){
+          if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() > 0){
 
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[j].getXpos() + 1);
-            possibleMovesY.push_back(pieces[j].getYpos() + 1);
+            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesY.push_back(pieces[c].getYpos() + 1);
             //white pawn diagonal left
-            possibleMovesX.push_back( pieces[j].getXpos() - 1);
-            possibleMovesY.push_back( pieces[j].getYpos() + 1);
+            possibleMovesX.push_back( pieces[c].getXpos() - 1);
+            possibleMovesY.push_back( pieces[c].getYpos() + 1);
 
-          }else if(pieces[j].getXpos() == 0 && pieces[j].getYpos() > 0){
+          }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() > 0){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[j].getXpos() + 1);
-            possibleMovesY.push_back(pieces[j].getYpos() + 1);
+            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesY.push_back(pieces[c].getYpos() + 1);
 
-          }else if(pieces[j].getXpos() == 8 && pieces[j].getYpos() > 0){
+          }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() > 0){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[j].getXpos() + 1);
-            possibleMovesY.push_back(pieces[j].getYpos() + 1);
+            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesY.push_back(pieces[c].getYpos() + 1);
 
           }
 
         }
 
-      }else if(pieces[j].getType() == 'Q'){
+      }else if(pieces[c].getType() == 'Q'){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
@@ -713,11 +714,11 @@ bool check(bool white){
           }
         }
 
-      }else if(pieces[j].getType() == 'K'){
+      }else if(pieces[c].getType() == 'K'){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
-            if(King(j, x,y,false)){
+            if(King(c, x,y,false)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
@@ -732,14 +733,14 @@ bool check(bool white){
   }
 
 
-  for (int j = 0; j < possibleMovesX.size(); j++){
+  for (int c = 0; c < possibleMovesX.size(); c++){
 
     if(white){
-      if (WK.getXpos() == possibleMovesX[j] && WK.getYpos() == possibleMovesY[j]){
+      if (WK.getXpos() == possibleMovesX[c] && WK.getYpos() == possibleMovesY[c]){
         return true;
       }
     }else{
-      if(BK.getXpos() == possibleMovesX[j] && BK.getYpos() == possibleMovesY[j]){
+      if(BK.getXpos() == possibleMovesX[c] && BK.getYpos() == possibleMovesY[c]){
         return true;
       }
     }
@@ -751,51 +752,51 @@ bool check(bool white){
 bool checkMate(bool white){
 
   if(check(white)){
-    for(int l = 0; l < arrayLength; l++){
-      if(pieces[l].getWhite() == white){
-        oldX = pieces[l].getXpos();
-        oldY = pieces[l].getYpos();
+    for(int f = 0; f < arrayLength; f++){
+      if(pieces[f].getWhite() == white){
+        oldX = pieces[f].getXpos();
+        oldY = pieces[f].getYpos();
 
-        if(pieces[l].getType() == 'P'){
+        if(pieces[f].getType() == 'P'){
 
           for(int x = 0; x < 9; x++){
             for(int y = 0; y < 9; y++){
-              if(Pawn(l, x,y,false)){
-                Pawn(l, x,y,true);
+              if(Pawn(f, x,y,false)){
+                Pawn(f, x,y,true);
                 if(check(white) == false){
                   return false;
                 }
-                pieces[l].setCoords(oldX,oldY);
+                pieces[f].setCoords(oldX,oldY);
               }
             }
           }
 
 
-        }else if(pieces[l].getType() == 'Q'){
+        }else if(pieces[f].getType() == 'Q'){
 
 
           for(int x = 0; x < 9; x++){
             for(int y = 0; y < 9; y++){
-              if(Queen(l, x,y,false)){
-                Queen(l, x,y,true);
+              if(Queen(f, x,y,false)){
+                Queen(f, x,y,true);
                 if(check(white) == false){
                   return false;
                 }
-                pieces[l].setCoords(oldX,oldY);
+                pieces[f].setCoords(oldX,oldY);
               }
             }
           }
 
-        }else if(pieces[l].getType() == 'K'){
+        }else if(pieces[f].getType() == 'K'){
 
           for(int x = 0; x < 9; x++){
             for(int y = 0; y < 9; y++){
-              if(Queen(l, x,y,false)){
-                Queen(l, x,y,true);
+              if(Queen(f, x,y,false)){
+                Queen(f, x,y,true);
                 if(check(white) == false){
                   return false;
                 }
-                pieces[l].setCoords(oldX,oldY);
+                pieces[f].setCoords(oldX,oldY);
               }
             }
           }
