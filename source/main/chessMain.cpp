@@ -706,7 +706,7 @@ bool check(bool white){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
-            if(Queen(j, x,y,false)){
+            if(Queen(c, x,y,false)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
