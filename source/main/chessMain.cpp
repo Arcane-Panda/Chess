@@ -332,7 +332,7 @@ void userInput(){
 
 
 
-bool Pawn(int i, int newX, int newY, bool moving){
+bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
 
   validMove = false;
 
@@ -368,7 +368,7 @@ bool Pawn(int i, int newX, int newY, bool moving){
             validMove = false;
           }else{
             validMove = true;
-            if(moving){
+            if(moving && checkM == false){
               pieces[j].setCoords(9,9);
             }
           }
@@ -408,7 +408,7 @@ bool Pawn(int i, int newX, int newY, bool moving){
             validMove = false;
           }else{
             validMove = true;
-            if(moving){
+            if(moving&& checkM == false){
               pieces[j].setCoords(9,9);
             }
           }
@@ -433,7 +433,7 @@ bool Pawn(int i, int newX, int newY, bool moving){
   }
 }
 
-bool King(int i, int newX, int newY, bool moving){
+bool King(int i, int newX, int newY, bool moving, bool checkM){
 
   validMove = false;
 
@@ -482,7 +482,7 @@ bool King(int i, int newX, int newY, bool moving){
           return false;
         }
         else{
-          if(moving){
+          if(moving && checkM == false){
             pieces[j].setCoords(9,9);
           }
         }
@@ -504,7 +504,7 @@ bool King(int i, int newX, int newY, bool moving){
 
 
 
-bool Queen(int i, int newX, int newY, bool moving){
+bool Queen(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
 
   if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
@@ -606,7 +606,7 @@ bool Queen(int i, int newX, int newY, bool moving){
           }
           return false;
         }else{
-          if(moving){
+          if(moving && checkM == false){
             pieces[j].setCoords(9,9);
           }
         }
@@ -710,7 +710,7 @@ bool check(bool white){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
-            if(Queen(c, x,y,false)){
+            if(Queen(c, x,y,false, true)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
@@ -722,7 +722,7 @@ bool check(bool white){
 
         for(int x = 0; x < 9; x++){
           for(int y = 0; y < 9; y++){
-            if(King(c, x,y,false)){
+            if(King(c, x,y,false, true)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
@@ -740,11 +740,11 @@ bool check(bool white){
   for (int c = 0; c < possibleMovesX.size(); c++){
 
     if(white){
-      if (WK.getXpos() == possibleMovesX[c] && WK.getYpos() == possibleMovesY[c]){
+      if (pieces[19].getXpos() == possibleMovesX[c] && pieces[19].getYpos() == possibleMovesY[c]){
         return true;
       }
     }else{
-      if(BK.getXpos() == possibleMovesX[c] && BK.getYpos() == possibleMovesY[c]){
+      if(pieces[9].getXpos() == possibleMovesX[c] && pieces[9].getYpos() == possibleMovesY[c]){
         return true;
       }
     }
@@ -752,6 +752,7 @@ bool check(bool white){
   }
   return false;
 }
+
 
 bool checkMate(bool white){
 
@@ -765,9 +766,10 @@ bool checkMate(bool white){
 
           for(int x = 0; x < 9; x++){
             for(int y = 0; y < 9; y++){
-              if(Pawn(f, x,y,false)){
-                Pawn(f, x,y,true);
+              if(Pawn(f, x,y,false, true)){
+                Pawn(f, x,y,true, true);
                 if(check(white) == false){
+                  pieces[f].setCoords(oldX,oldY);
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -781,9 +783,10 @@ bool checkMate(bool white){
 
           for(int x = 0; x < 9; x++){
             for(int y = 0; y < 9; y++){
-              if(Queen(f, x,y,false)){
-                Queen(f, x,y,true);
+              if(Queen(f, x,y,false, true)){
+                Queen(f, x,y,true, true);
                 if(check(white) == false){
+                  pieces[f].setCoords(oldX,oldY);
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -795,9 +798,10 @@ bool checkMate(bool white){
 
           for(int x = 0; x < 9; x++){
             for(int y = 0; y < 9; y++){
-              if(Queen(f, x,y,false)){
-                Queen(f, x,y,true);
+              if(King(f, x,y,false, true)){
+                King(f, x,y,true, true);
                 if(check(white) == false){
+                  pieces[f].setCoords(oldX,oldY);
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -854,7 +858,7 @@ int main(){
   {
     //by zach greenberg
     display();
-
+    cout<< endl<< pieces[18].getXpos() <<endl<< pieces[18].getYpos()<< endl;
     //pyae sone
     userInput();
 
@@ -873,7 +877,7 @@ int main(){
 
           if (pieces[i].getType() == 'P')
           {
-            if(Pawn(i, newArrayX, newArrayY, true))
+            if(Pawn(i, newArrayX, newArrayY, true, false))
             {
 
               if(check(true)){
@@ -886,7 +890,7 @@ int main(){
             }
           }else if (pieces[i].getType() == 'K')
           {
-            if(King(i, newArrayX, newArrayY, true))
+            if(King(i, newArrayX, newArrayY, true, false))
             {
               if(check(true)){
                 pieces[i].setCoords(oldArrayX,oldArrayY);
@@ -898,7 +902,7 @@ int main(){
           } else if (pieces[i].getType() == 'Q')
           {
             // pyae sone
-            if(Queen(i, newArrayX, newArrayY, true))
+            if(Queen(i, newArrayX, newArrayY, true, false))
             {
               if(check(true)){
                 pieces[i].setCoords(oldArrayX,oldArrayY);
@@ -916,7 +920,7 @@ int main(){
           }
           if (pieces[i].getType() == 'P')
           {
-            if(Pawn(i, newArrayX, newArrayY,true))
+            if(Pawn(i, newArrayX, newArrayY,true, false))
             {
               if(check(false)){
                 pieces[i].setCoords(oldArrayX,oldArrayY);
@@ -928,7 +932,7 @@ int main(){
             }
           } else if (pieces[i].getType() == 'K')
           {
-            if(King(i, newArrayX, newArrayY,true))
+            if(King(i, newArrayX, newArrayY,true, false))
             {
               if(check(false)){
                 pieces[i].setCoords(oldArrayX,oldArrayY);
@@ -940,7 +944,7 @@ int main(){
           } else if (pieces[i].getType() == 'Q')
           {
             // pyae sone
-            if(Queen(i, newArrayX, newArrayY,true))
+            if(Queen(i, newArrayX, newArrayY,true, false))
             {
               if(check(false)){
                 pieces[i].setCoords(oldArrayX,oldArrayY);
