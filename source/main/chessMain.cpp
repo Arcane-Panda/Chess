@@ -476,7 +476,9 @@ bool King(int i, int newX, int newY, bool moving){
     for(int j = 0; j < arrayLength; j++){
       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
         if(pieces[j].getWhite() == pieces[i].getWhite()){
-          cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          if(moving){
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
           return false;
         }
         else{
@@ -599,7 +601,9 @@ bool Queen(int i, int newX, int newY, bool moving){
       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
         if(pieces[j].getWhite() == pieces[i].getWhite()){
           validMove = false;
-          cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          if(moving){
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
           return false;
         }else{
           if(moving){
