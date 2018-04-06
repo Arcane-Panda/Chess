@@ -630,6 +630,7 @@ void setRandomTypes(){
 
   for (int i = 0; i < arrayLength; i++)
   {
+    srand(time(NULL));
     randomInt = rand();
     randomInt = rand();
     if(pieces[i].getType() != 'K')
@@ -964,4 +965,3 @@ int main(){
     }
   }
 }
-
