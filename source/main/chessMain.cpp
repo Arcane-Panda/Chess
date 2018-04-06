@@ -80,7 +80,7 @@ void Piece::setType(char input)
 
 //global variables
 Piece BP1('P',0,1,false);
-Piece BP2('P',5,0,false); // 1,1
+Piece BP2('P',1,1,false);
 Piece BP3('P',2,1,false);
 Piece BP4('P',3,1,false);
 Piece BP5('P',4,1,false);
@@ -408,7 +408,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
             validMove = false;
           }else{
             validMove = true;
-            if(moving&& checkM == false){
+            if(moving && checkM == false){
               pieces[j].setCoords(9,9);
             }
           }
@@ -837,11 +837,22 @@ void promotion(int i){
 void passTurn(){
 
   if (whiteTurn == true){
-    whiteTurn = false;
-    cout << endl << endl << endl << endl << "\033[1;92mBlack Turn\033[0m\n" << endl;
+    if(checkMate(false)){
+      playing = false;
+      cout<< endl << endl << endl << endl << "Check Mate. White Player wins" << endl;
+    }
+    else{
+      whiteTurn = false;
+      cout << endl << endl << endl << endl << "\033[1;92mBlack Turn\033[0m\n" << endl;
+    }
   }else if (whiteTurn == false){
-    whiteTurn = true;
-    cout << endl << endl << endl << endl << "\033[1;92mWhite Turn\033[0m\n" << endl;
+    if(checkMate(true)){
+      playing = false;
+      cout<< endl << endl << endl << endl << "Check Mate. Black Player wins" << endl;
+    }else{
+      whiteTurn = true;
+      cout << endl << endl << endl << endl << "\033[1;92mWhite Turn\033[0m\n" << endl;
+    }
   }
 }
 
@@ -858,107 +869,99 @@ int main(){
   {
     //by zach greenberg
     display();
-    cout<< endl<< pieces[18].getXpos() <<endl<< pieces[18].getYpos()<< endl;
     //pyae sone
     userInput();
 
     //lucas zagal
-    for (int i = 0; i < arrayLength; i ++)
+    int i;
+    for (int v = 0; v < arrayLength; v ++)
     {
-      if (pieces[i].getXpos() == oldArrayX && pieces[i].getYpos() == oldArrayY)
+      if (pieces[v].getXpos() == oldArrayX && pieces[v].getYpos() == oldArrayY)
       {
-        if (pieces[i].getWhite() ==  true && whiteTurn == true)
+        i = v;
+      }
+    }
+    if(pieces[i].getWhite() ==  true && whiteTurn == true)
+    {
+      if (pieces[i].getType() == 'P')
+      {
+        if(Pawn(i, newArrayX, newArrayY, true, false))
         {
-          if(checkMate(true)){
-            playing = false;
-            cout<< endl << endl << endl << endl << "Check Mate. Black Player wins" << endl;
+
+          if(check(true)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+            promotion(i);
           }
-
-
-          if (pieces[i].getType() == 'P')
-          {
-            if(Pawn(i, newArrayX, newArrayY, true, false))
-            {
-
-              if(check(true)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-                passTurn();
-                promotion(i);
-              }
-            }
-          }else if (pieces[i].getType() == 'K')
-          {
-            if(King(i, newArrayX, newArrayY, true, false))
-            {
-              if(check(true)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-                passTurn();
-              }
-            }
-          } else if (pieces[i].getType() == 'Q')
-          {
-            // pyae sone
-            if(Queen(i, newArrayX, newArrayY, true, false))
-            {
-              if(check(true)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-                passTurn();
-              }
-            }
-          }
-        } else if (pieces[i].getWhite() == false && whiteTurn == false)
+        }
+      }else if (pieces[i].getType() == 'K')
+      {
+        if(King(i, newArrayX, newArrayY, true, false))
         {
-          if(checkMate(false)){
-            playing = false;
-            cout<< endl << endl << endl << endl << "Check Mate. White Player wins" << endl;
+          if(check(true)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
           }
-          if (pieces[i].getType() == 'P')
-          {
-            if(Pawn(i, newArrayX, newArrayY,true, false))
-            {
-              if(check(false)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-                passTurn();
-                promotion(i);
-              }
-            }
-          } else if (pieces[i].getType() == 'K')
-          {
-            if(King(i, newArrayX, newArrayY,true, false))
-            {
-              if(check(false)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-                passTurn();
-              }
-            }
-          } else if (pieces[i].getType() == 'Q')
-          {
-            // pyae sone
-            if(Queen(i, newArrayX, newArrayY,true, false))
-            {
-              if(check(false)){
-                pieces[i].setCoords(oldArrayX,oldArrayY);
-                cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-              }else{
-                passTurn();
-              }
-            }
-          }
-        } else
+        }
+      } else if (pieces[i].getType() == 'Q')
+      {
+        // pyae sone
+        if(Queen(i, newArrayX, newArrayY, true, false))
         {
-          cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Not your turn!\033[0m\n" << endl;
+          if(check(true)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }
+          passTurn();
         }
       }
+
+    }else if (pieces[i].getWhite() == false && whiteTurn == false){
+
+      if (pieces[i].getType() == 'P')
+      {
+        if(Pawn(i, newArrayX, newArrayY,true, false))
+        {
+          if(check(false)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+            promotion(i);
+          }
+        }
+      } else if (pieces[i].getType() == 'K')
+      {
+        if(King(i, newArrayX, newArrayY,true, false))
+        {
+          if(check(false)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+          }
+        }
+      } else if (pieces[i].getType() == 'Q')
+      {
+        // pyae sone
+        if(Queen(i, newArrayX, newArrayY,true, false))
+        {
+          if(check(false)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+          }
+        }
+      }
+
+    }else{
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Not your turn!\033[0m\n" << endl;
     }
   }
 }
+
