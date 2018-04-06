@@ -630,7 +630,6 @@ void setRandomTypes(){
 
   for (int i = 0; i < arrayLength; i++)
   {
-    srand(time(NULL));
     randomInt = rand();
     randomInt = rand();
     if(pieces[i].getType() != 'K')
@@ -677,7 +676,7 @@ bool check(bool white){
 
           }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() < 8){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesX.push_back(pieces[c].getXpos() - 1);
             possibleMovesY.push_back(pieces[c].getYpos() - 1);
 
           }
@@ -700,7 +699,7 @@ bool check(bool white){
 
           }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() > 0){
             // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() + 1);
+            possibleMovesX.push_back(pieces[c].getXpos() - 1);
             possibleMovesY.push_back(pieces[c].getYpos() + 1);
 
           }
@@ -965,3 +964,4 @@ int main(){
     }
   }
 }
+
