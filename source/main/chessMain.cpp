@@ -93,6 +93,16 @@ Piece BQ('Q',3,0,false);
 
 Piece BK('K',4,0,false);
 
+Piece BB1('B',2,0,false);
+Piece BB2('B',5,0,false);
+
+Piece BR1('R',0,0,false);
+Piece BR2('R',7,0,false);
+
+Piece BN1('N',1,0,false);
+Piece BN2('N',6,0,false);
+
+
 Piece WP1('P',0,6,true);
 Piece WP2('P',1,6,true);
 Piece WP3('P',2,6,true);
@@ -105,12 +115,25 @@ Piece WP8('P',7,6,true);
 Piece WQ('Q',3,7,true);
 
 Piece WK('K',4,7,true);
+
+Piece WB1('B',2,7,true);
+Piece WB2('B',5,7,true);
+
+Piece WR1('R',0,7,true);
+Piece WR2('R',7,7,true);
+
+Piece WN1('N',1,7,true);
+Piece WN2('N',6,7,true);
+
+
+
 vector<int> possibleMovesX;
 vector<int> possibleMovesY;
 int oldX;
 int oldY;
 bool playing = true;
-Piece pieces[20] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK};
+Piece pieces[32] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, BB1, BB2, BR1, BR2, BN1, BN2, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK, WB1, WB2, WR2, WR1, WN1, WN2};
+//                   0    1   2      3   4   5     6     7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22  23  24   25   26   27   28   29   30   31
 
 
 bool piece = true;
@@ -624,6 +647,210 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
   }
 }
 
+bool Rook(int i, int newX, int newY, bool moving, bool checkM){
+  validMove = false;
+
+ if(newX == pieces[i].getXpos()) {
+
+    validMove = true;
+    if((newY - pieces[i].getYpos()) > 0){
+      for(int l = pieces[i].getYpos()+1; l < newY; l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getYpos() == l && pieces[j].getXpos() == newX){
+            validMove = false;
+          }
+        }
+      }
+
+    }else{
+      for(int l = newY +1; l <  pieces[i].getYpos(); l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getYpos() == l && pieces[j].getXpos() == newX){
+            validMove = false;
+          }
+        }
+      }
+    }
+
+  }else if (newY == pieces[i].getYpos()) {
+
+    validMove = true;
+    if((newX - pieces[i].getXpos()) > 0){
+      for(int l = pieces[i].getXpos()+1; l < newX; l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getXpos() == l && pieces[j].getYpos() == newY){
+            validMove = false;
+          }
+        }
+      }
+
+    }else{
+      for(int l = newX +1; l <  pieces[i].getXpos(); l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getXpos() == l && pieces[j].getYpos() == newY){
+            validMove = false;
+          }
+        }
+      }
+    }
+
+  }else{
+    validMove = false;
+  }
+  if(validMove == true){
+    for(int j = 0; j < arrayLength; j++){
+      if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
+        if(pieces[j].getWhite() == pieces[i].getWhite()){
+          validMove = false;
+          if(moving){
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
+          return false;
+        }else{
+          if(moving && checkM == false){
+            pieces[j].setCoords(9,9);
+          }
+        }
+      }
+    }
+    if(validMove){
+      if(moving){
+        pieces[i].setCoords(newX,newY);
+      }
+      return true;
+    }
+  }else{
+    if(moving){
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
+    return false;
+  }
+}
+
+bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
+  validMove = false;
+
+  if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
+
+    validMove = true;
+    if((newX - pieces[i].getXpos()) > 0){
+      for(int l = 1; l < newX  -  pieces[i].getXpos(); l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getYpos() == l + pieces[i].getYpos() && pieces[j].getXpos() == l + pieces[i].getXpos()){
+            validMove = false;
+          }
+        }
+      }
+    }else{
+      for(int l = 1; l <  pieces[i].getXpos() - newX; l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getYpos() == l + newY && pieces[j].getXpos() == l + newX){
+            validMove = false;
+          }
+        }
+      }
+    }
+
+  }else if (newX - pieces[i].getXpos() == (newY - pieces[i].getYpos())*-1) {
+
+    validMove = true;
+    if((newX - pieces[i].getXpos()) > 0){
+      for(int l = 1; l < newX - pieces[i].getXpos(); l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getYpos() == pieces[i].getYpos() - l && pieces[j].getXpos() == pieces[i].getXpos() + l){
+            validMove = false;
+          }
+        }
+      }
+    }else{
+      for(int l = 1; l <  pieces[i].getXpos() - newX; l++){
+        for(int j = 0; j < arrayLength; j++){
+          if(pieces[j].getYpos() == newY - l && pieces[j].getXpos() == newX + l){
+            validMove = false;
+          }
+        }
+      }
+    }
+
+  }else{
+    validMove = false;
+  }
+  if(validMove == true){
+    for(int j = 0; j < arrayLength; j++){
+      if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
+        if(pieces[j].getWhite() == pieces[i].getWhite()){
+          validMove = false;
+          if(moving){
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
+          return false;
+        }else{
+          if(moving && checkM == false){
+            pieces[j].setCoords(9,9);
+          }
+        }
+      }
+    }
+    if(validMove){
+      if(moving){
+        pieces[i].setCoords(newX,newY);
+      }
+      return true;
+    }
+  }else{
+    if(moving){
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
+    return false;
+  }
+}
+
+// bool Knight(int i, int newX, int newY, bool moving, bool checkM){
+//
+//   validMove = false;
+//
+//   if (((newX = 1 + pieces[i].getXpos())||(newX = -1 + pieces[i].getXpos())) && ((newY = 2 + pieces[i].getYpos())||(newY = -2 + pieces[i].getYpos()))) {
+//
+//     validMove = true;
+//
+//   }else if (((newX = 2 + pieces[i].getXpos())||(newX = -2 + pieces[i].getXpos())) && ((newY = 1 + pieces[i].getYpos())||(newY = -1 + pieces[i].getYpos()))) {
+//
+//     validMove = true;
+//
+//   }else{
+//     validMove = false;
+//   }
+//
+//   if(validMove == true){
+//     for(int j = 0; j < arrayLength; j++){
+//       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
+//         if(pieces[j].getWhite() == pieces[i].getWhite()){
+//           validMove = false;
+//           if(moving){
+//             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+//           }
+//           return false;
+//         }else{
+//           if(moving && checkM == false){
+//             pieces[j].setCoords(9,9);
+//           }
+//         }
+//       }
+//     }
+//     if(validMove){
+//       if(moving){
+//         pieces[i].setCoords(newX,newY);
+//       }
+//       return true;
+//     }
+//   }else{
+//     if(moving){
+//       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+//     }
+//     return false;
+//   }
+// }
+
 void setRandomTypes(){
 
   for (int i = 0; i < arrayLength; i++)
@@ -716,6 +943,42 @@ bool check(bool white){
           }
         }
 
+      }else if(pieces[c].getType() == 'R'){
+
+        for(int x = 0; x < 8; x++){
+          for(int y = 0; y < 8; y++){
+            if(Rook(c, x,y,false, true)){
+
+              possibleMovesX.push_back(x);
+              possibleMovesY.push_back(y);
+            }
+          }
+        }
+
+      }else if(pieces[c].getType() == 'B'){
+
+        for(int x = 0; x < 8; x++){
+          for(int y = 0; y < 8; y++){
+            if(Bishop(c, x,y,false, true)){
+
+              possibleMovesX.push_back(x);
+              possibleMovesY.push_back(y);
+            }
+          }
+        }
+
+      // }else if(pieces[c].getType() == 'N'){
+      //
+      //   for(int x = 0; x < 8; x++){
+      //     for(int y = 0; y < 8; y++){
+      //       if(Knight(c, x,y,false, true)){
+      //
+      //         possibleMovesX.push_back(x);
+      //         possibleMovesY.push_back(y);
+      //       }
+      //     }
+      //   }
+
       }else if(pieces[c].getType() == 'K'){
 
         for(int x = 0; x < 8; x++){
@@ -738,7 +1001,7 @@ bool check(bool white){
   for (int c = 0; c < possibleMovesX.size(); c++){
 
     if(white){
-      if (pieces[19].getXpos() == possibleMovesX[c] && pieces[19].getYpos() == possibleMovesY[c]){
+      if (pieces[25].getXpos() == possibleMovesX[c] && pieces[25].getYpos() == possibleMovesY[c]){
         return true;
       }
     }else{
@@ -783,6 +1046,54 @@ bool checkMate(bool colorW){
             for(int y = 0; y < 8; y++){
               if(Queen(f, x,y,false, true)){
                 Queen(f, x,y,true, true);
+                if(check(colorW) == false){
+                  pieces[f].setCoords(oldX,oldY);
+                  return false;
+                }
+                pieces[f].setCoords(oldX,oldY);
+              }
+            }
+          }
+
+        }else if(pieces[f].getType() == 'R'){
+
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Rook(f, x,y,false, true)){
+                Rook(f, x,y,true, true);
+                if(check(colorW) == false){
+                  pieces[f].setCoords(oldX,oldY);
+                  return false;
+                }
+                pieces[f].setCoords(oldX,oldY);
+              }
+            }
+          }
+
+        // }else if(pieces[f].getType() == 'N'){
+        //
+        //
+        //   for(int x = 0; x < 8; x++){
+        //     for(int y = 0; y < 8; y++){
+        //       if(Knight(f, x,y,false, true)){
+        //         Knight(f, x,y,true, true);
+        //         if(check(colorW) == false){
+        //           pieces[f].setCoords(oldX,oldY);
+        //           return false;
+        //         }
+        //         pieces[f].setCoords(oldX,oldY);
+        //       }
+        //     }
+        //   }
+
+        }else if(pieces[f].getType() == 'B'){
+
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Bishop(f, x,y,false, true)){
+                Bishop(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
                   return false;
@@ -872,7 +1183,7 @@ int main(){
 
     //lucas zagal
     int i;
-    for (int v = 0; v < arrayLength; v ++)
+    for (int v = 0; v < arrayLength; v++)
     {
       if (pieces[v].getXpos() == oldArrayX && pieces[v].getYpos() == oldArrayY)
       {
@@ -916,6 +1227,39 @@ int main(){
           }
           passTurn();
         }
+      }else if (pieces[i].getType() == 'R')
+      {
+        // pyae sone
+        if(Rook(i, newArrayX, newArrayY, true, false))
+        {
+          if(check(true)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }
+          passTurn();
+        }
+      }else if (pieces[i].getType() == 'B')
+      {
+        // pyae sone
+        if(Bishop(i, newArrayX, newArrayY, true, false))
+        {
+          if(check(true)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }
+          passTurn();
+        }
+      // }else if (pieces[i].getType() == 'N')
+      // {
+      //   // pyae sone
+      //   if(Knight(i, newArrayX, newArrayY, true, false))
+      //   {
+      //     if(check(true)){
+      //       pieces[i].setCoords(oldArrayX,oldArrayY);
+      //       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+      //     }
+      //     passTurn();
+      //   }
       }
 
     }else if (pieces[i].getWhite() == false && whiteTurn == false){
@@ -955,6 +1299,42 @@ int main(){
             passTurn();
           }
         }
+      }else if (pieces[i].getType() == 'R')
+      {
+        // pyae sone
+        if(Rook(i, newArrayX, newArrayY,true, false))
+        {
+          if(check(false)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+          }
+        }
+      }else if (pieces[i].getType() == 'B')
+      {
+        // pyae sone
+        if(Bishop(i, newArrayX, newArrayY,true, false))
+        {
+          if(check(false)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+          }
+        }
+      // }else if (pieces[i].getType() == 'N')
+      // {
+      //   // pyae sone
+      //   if(Knight(i, newArrayX, newArrayY,true, false))
+      //   {
+      //     if(check(false)){
+      //       pieces[i].setCoords(oldArrayX,oldArrayY);
+      //       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+      //     }else{
+      //       passTurn();
+      //     }
+      //   }
       }
 
     }else{
