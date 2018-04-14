@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
+#include <string>
 using namespace std;
 //Lucas Zagal
 class Piece
@@ -331,7 +332,6 @@ void userInput(){
 }
 
 
-
 bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
 
   validMove = false;
@@ -421,7 +421,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
   }
   if(validMove){
     if(moving){
-      pieces[i].setCoords(newArrayX,newArrayY);
+      pieces[i].setCoords(newX,newY);
     }
     return true;
 
@@ -490,7 +490,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     }
     if(validMove){
       if(moving){
-        pieces[i].setCoords(newArrayX,newArrayY);
+        pieces[i].setCoords(newX,newY);
       }
       return true;
     }
@@ -501,8 +501,6 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     return false;
   }
 }
-
-
 
 bool Queen(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
@@ -614,7 +612,7 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
     }
     if(validMove){
       if(moving){
-        pieces[i].setCoords(newArrayX,newArrayY);
+        pieces[i].setCoords(newX,newY);
       }
       return true;
     }
@@ -708,8 +706,8 @@ bool check(bool white){
 
       }else if(pieces[c].getType() == 'Q'){
 
-        for(int x = 0; x < 9; x++){
-          for(int y = 0; y < 9; y++){
+        for(int x = 0; x < 8; x++){
+          for(int y = 0; y < 8; y++){
             if(Queen(c, x,y,false, true)){
 
               possibleMovesX.push_back(x);
@@ -720,8 +718,8 @@ bool check(bool white){
 
       }else if(pieces[c].getType() == 'K'){
 
-        for(int x = 0; x < 9; x++){
-          for(int y = 0; y < 9; y++){
+        for(int x = 0; x < 8; x++){
+          for(int y = 0; y < 8; y++){
             if(King(c, x,y,false, true)){
 
               possibleMovesX.push_back(x);
@@ -754,21 +752,21 @@ bool check(bool white){
 }
 
 
-bool checkMate(bool white){
+bool checkMate(bool colorW){
 
-  if(check(white)){
+  if(check(colorW)){
     for(int f = 0; f < arrayLength; f++){
-      if(pieces[f].getWhite() == white){
+      if(pieces[f].getWhite() == colorW){
         oldX = pieces[f].getXpos();
         oldY = pieces[f].getYpos();
 
         if(pieces[f].getType() == 'P'){
 
-          for(int x = 0; x < 9; x++){
-            for(int y = 0; y < 9; y++){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
               if(Pawn(f, x,y,false, true)){
                 Pawn(f, x,y,true, true);
-                if(check(white) == false){
+                if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
                   return false;
                 }
@@ -781,11 +779,11 @@ bool checkMate(bool white){
         }else if(pieces[f].getType() == 'Q'){
 
 
-          for(int x = 0; x < 9; x++){
-            for(int y = 0; y < 9; y++){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
               if(Queen(f, x,y,false, true)){
                 Queen(f, x,y,true, true);
-                if(check(white) == false){
+                if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
                   return false;
                 }
@@ -796,11 +794,11 @@ bool checkMate(bool white){
 
         }else if(pieces[f].getType() == 'K'){
 
-          for(int x = 0; x < 9; x++){
-            for(int y = 0; y < 9; y++){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
               if(King(f, x,y,false, true)){
                 King(f, x,y,true, true);
-                if(check(white) == false){
+                if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
                   return false;
                 }
@@ -964,4 +962,3 @@ int main(){
     }
   }
 }
-
