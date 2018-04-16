@@ -805,6 +805,50 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
   }
 }
 
+bool Knight(int i, int newX, int newY, bool moving, bool checkM){
+  validMove = false;
+
+  if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
+
+    validMove = true;
+
+
+  }else if (newX - pieces[i].getXpos() == (newY - pieces[i].getYpos())*-1) {
+
+    validMove = true;
+
+  }else{
+    validMove = false;
+  }
+  if(validMove == true){
+    for(int j = 0; j < arrayLength; j++){
+      if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
+        if(pieces[j].getWhite() == pieces[i].getWhite()){
+          validMove = false;
+          if(moving){
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+          }
+          return false;
+        }else{
+          if(moving && checkM == false){
+            pieces[j].setCoords(9,9);
+          }
+        }
+      }
+    }
+    if(validMove){
+      if(moving){
+        pieces[i].setCoords(newX,newY);
+      }
+      return true;
+    }
+  }else{
+    if(moving){
+      cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+    }
+    return false;
+  }
+}
 // bool Knight(int i, int newX, int newY, bool moving, bool checkM){
 //
 //   validMove = false;
@@ -967,17 +1011,19 @@ bool check(bool white){
           }
         }
 
-      // }else if(pieces[c].getType() == 'N'){
-      //
-      //   for(int x = 0; x < 8; x++){
-      //     for(int y = 0; y < 8; y++){
-      //       if(Knight(c, x,y,false, true)){
-      //
-      //         possibleMovesX.push_back(x);
-      //         possibleMovesY.push_back(y);
-      //       }
-      //     }
-      //   }
+
+      }else if(pieces[c].getType() == 'N'){
+
+        for(int x = 0; x < 8; x++){
+          for(int y = 0; y < 8; y++){
+            if(Knight(c, x,y,false, true)){
+
+              possibleMovesX.push_back(x);
+              possibleMovesY.push_back(y);
+            }
+          }
+        }
+
 
       }else if(pieces[c].getType() == 'K'){
 
@@ -1071,21 +1117,6 @@ bool checkMate(bool colorW){
             }
           }
 
-        // }else if(pieces[f].getType() == 'N'){
-        //
-        //
-        //   for(int x = 0; x < 8; x++){
-        //     for(int y = 0; y < 8; y++){
-        //       if(Knight(f, x,y,false, true)){
-        //         Knight(f, x,y,true, true);
-        //         if(check(colorW) == false){
-        //           pieces[f].setCoords(oldX,oldY);
-        //           return false;
-        //         }
-        //         pieces[f].setCoords(oldX,oldY);
-        //       }
-        //     }
-        //   }
 
         }else if(pieces[f].getType() == 'B'){
 
@@ -1094,6 +1125,22 @@ bool checkMate(bool colorW){
             for(int y = 0; y < 8; y++){
               if(Bishop(f, x,y,false, true)){
                 Bishop(f, x,y,true, true);
+                if(check(colorW) == false){
+                  pieces[f].setCoords(oldX,oldY);
+                  return false;
+                }
+                pieces[f].setCoords(oldX,oldY);
+              }
+            }
+          }
+
+        }else if(pieces[f].getType() == 'N'){
+
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Knight(f, x,y,false, true)){
+                Knight(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
                   return false;
@@ -1249,17 +1296,17 @@ int main(){
           }
           passTurn();
         }
-      // }else if (pieces[i].getType() == 'N')
-      // {
-      //   // pyae sone
-      //   if(Knight(i, newArrayX, newArrayY, true, false))
-      //   {
-      //     if(check(true)){
-      //       pieces[i].setCoords(oldArrayX,oldArrayY);
-      //       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-      //     }
-      //     passTurn();
-      //   }
+      }else if (pieces[i].getType() == 'N')
+      {
+        // pyae sone
+        if(Knight(i, newArrayX, newArrayY, true, false))
+        {
+          if(check(true)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }
+          passTurn();
+        }
       }
 
     }else if (pieces[i].getWhite() == false && whiteTurn == false){
@@ -1323,18 +1370,20 @@ int main(){
             passTurn();
           }
         }
-      // }else if (pieces[i].getType() == 'N')
-      // {
-      //   // pyae sone
-      //   if(Knight(i, newArrayX, newArrayY,true, false))
-      //   {
-      //     if(check(false)){
-      //       pieces[i].setCoords(oldArrayX,oldArrayY);
-      //       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
-      //     }else{
-      //       passTurn();
-      //     }
-      //   }
+
+      }else if (pieces[i].getType() == 'N')
+      {
+        // pyae sone
+        if(Knight(i, newArrayX, newArrayY,true, false))
+        {
+          if(check(false)){
+            pieces[i].setCoords(oldArrayX,oldArrayY);
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
+          }
+        }
+
       }
 
     }else{
