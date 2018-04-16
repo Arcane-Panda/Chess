@@ -808,12 +808,12 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
 bool Horse(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
 
-  if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
+  if (((newX == 1 + pieces[i].getXpos())||(newX == -1 + pieces[i].getXpos())) && ((newY == 2 + pieces[i].getYpos())||(newY == -2 + pieces[i].getYpos()))) {
 
     validMove = true;
 
 
-  }else if (newX - pieces[i].getXpos() == (newY - pieces[i].getYpos())*-1) {
+  }else if (((newX == 2 + pieces[i].getXpos())||(newX == -2 + pieces[i].getXpos())) && ((newY == 1 + pieces[i].getYpos())||(newY == -1 + pieces[i].getYpos()))) {
 
     validMove = true;
 
@@ -849,51 +849,6 @@ bool Horse(int i, int newX, int newY, bool moving, bool checkM){
     return false;
   }
 }
-// bool Horse(int i, int newX, int newY, bool moving, bool checkM){
-//
-//   validMove = false;
-//
-//   if (((newX = 1 + pieces[i].getXpos())||(newX = -1 + pieces[i].getXpos())) && ((newY = 2 + pieces[i].getYpos())||(newY = -2 + pieces[i].getYpos()))) {
-//
-//     validMove = true;
-//
-//   }else if (((newX = 2 + pieces[i].getXpos())||(newX = -2 + pieces[i].getXpos())) && ((newY = 1 + pieces[i].getYpos())||(newY = -1 + pieces[i].getYpos()))) {
-//
-//     validMove = true;
-//
-//   }else{
-//     validMove = false;
-//   }
-//
-//   if(validMove == true){
-//     for(int j = 0; j < arrayLength; j++){
-//       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
-//         if(pieces[j].getWhite() == pieces[i].getWhite()){
-//           validMove = false;
-//           if(moving){
-//             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-//           }
-//           return false;
-//         }else{
-//           if(moving && checkM == false){
-//             pieces[j].setCoords(9,9);
-//           }
-//         }
-//       }
-//     }
-//     if(validMove){
-//       if(moving){
-//         pieces[i].setCoords(newX,newY);
-//       }
-//       return true;
-//     }
-//   }else{
-//     if(moving){
-//       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-//     }
-//     return false;
-//   }
-// }
 
 void setRandomTypes(){
 
