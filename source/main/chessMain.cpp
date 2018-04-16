@@ -99,8 +99,8 @@ Piece BB2('B',5,0,false);
 Piece BR1('R',0,0,false);
 Piece BR2('R',7,0,false);
 
-Piece BN1('N',1,0,false);
-Piece BN2('N',6,0,false);
+Piece BN1('H',1,0,false);
+Piece BN2('H',6,0,false);
 
 
 Piece WP1('P',0,6,true);
@@ -122,8 +122,8 @@ Piece WB2('B',5,7,true);
 Piece WR1('R',0,7,true);
 Piece WR2('R',7,7,true);
 
-Piece WN1('N',1,7,true);
-Piece WN2('N',6,7,true);
+Piece WN1('H',1,7,true);
+Piece WN2('H',6,7,true);
 
 
 
@@ -805,7 +805,7 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
   }
 }
 
-bool Knight(int i, int newX, int newY, bool moving, bool checkM){
+bool Horse(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
 
   if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
@@ -849,7 +849,7 @@ bool Knight(int i, int newX, int newY, bool moving, bool checkM){
     return false;
   }
 }
-// bool Knight(int i, int newX, int newY, bool moving, bool checkM){
+// bool Horse(int i, int newX, int newY, bool moving, bool checkM){
 //
 //   validMove = false;
 //
@@ -1012,11 +1012,11 @@ bool check(bool white){
         }
 
 
-      }else if(pieces[c].getType() == 'N'){
+      }else if(pieces[c].getType() == 'H'){
 
         for(int x = 0; x < 8; x++){
           for(int y = 0; y < 8; y++){
-            if(Knight(c, x,y,false, true)){
+            if(Horse(c, x,y,false, true)){
 
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
@@ -1134,13 +1134,13 @@ bool checkMate(bool colorW){
             }
           }
 
-        }else if(pieces[f].getType() == 'N'){
+        }else if(pieces[f].getType() == 'H'){
 
 
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
-              if(Knight(f, x,y,false, true)){
-                Knight(f, x,y,true, true);
+              if(Horse(f, x,y,false, true)){
+                Horse(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
                   return false;
@@ -1296,10 +1296,10 @@ int main(){
           }
           passTurn();
         }
-      }else if (pieces[i].getType() == 'N')
+      }else if (pieces[i].getType() == 'H')
       {
         // pyae sone
-        if(Knight(i, newArrayX, newArrayY, true, false))
+        if(Horse(i, newArrayX, newArrayY, true, false))
         {
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
@@ -1371,10 +1371,10 @@ int main(){
           }
         }
 
-      }else if (pieces[i].getType() == 'N')
+      }else if (pieces[i].getType() == 'H')
       {
         // pyae sone
-        if(Knight(i, newArrayX, newArrayY,true, false))
+        if(Horse(i, newArrayX, newArrayY,true, false))
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
