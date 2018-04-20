@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
+#include <fstream>
 using namespace std;
 //Lucas Zagal
 class Piece
@@ -99,8 +100,8 @@ Piece BB2('B',5,0,false);
 Piece BR1('R',0,0,false);
 Piece BR2('R',7,0,false);
 
-Piece BN1('H',1,0,false);
-Piece BN2('H',6,0,false);
+Piece BH1('H',1,0,false);
+Piece BH2('H',6,0,false);
 
 
 Piece WP1('P',0,6,true);
@@ -122,8 +123,8 @@ Piece WB2('B',5,7,true);
 Piece WR1('R',0,7,true);
 Piece WR2('R',7,7,true);
 
-Piece WN1('H',1,7,true);
-Piece WN2('H',6,7,true);
+Piece WH1('H',1,7,true);
+Piece WH2('H',6,7,true);
 
 
 
@@ -132,7 +133,7 @@ vector<int> possibleMovesY;
 int oldX;
 int oldY;
 bool playing = true;
-Piece pieces[32] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, BB1, BB2, BR1, BR2, BN1, BN2, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK, WB1, WB2, WR2, WR1, WN1, WN2};
+Piece pieces[32] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, BB1, BB2, BR1, BR2, BH1, BH2, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK, WB1, WB2, WR2, WR1, WH1, WH2};
 //                   0    1   2      3   4   5     6     7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22  23  24   25   26   27   28   29   30   31
 
 
@@ -849,6 +850,51 @@ bool Horse(int i, int newX, int newY, bool moving, bool checkM){
     return false;
   }
 }
+// bool Horse(int i, int newX, int newY, bool moving, bool checkM){
+//
+//   validMove = false;
+//
+//   if (((newX = 1 + pieces[i].getXpos())||(newX = -1 + pieces[i].getXpos())) && ((newY = 2 + pieces[i].getYpos())||(newY = -2 + pieces[i].getYpos()))) {
+//
+//     validMove = true;
+//
+//   }else if (((newX = 2 + pieces[i].getXpos())||(newX = -2 + pieces[i].getXpos())) && ((newY = 1 + pieces[i].getYpos())||(newY = -1 + pieces[i].getYpos()))) {
+//
+//     validMove = true;
+//
+//   }else{
+//     validMove = false;
+//   }
+//
+//   if(validMove == true){
+//     for(int j = 0; j < arrayLength; j++){
+//       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
+//         if(pieces[j].getWhite() == pieces[i].getWhite()){
+//           validMove = false;
+//           if(moving){
+//             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+//           }
+//           return false;
+//         }else{
+//           if(moving && checkM == false){
+//             pieces[j].setCoords(9,9);
+//           }
+//         }
+//       }
+//     }
+//     if(validMove){
+//       if(moving){
+//         pieces[i].setCoords(newX,newY);
+//       }
+//       return true;
+//     }
+//   }else{
+//     if(moving){
+//       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
+//     }
+//     return false;
+//   }
+// }
 
 void setRandomTypes(){
 
@@ -1167,6 +1213,108 @@ void passTurn(){
   }
 }
 
+void save()
+{
+  ofstream outfile("save.txt");
+
+  outfile << BP1.getXpos() << BP1.getYpos();
+  outfile << BP2.getXpos() << BP2.getYpos();
+  outfile << BP3.getXpos() << BP3.getYpos();
+  outfile << BP4.getXpos() << BP4.getYpos();
+  outfile << BP5.getXpos() << BP5.getYpos();
+  outfile << BP6.getXpos() << BP6.getYpos();
+  outfile << BP7.getXpos() << BP7.getYpos();
+  outfile << BP8.getXpos() << BP8.getYpos();
+
+  outfile << BQ.getXpos() << BQ.getYpos();
+
+  outfile << BK.getXpos() << BK.getYpos();
+
+  outfile << BB1.getXpos() << BB1.getYpos();
+  outfile << BB2.getXpos() << BB2.getYpos();
+
+  outfile << BR1.getXpos() << BR1.getYpos();
+  outfile << BR2.getXpos() << BR2.getYpos();
+
+  outfile << BH1.getXpos() << BH1.getYpos();
+  outfile << BH2.getXpos() << BH2.getYpos();
+
+  outfile << WP1.getXpos() << WP1.getYpos();
+  outfile << WP2.getXpos() << WP2.getYpos();
+  outfile << WP3.getXpos() << WP3.getYpos();
+  outfile << WP4.getXpos() << WP4.getYpos();
+  outfile << WP5.getXpos() << WP5.getYpos();
+  outfile << WP6.getXpos() << WP6.getYpos();
+  outfile << WP7.getXpos() << WP7.getYpos();
+  outfile << WP8.getXpos() << WP8.getYpos();
+
+  outfile << WQ.getXpos() << WQ.getYpos();
+
+  outfile << WK.getXpos() << WK.getYpos();
+
+  outfile << WB1.getXpos() << WB1.getYpos();
+  outfile << WB2.getXpos() << WB2.getYpos();
+
+  outfile << WR1.getXpos() << WR1.getYpos();
+  outfile << WR2.getXpos() << WR2.getYpos();
+
+  outfile << WH1.getXpos() << WH1.getYpos();
+  outfile << WH2.getXpos() << WH2.getYpos();
+  outfile.close();
+}
+
+void load()
+{
+  ifstream infile;
+  infile.open("save.txt");
+
+  string saveFile;
+  infile >> saveFile;
+  BP1.setCoords(saveFile.at(0),saveFile.at(1));
+  BP2.setCoords(saveFile.at(2),saveFile.at(3));
+  BP3.setCoords(saveFile.at(4),saveFile.at(5));
+  BP4.setCoords(saveFile.at(6),saveFile.at(7));
+  BP5.setCoords(saveFile.at(8),saveFile.at(9));
+  BP6.setCoords(saveFile.at(10),saveFile.at(11));
+  BP7.setCoords(saveFile.at(12),saveFile.at(13));
+  BP8.setCoords(saveFile.at(14),saveFile.at(15));
+
+  BQ.setCoords(saveFile.at(16),saveFile.at(17));
+
+  BK.setCoords(saveFile.at(18),saveFile.at(19));
+
+  BB1.setCoords(saveFile.at(20),saveFile.at(21));
+  BB2.setCoords(saveFile.at(22),saveFile.at(23));
+
+  BR1.setCoords(saveFile.at(24),saveFile.at(25));
+  BR2.setCoords(saveFile.at(26),saveFile.at(27));
+
+  BH1.setCoords(saveFile.at(28),saveFile.at(29));
+  BH2.setCoords(saveFile.at(30),saveFile.at(31));
+
+  WP1.setCoords(saveFile.at(0),saveFile.at(1));
+  WP2.setCoords(saveFile.at(2),saveFile.at(3));
+  WP3.setCoords(saveFile.at(4),saveFile.at(5));
+  WP4.setCoords(saveFile.at(6),saveFile.at(7));
+  WP5.setCoords(saveFile.at(8),saveFile.at(9));
+  WP6.setCoords(saveFile.at(10),saveFile.at(11));
+  WP7.setCoords(saveFile.at(12),saveFile.at(13));
+  WP8.setCoords(saveFile.at(14),saveFile.at(15));
+
+  WQ.setCoords(saveFile.at(16),saveFile.at(17));
+
+  WK.setCoords(saveFile.at(18),saveFile.at(19));
+
+  WB1.setCoords(saveFile.at(20),saveFile.at(21));
+  WB2.setCoords(saveFile.at(22),saveFile.at(23));
+
+  WR1.setCoords(saveFile.at(24),saveFile.at(25));
+  WR2.setCoords(saveFile.at(26),saveFile.at(27));
+
+  WH1.setCoords(saveFile.at(28),saveFile.at(29));
+  WH2.setCoords(saveFile.at(30),saveFile.at(31));
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1176,6 +1324,8 @@ int main(){
   {
     setRandomTypes();
   }
+  save();
+  load();
   while(playing)
   {
     //by zach greenberg
