@@ -1260,6 +1260,7 @@ void save()
 
   outfile << WH1.getXpos() << WH1.getYpos();
   outfile << WH2.getXpos() << WH2.getYpos();
+  outfile << whiteTurn;
   outfile.close();
 }
 
@@ -1270,6 +1271,7 @@ void load()
 
   string saveFile;
   infile >> saveFile;
+  infile.close();
   BP1.setCoords(saveFile.at(0),saveFile.at(1));
   BP2.setCoords(saveFile.at(2),saveFile.at(3));
   BP3.setCoords(saveFile.at(4),saveFile.at(5));
@@ -1292,27 +1294,35 @@ void load()
   BH1.setCoords(saveFile.at(28),saveFile.at(29));
   BH2.setCoords(saveFile.at(30),saveFile.at(31));
 
-  WP1.setCoords(saveFile.at(0),saveFile.at(1));
-  WP2.setCoords(saveFile.at(2),saveFile.at(3));
-  WP3.setCoords(saveFile.at(4),saveFile.at(5));
-  WP4.setCoords(saveFile.at(6),saveFile.at(7));
-  WP5.setCoords(saveFile.at(8),saveFile.at(9));
-  WP6.setCoords(saveFile.at(10),saveFile.at(11));
-  WP7.setCoords(saveFile.at(12),saveFile.at(13));
-  WP8.setCoords(saveFile.at(14),saveFile.at(15));
+  WP1.setCoords(saveFile.at(32),saveFile.at(33));
+  WP2.setCoords(saveFile.at(34),saveFile.at(35));
+  WP3.setCoords(saveFile.at(36),saveFile.at(37));
+  WP4.setCoords(saveFile.at(38),saveFile.at(39));
+  WP5.setCoords(saveFile.at(40),saveFile.at(41));
+  WP6.setCoords(saveFile.at(42),saveFile.at(43));
+  WP7.setCoords(saveFile.at(44),saveFile.at(45));
+  WP8.setCoords(saveFile.at(46),saveFile.at(47));
 
-  WQ.setCoords(saveFile.at(16),saveFile.at(17));
+  WQ.setCoords(saveFile.at(48),saveFile.at(49));
 
-  WK.setCoords(saveFile.at(18),saveFile.at(19));
+  WK.setCoords(saveFile.at(50),saveFile.at(51));
 
-  WB1.setCoords(saveFile.at(20),saveFile.at(21));
-  WB2.setCoords(saveFile.at(22),saveFile.at(23));
+  WB1.setCoords(saveFile.at(52),saveFile.at(53));
+  WB2.setCoords(saveFile.at(54),saveFile.at(55));
 
-  WR1.setCoords(saveFile.at(24),saveFile.at(25));
-  WR2.setCoords(saveFile.at(26),saveFile.at(27));
+  WR1.setCoords(saveFile.at(56),saveFile.at(57));
+  WR2.setCoords(saveFile.at(58),saveFile.at(59));
 
-  WH1.setCoords(saveFile.at(28),saveFile.at(29));
-  WH2.setCoords(saveFile.at(30),saveFile.at(31));
+  WH1.setCoords(saveFile.at(60),saveFile.at(61));
+  WH2.setCoords(saveFile.at(62),saveFile.at(63));
+
+  if(saveFile.at(64) == '1')
+  {
+    whiteTurn = true;
+  } else
+  {
+    whiteTurn = false;
+  }
 
 }
 
