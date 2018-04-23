@@ -20,14 +20,14 @@ public:
   bool getWhite(void);
   void setCoords(int newX, int newY);
   bool getFirst(void);
-
+  
 private:
   int xpos, ypos;
   char type;
   bool white;
   bool firstMove;
-
-
+  
+  
 };
 Piece::Piece(char typ, int x, int y, bool isWhite)
 {
@@ -60,12 +60,12 @@ bool Piece::getWhite(void)
 
 void Piece::setCoords(int newX, int newY)
 {
-
+  
   xpos = newX;
   ypos = newY;
   firstMove = false;
   cout << "\n\n\n\n\n\n\n\n";
-
+  
 }
 
 bool Piece::getFirst(void)
@@ -159,30 +159,30 @@ bool whiteTurn = true;
 // functions
 
 void display(){
-
+  
   cout  << endl << endl<< "    A  B  C  D  E  F  G  H " << endl;
   for(int j=0;j < 8; j+=2){ // rows
-
+    
     cout<< " " << 8-j << " ";
     for( int l =0; l < 8;l+=2 ){ //Columns
-
+      
       for(int i = 0; i < arrayLength; i++){ // pieces
-
+        
         if(pieces[i].getYpos() == j && pieces[i].getXpos() ==l && piece == true){
           if(pieces[i].getWhite()){
             printf("\x1b[31;46m %c \x1b[0m" ,pieces[i].getType());//black
           }else{
             printf("\x1b[30;46m %c \x1b[0m" ,pieces[i].getType());//black
           }
-
+          
           piece = false;
-
+          
         }
       }
       if(piece){
-
+        
         printf("\x1b[37;46m   \x1b[0m" );// black
-
+        
       }
       for(int i = 0; i < arrayLength; i++){
         if(pieces[i].getYpos() == j && pieces[i].getXpos() ==l+1 && piece1 == true){
@@ -194,7 +194,7 @@ void display(){
           piece1 = false;
         }
       }
-
+      
       if(piece1){
         printf("\x1b[37;47m   \x1b[0m" );//green
       }
@@ -203,12 +203,12 @@ void display(){
     }
     cout<< " " << 8-j << " ";
     printf("\n");
-
+    
     cout<< " " << 7-j << " ";
     for( int l = 0; l < 8;l+=2 ){ // Columns
-
+      
       for(int i = 0; i < arrayLength; i++){ // pieces
-
+        
         if(pieces[i].getYpos() == j+1 && pieces[i].getXpos() == l && piece == true){
           if(pieces[i].getWhite()){
             printf("\x1b[31;47m %c \x1b[0m" , pieces[i].getType());//green
@@ -216,16 +216,16 @@ void display(){
             printf("\x1b[30;47m %c \x1b[0m" , pieces[i].getType());//green
           }
           piece = false;
-
+          
         }
       }
-
+      
       if(piece){
         printf("\x1b[37;47m   \x1b[0m" );//green
-
-
+        
+        
       }
-
+      
       for(int i = 0; i < arrayLength; i++){
         if(pieces[i].getYpos() == j+1 && pieces[i].getXpos() == l+1 && piece1 == true){
           if(pieces[i].getWhite()){
@@ -236,10 +236,10 @@ void display(){
           piece1 = false;
         }
       }
-
+      
       if(piece1){
-
-
+        
+        
         printf("\x1b[37;46m   \x1b[0m" );// black
       }
       piece = true;
@@ -249,7 +249,7 @@ void display(){
     printf("\n");
   }
   cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
-
+  
 }
 
 void userInput(){
@@ -300,12 +300,12 @@ void userInput(){
     } else if (selConfTwo == "8") {
       oldArrayY = 0;
     }
-
+    
   } else
   {
     cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
   }
-
+  
   for (int i = 0; i < arrayLength; i++)
   {
     if (pieces[i].getYpos() == oldArrayY && pieces[i].getXpos() == oldArrayX)
@@ -351,17 +351,17 @@ void userInput(){
       }
     }
   }
-
-
+  
+  
 }
 
 
 bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
-
+  
   validMove = false;
-
+  
   if(pieces[i].getWhite() == true){
-
+    
     if(newY - pieces[i].getYpos() == -2 && pieces[i].getFirst() == true && newX == pieces[i].getXpos()){
       //double move white
       validMove = true;
@@ -373,7 +373,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
           validMove = false;
         }
       }
-
+      
     }else if(newY - pieces[i].getYpos() == -1 && newX == pieces[i].getXpos()){
       //single move white
       validMove = true;
@@ -386,7 +386,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
       // attacking white
       validMove = false;
       for(int j = 0; j < arrayLength; j++){
-
+        
         if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           if(pieces[i].getWhite() == pieces[j].getWhite()){
             validMove = false;
@@ -426,7 +426,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
       // attack black
       validMove = false;
       for(int j = 0; j < arrayLength; j++){
-
+        
         if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
           if(pieces[j].getWhite() == pieces[i].getWhite()){
             validMove = false;
@@ -438,7 +438,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
           }
         }
       }
-
+      
     }else{
       validMove = false;
     }
@@ -448,7 +448,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
       pieces[i].setCoords(newX,newY);
     }
     return true;
-
+    
   }else{
     if(moving){
       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
@@ -458,9 +458,9 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
 }
 
 bool King(int i, int newX, int newY, bool moving, bool checkM){
-
+  
   validMove = false;
-
+  
   if(newY- pieces[i].getYpos() == -1 && newX == pieces[i].getXpos())
   {
     //move up
@@ -528,9 +528,9 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
 
 bool Queen(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
-
+  
   if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
-
+    
     validMove = true;
     if((newX - pieces[i].getXpos()) > 0){
       for(int l = 1; l < newX  -  pieces[i].getXpos(); l++){
@@ -549,9 +549,9 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else if (newX - pieces[i].getXpos() == (newY - pieces[i].getYpos())*-1) {
-
+    
     validMove = true;
     if((newX - pieces[i].getXpos()) > 0){
       for(int l = 1; l < newX - pieces[i].getXpos(); l++){
@@ -570,9 +570,9 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else if(newX == pieces[i].getXpos()) {
-
+    
     validMove = true;
     if((newY - pieces[i].getYpos()) > 0){
       for(int l = pieces[i].getYpos()+1; l < newY; l++){
@@ -582,7 +582,7 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
           }
         }
       }
-
+      
     }else{
       for(int l = newY +1; l <  pieces[i].getYpos(); l++){
         for(int j = 0; j < arrayLength; j++){
@@ -592,9 +592,9 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else if (newY == pieces[i].getYpos()) {
-
+    
     validMove = true;
     if((newX - pieces[i].getXpos()) > 0){
       for(int l = pieces[i].getXpos()+1; l < newX; l++){
@@ -604,7 +604,7 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
           }
         }
       }
-
+      
     }else{
       for(int l = newX +1; l <  pieces[i].getXpos(); l++){
         for(int j = 0; j < arrayLength; j++){
@@ -614,7 +614,7 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else{
     validMove = false;
   }
@@ -650,9 +650,9 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
 
 bool Rook(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
-
- if(newX == pieces[i].getXpos()) {
-
+  
+  if(newX == pieces[i].getXpos()) {
+    
     validMove = true;
     if((newY - pieces[i].getYpos()) > 0){
       for(int l = pieces[i].getYpos()+1; l < newY; l++){
@@ -662,7 +662,7 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
           }
         }
       }
-
+      
     }else{
       for(int l = newY +1; l <  pieces[i].getYpos(); l++){
         for(int j = 0; j < arrayLength; j++){
@@ -672,9 +672,9 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else if (newY == pieces[i].getYpos()) {
-
+    
     validMove = true;
     if((newX - pieces[i].getXpos()) > 0){
       for(int l = pieces[i].getXpos()+1; l < newX; l++){
@@ -684,7 +684,7 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
           }
         }
       }
-
+      
     }else{
       for(int l = newX +1; l <  pieces[i].getXpos(); l++){
         for(int j = 0; j < arrayLength; j++){
@@ -694,7 +694,7 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else{
     validMove = false;
   }
@@ -730,9 +730,9 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
 
 bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
-
+  
   if (newX - pieces[i].getXpos() == newY - pieces[i].getYpos()) {
-
+    
     validMove = true;
     if((newX - pieces[i].getXpos()) > 0){
       for(int l = 1; l < newX  -  pieces[i].getXpos(); l++){
@@ -751,9 +751,9 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else if (newX - pieces[i].getXpos() == (newY - pieces[i].getYpos())*-1) {
-
+    
     validMove = true;
     if((newX - pieces[i].getXpos()) > 0){
       for(int l = 1; l < newX - pieces[i].getXpos(); l++){
@@ -772,7 +772,7 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
-
+    
   }else{
     validMove = false;
   }
@@ -808,16 +808,16 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
 
 bool Horse(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
-
+  
   if (((newX == 1 + pieces[i].getXpos())||(newX == -1 + pieces[i].getXpos())) && ((newY == 2 + pieces[i].getYpos())||(newY == -2 + pieces[i].getYpos()))) {
-
+    
     validMove = true;
-
-
+    
+    
   }else if (((newX == 2 + pieces[i].getXpos())||(newX == -2 + pieces[i].getXpos())) && ((newY == 1 + pieces[i].getYpos())||(newY == -1 + pieces[i].getYpos()))) {
-
+    
     validMove = true;
-
+    
   }else{
     validMove = false;
   }
@@ -850,54 +850,9 @@ bool Horse(int i, int newX, int newY, bool moving, bool checkM){
     return false;
   }
 }
-// bool Horse(int i, int newX, int newY, bool moving, bool checkM){
-//
-//   validMove = false;
-//
-//   if (((newX = 1 + pieces[i].getXpos())||(newX = -1 + pieces[i].getXpos())) && ((newY = 2 + pieces[i].getYpos())||(newY = -2 + pieces[i].getYpos()))) {
-//
-//     validMove = true;
-//
-//   }else if (((newX = 2 + pieces[i].getXpos())||(newX = -2 + pieces[i].getXpos())) && ((newY = 1 + pieces[i].getYpos())||(newY = -1 + pieces[i].getYpos()))) {
-//
-//     validMove = true;
-//
-//   }else{
-//     validMove = false;
-//   }
-//
-//   if(validMove == true){
-//     for(int j = 0; j < arrayLength; j++){
-//       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
-//         if(pieces[j].getWhite() == pieces[i].getWhite()){
-//           validMove = false;
-//           if(moving){
-//             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-//           }
-//           return false;
-//         }else{
-//           if(moving && checkM == false){
-//             pieces[j].setCoords(9,9);
-//           }
-//         }
-//       }
-//     }
-//     if(validMove){
-//       if(moving){
-//         pieces[i].setCoords(newX,newY);
-//       }
-//       return true;
-//     }
-//   }else{
-//     if(moving){
-//       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
-//     }
-//     return false;
-//   }
-// }
 
 void setRandomTypes(){
-
+  
   for (int i = 0; i < arrayLength; i++)
   {
     randomInt = rand();
@@ -917,136 +872,136 @@ void setRandomTypes(){
 
 
 bool check(bool white){
-
+  
   possibleMovesX.clear();
   possibleMovesY.clear();
-
+  
   for(int c = 0; c < arrayLength; c++){
-
+    
     if(pieces[c].getWhite() != white){
-
+      
       if(pieces[c].getType() == 'P'){
-
+        
         if(pieces[c].getWhite()){
-
-
+          
+          
           if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() < 8){
-
+            
             // white pawn diagonal right
             possibleMovesX.push_back(pieces[c].getXpos() + 1);
             possibleMovesY.push_back(pieces[c].getYpos() - 1);
             //white pawn diagonal left
             possibleMovesX.push_back( pieces[c].getXpos() - 1);
             possibleMovesY.push_back( pieces[c].getYpos() - 1);
-
+            
           }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() < 8){
             // white pawn diagonal right
             possibleMovesX.push_back(pieces[c].getXpos() + 1);
             possibleMovesY.push_back(pieces[c].getYpos() - 1);
-
+            
           }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() < 8){
             // white pawn diagonal right
             possibleMovesX.push_back(pieces[c].getXpos() - 1);
             possibleMovesY.push_back(pieces[c].getYpos() - 1);
-
+            
           }
-
+          
         }else{
-
+          
           if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() > 0){
-
+            
             // white pawn diagonal right
             possibleMovesX.push_back(pieces[c].getXpos() + 1);
             possibleMovesY.push_back(pieces[c].getYpos() + 1);
             //white pawn diagonal left
             possibleMovesX.push_back( pieces[c].getXpos() - 1);
             possibleMovesY.push_back( pieces[c].getYpos() + 1);
-
+            
           }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() > 0){
             // white pawn diagonal right
             possibleMovesX.push_back(pieces[c].getXpos() + 1);
             possibleMovesY.push_back(pieces[c].getYpos() + 1);
-
+            
           }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() > 0){
             // white pawn diagonal right
             possibleMovesX.push_back(pieces[c].getXpos() - 1);
             possibleMovesY.push_back(pieces[c].getYpos() + 1);
-
+            
           }
-
+          
         }
-
+        
       }else if(pieces[c].getType() == 'Q'){
-
+        
         for(int x = 0; x < 8; x++){
           for(int y = 0; y < 8; y++){
             if(Queen(c, x,y,false, true)){
-
+              
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
             }
           }
         }
-
+        
       }else if(pieces[c].getType() == 'R'){
-
+        
         for(int x = 0; x < 8; x++){
           for(int y = 0; y < 8; y++){
             if(Rook(c, x,y,false, true)){
-
+              
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
             }
           }
         }
-
+        
       }else if(pieces[c].getType() == 'B'){
-
+        
         for(int x = 0; x < 8; x++){
           for(int y = 0; y < 8; y++){
             if(Bishop(c, x,y,false, true)){
-
+              
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
             }
           }
         }
-
-
+        
+        
       }else if(pieces[c].getType() == 'H'){
-
+        
         for(int x = 0; x < 8; x++){
           for(int y = 0; y < 8; y++){
             if(Horse(c, x,y,false, true)){
-
+              
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
             }
           }
         }
-
-
+        
+        
       }else if(pieces[c].getType() == 'K'){
-
+        
         for(int x = 0; x < 8; x++){
           for(int y = 0; y < 8; y++){
             if(King(c, x,y,false, true)){
-
+              
               possibleMovesX.push_back(x);
               possibleMovesY.push_back(y);
             }
           }
         }
-
+        
       }
-
+      
     }
-
+    
   }
-
-
+  
+  
   for (int c = 0; c < possibleMovesX.size(); c++){
-
+    
     if(white){
       if (pieces[25].getXpos() == possibleMovesX[c] && pieces[25].getYpos() == possibleMovesY[c]){
         return true;
@@ -1056,22 +1011,22 @@ bool check(bool white){
         return true;
       }
     }
-
+    
   }
   return false;
 }
 
 
 bool checkMate(bool colorW){
-
+  
   if(check(colorW)){
     for(int f = 0; f < arrayLength; f++){
       if(pieces[f].getWhite() == colorW){
         oldX = pieces[f].getXpos();
         oldY = pieces[f].getYpos();
-
+        
         if(pieces[f].getType() == 'P'){
-
+          
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(Pawn(f, x,y,false, true)){
@@ -1084,11 +1039,11 @@ bool checkMate(bool colorW){
               }
             }
           }
-
-
+          
+          
         }else if(pieces[f].getType() == 'Q'){
-
-
+          
+          
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(Queen(f, x,y,false, true)){
@@ -1101,10 +1056,10 @@ bool checkMate(bool colorW){
               }
             }
           }
-
+          
         }else if(pieces[f].getType() == 'R'){
-
-
+          
+          
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(Rook(f, x,y,false, true)){
@@ -1117,11 +1072,11 @@ bool checkMate(bool colorW){
               }
             }
           }
-
-
+          
+          
         }else if(pieces[f].getType() == 'B'){
-
-
+          
+          
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(Bishop(f, x,y,false, true)){
@@ -1134,10 +1089,10 @@ bool checkMate(bool colorW){
               }
             }
           }
-
+          
         }else if(pieces[f].getType() == 'H'){
-
-
+          
+          
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(Horse(f, x,y,false, true)){
@@ -1150,9 +1105,9 @@ bool checkMate(bool colorW){
               }
             }
           }
-
+          
         }else if(pieces[f].getType() == 'K'){
-
+          
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(King(f, x,y,false, true)){
@@ -1165,13 +1120,13 @@ bool checkMate(bool colorW){
               }
             }
           }
-
+          
         }
-
+        
       }
-
+      
     }
-
+    
     return true;
   }
   return false;
@@ -1180,10 +1135,10 @@ bool checkMate(bool colorW){
 
 void promotion(int i){
   if (pieces[i].getWhite() && pieces[i].getYpos() == 0 && pieces[i].getType() == 'P'){
-
+    
     pieces[i].setType('Q');
     cout << endl << endl << endl << endl << "\033[1;92mPromotion!\033[0m\n" << endl;
-
+    
   } else if(pieces[i].getYpos() == 7 && pieces[i].getWhite() == false && pieces[i].getType() == 'P')
   {
     pieces[i].setType('Q');
@@ -1192,7 +1147,7 @@ void promotion(int i){
 }
 
 void passTurn(){
-
+  
   if (whiteTurn == true){
     if(checkMate(false)){
       playing = false;
@@ -1216,50 +1171,52 @@ void passTurn(){
 void save()
 {
   ofstream outfile("save.txt");
-
-  outfile << BP1.getXpos() << BP1.getYpos();
-  outfile << BP2.getXpos() << BP2.getYpos();
-  outfile << BP3.getXpos() << BP3.getYpos();
-  outfile << BP4.getXpos() << BP4.getYpos();
-  outfile << BP5.getXpos() << BP5.getYpos();
-  outfile << BP6.getXpos() << BP6.getYpos();
-  outfile << BP7.getXpos() << BP7.getYpos();
-  outfile << BP8.getXpos() << BP8.getYpos();
-
-  outfile << BQ.getXpos() << BQ.getYpos();
-
-  outfile << BK.getXpos() << BK.getYpos();
-
-  outfile << BB1.getXpos() << BB1.getYpos();
-  outfile << BB2.getXpos() << BB2.getYpos();
-
-  outfile << BR1.getXpos() << BR1.getYpos();
-  outfile << BR2.getXpos() << BR2.getYpos();
-
-  outfile << BH1.getXpos() << BH1.getYpos();
-  outfile << BH2.getXpos() << BH2.getYpos();
-
-  outfile << WP1.getXpos() << WP1.getYpos();
-  outfile << WP2.getXpos() << WP2.getYpos();
-  outfile << WP3.getXpos() << WP3.getYpos();
-  outfile << WP4.getXpos() << WP4.getYpos();
-  outfile << WP5.getXpos() << WP5.getYpos();
-  outfile << WP6.getXpos() << WP6.getYpos();
-  outfile << WP7.getXpos() << WP7.getYpos();
-  outfile << WP8.getXpos() << WP8.getYpos();
-
-  outfile << WQ.getXpos() << WQ.getYpos();
-
-  outfile << WK.getXpos() << WK.getYpos();
-
-  outfile << WB1.getXpos() << WB1.getYpos();
-  outfile << WB2.getXpos() << WB2.getYpos();
-
-  outfile << WR1.getXpos() << WR1.getYpos();
-  outfile << WR2.getXpos() << WR2.getYpos();
-
-  outfile << WH1.getXpos() << WH1.getYpos();
-  outfile << WH2.getXpos() << WH2.getYpos();
+  for(int c = 0; c < arrayLength; c++){
+    outfile << pieces[c].getXpos() << pieces[c].getYpos();
+  }
+  // outfile << BP1.getXpos() << BP1.getYpos();
+  // outfile << BP2.getXpos() << BP2.getYpos();
+  // outfile << BP3.getXpos() << BP3.getYpos();
+  // outfile << BP4.getXpos() << BP4.getYpos();
+  // outfile << BP5.getXpos() << BP5.getYpos();
+  // outfile << BP6.getXpos() << BP6.getYpos();
+  // outfile << BP7.getXpos() << BP7.getYpos();
+  // outfile << BP8.getXpos() << BP8.getYpos();
+  // 
+  // outfile << BQ.getXpos() << BQ.getYpos();
+  // 
+  // outfile << BK.getXpos() << BK.getYpos();
+  // 
+  // outfile << BB1.getXpos() << BB1.getYpos();
+  // outfile << BB2.getXpos() << BB2.getYpos();
+  // 
+  // outfile << BR1.getXpos() << BR1.getYpos();
+  // outfile << BR2.getXpos() << BR2.getYpos();
+  // 
+  // outfile << BH1.getXpos() << BH1.getYpos();
+  // outfile << BH2.getXpos() << BH2.getYpos();
+  // 
+  // outfile << WP1.getXpos() << WP1.getYpos();
+  // outfile << WP2.getXpos() << WP2.getYpos();
+  // outfile << WP3.getXpos() << WP3.getYpos();
+  // outfile << WP4.getXpos() << WP4.getYpos();
+  // outfile << WP5.getXpos() << WP5.getYpos();
+  // outfile << WP6.getXpos() << WP6.getYpos();
+  // outfile << WP7.getXpos() << WP7.getYpos();
+  // outfile << WP8.getXpos() << WP8.getYpos();
+  // 
+  // outfile << WQ.getXpos() << WQ.getYpos();
+  // 
+  // outfile << WK.getXpos() << WK.getYpos();
+  // 
+  // outfile << WB1.getXpos() << WB1.getYpos();
+  // outfile << WB2.getXpos() << WB2.getYpos();
+  // 
+  // outfile << WR1.getXpos() << WR1.getYpos();
+  // outfile << WR2.getXpos() << WR2.getYpos();
+  // 
+  // outfile << WH1.getXpos() << WH1.getYpos();
+  // outfile << WH2.getXpos() << WH2.getYpos();
   outfile << whiteTurn;
   outfile.close();
 }
@@ -1268,54 +1225,59 @@ void load()
 {
   ifstream infile;
   infile.open("save.txt");
-
+  
   string saveFile;
   infile >> saveFile;
   infile.close();
-  BP1.setCoords(saveFile.at(0),saveFile.at(1));
-  BP2.setCoords(saveFile.at(2),saveFile.at(3));
-  BP3.setCoords(saveFile.at(4),saveFile.at(5));
-  BP4.setCoords(saveFile.at(6),saveFile.at(7));
-  BP5.setCoords(saveFile.at(8),saveFile.at(9));
-  BP6.setCoords(saveFile.at(10),saveFile.at(11));
-  BP7.setCoords(saveFile.at(12),saveFile.at(13));
-  BP8.setCoords(saveFile.at(14),saveFile.at(15));
-
-  BQ.setCoords(saveFile.at(16),saveFile.at(17));
-
-  BK.setCoords(saveFile.at(18),saveFile.at(19));
-
-  BB1.setCoords(saveFile.at(20),saveFile.at(21));
-  BB2.setCoords(saveFile.at(22),saveFile.at(23));
-
-  BR1.setCoords(saveFile.at(24),saveFile.at(25));
-  BR2.setCoords(saveFile.at(26),saveFile.at(27));
-
-  BH1.setCoords(saveFile.at(28),saveFile.at(29));
-  BH2.setCoords(saveFile.at(30),saveFile.at(31));
-
-  WP1.setCoords(saveFile.at(32),saveFile.at(33));
-  WP2.setCoords(saveFile.at(34),saveFile.at(35));
-  WP3.setCoords(saveFile.at(36),saveFile.at(37));
-  WP4.setCoords(saveFile.at(38),saveFile.at(39));
-  WP5.setCoords(saveFile.at(40),saveFile.at(41));
-  WP6.setCoords(saveFile.at(42),saveFile.at(43));
-  WP7.setCoords(saveFile.at(44),saveFile.at(45));
-  WP8.setCoords(saveFile.at(46),saveFile.at(47));
-
-  WQ.setCoords(saveFile.at(48),saveFile.at(49));
-
-  WK.setCoords(saveFile.at(50),saveFile.at(51));
-
-  WB1.setCoords(saveFile.at(52),saveFile.at(53));
-  WB2.setCoords(saveFile.at(54),saveFile.at(55));
-
-  WR1.setCoords(saveFile.at(56),saveFile.at(57));
-  WR2.setCoords(saveFile.at(58),saveFile.at(59));
-
-  WH1.setCoords(saveFile.at(60),saveFile.at(61));
-  WH2.setCoords(saveFile.at(62),saveFile.at(63));
-
+  for(int c = 0; c < arrayLength; c++){
+      int p = 0;
+      pieces[c].setCoords(saveFile.at(p),saveFile.at(p+1));
+      p+=2;
+  }
+  // BP1.setCoords(saveFile.at(0),saveFile.at(1));
+  // BP2.setCoords(saveFile.at(2),saveFile.at(3));
+  // BP3.setCoords(saveFile.at(4),saveFile.at(5));
+  // BP4.setCoords(saveFile.at(6),saveFile.at(7));
+  // BP5.setCoords(saveFile.at(8),saveFile.at(9));
+  // BP6.setCoords(saveFile.at(10),saveFile.at(11));
+  // BP7.setCoords(saveFile.at(12),saveFile.at(13));
+  // BP8.setCoords(saveFile.at(14),saveFile.at(15));
+  // 
+  // BQ.setCoords(saveFile.at(16),saveFile.at(17));
+  // 
+  // BK.setCoords(saveFile.at(18),saveFile.at(19));
+  // 
+  // BB1.setCoords(saveFile.at(20),saveFile.at(21));
+  // BB2.setCoords(saveFile.at(22),saveFile.at(23));
+  // 
+  // BR1.setCoords(saveFile.at(24),saveFile.at(25));
+  // BR2.setCoords(saveFile.at(26),saveFile.at(27));
+  // 
+  // BH1.setCoords(saveFile.at(28),saveFile.at(29));
+  // BH2.setCoords(saveFile.at(30),saveFile.at(31));
+  // 
+  // WP1.setCoords(saveFile.at(32),saveFile.at(33));
+  // WP2.setCoords(saveFile.at(34),saveFile.at(35));
+  // WP3.setCoords(saveFile.at(36),saveFile.at(37));
+  // WP4.setCoords(saveFile.at(38),saveFile.at(39));
+  // WP5.setCoords(saveFile.at(40),saveFile.at(41));
+  // WP6.setCoords(saveFile.at(42),saveFile.at(43));
+  // WP7.setCoords(saveFile.at(44),saveFile.at(45));
+  // WP8.setCoords(saveFile.at(46),saveFile.at(47));
+  // 
+  // WQ.setCoords(saveFile.at(48),saveFile.at(49));
+  // 
+  // WK.setCoords(saveFile.at(50),saveFile.at(51));
+  // 
+  // WB1.setCoords(saveFile.at(52),saveFile.at(53));
+  // WB2.setCoords(saveFile.at(54),saveFile.at(55));
+  // 
+  // WR1.setCoords(saveFile.at(56),saveFile.at(57));
+  // WR2.setCoords(saveFile.at(58),saveFile.at(59));
+  // 
+  // WH1.setCoords(saveFile.at(60),saveFile.at(61));
+  // WH2.setCoords(saveFile.at(62),saveFile.at(63));
+  
   if(saveFile.at(64) == '1')
   {
     whiteTurn = true;
@@ -1323,13 +1285,13 @@ void load()
   {
     whiteTurn = false;
   }
-
+  
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 int main(){
-
+  
   if (mode == "Random")
   {
     setRandomTypes();
@@ -1342,7 +1304,7 @@ int main(){
     display();
     //pyae sone
     userInput();
-
+    
     //lucas zagal
     int i;
     for (int v = 0; v < arrayLength; v++)
@@ -1358,7 +1320,7 @@ int main(){
       {
         if(Pawn(i, newArrayX, newArrayY, true, false))
         {
-
+          
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
@@ -1423,9 +1385,9 @@ int main(){
           passTurn();
         }
       }
-
+      
     }else if (pieces[i].getWhite() == false && whiteTurn == false){
-
+      
       if (pieces[i].getType() == 'P')
       {
         if(Pawn(i, newArrayX, newArrayY,true, false))
@@ -1485,7 +1447,7 @@ int main(){
             passTurn();
           }
         }
-
+        
       }else if (pieces[i].getType() == 'H')
       {
         // pyae sone
@@ -1498,11 +1460,12 @@ int main(){
             passTurn();
           }
         }
-
+        
       }
-
+      
     }else{
       cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Not your turn!\033[0m\n" << endl;
     }
   }
 }
+
