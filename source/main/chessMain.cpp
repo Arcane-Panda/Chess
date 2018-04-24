@@ -166,7 +166,8 @@ bool modeMenu = false;
 bool startSelections = false;
 bool loadGames = false;
 bool inputting = false;
-bool castle = false;
+bool whiteCastle = false;
+bool blackCastle = false;
 
 // functions
 
@@ -896,9 +897,15 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     if (WR2.getFirst())
     {
       validMove = true;
-      castle = true;
+      whiteCastle = true;
     }
-  }else{
+  }else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
+    if (BR1.getFirst())
+    {
+      validMove = true;
+      blackCastle = true;
+    }
+  }  else{
     validMove = false;
   }
   if(validMove){
@@ -920,9 +927,12 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
-        if (castle)
+        if (whiteCastle)
         {
           pieces[28].setCoords(5,7);
+        } else if(blackCastle)
+        {
+          pieces[13].setCoords(5,0);
         }
       }
       return true;
