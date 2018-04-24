@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -9,22 +10,22 @@ using namespace std;
 //Lucas Zagal
 class Piece
 {
-public:
-  Piece(){};
-  Piece(char typ, int x, int y, bool isWhite) ;
-  char getType(void);
-  void setType(char input);
-  int getXpos(void);
-  int getYpos(void);
-  bool getWhite(void);
-  void setCoords(int newX, int newY);
-  bool getFirst(void);
+  public:
+    Piece(){};
+    Piece(char typ, int x, int y, bool isWhite) ;
+    char getType(void);
+    void setType(char input);
+    int getXpos(void);
+    int getYpos(void);
+    bool getWhite(void);
+    void setCoords(int newX, int newY);
+    bool getFirst(void);
 
-private:
-  int xpos, ypos;
-  char type;
-  bool white;
-  bool firstMove;
+  private:
+    int xpos, ypos;
+    char type;
+    bool white;
+    bool firstMove;
 
 
 };
@@ -161,15 +162,87 @@ string incorect;
 bool incorectSelect = false;
 bool startMenu = true;
 bool instructionsMenu = false;
-bool optionsMenu = false;
+bool modeMenu = false;
 bool startSelections = false;
 bool loadGames = false;
-bool imputting = true;
+bool inputting = false;
 
 // functions
 
-void loadGame(){
+void save()
+{
+  ofstream outfile("save.txt");
+  for(int c = 0; c < arrayLength; c++){
+    outfile << pieces[c].getXpos() << pieces[c].getYpos();
+  }
+  outfile << whiteTurn;
+  outfile.close();
+}
 
+void load()
+{
+  ifstream infile;
+  infile.open("save.txt");
+
+  string saveFile;
+  infile >> saveFile;
+  infile.close();
+  BP1.setCoords(saveFile.at(0),saveFile.at(1));
+  BP2.setCoords(saveFile.at(2),saveFile.at(3));
+  BP3.setCoords(saveFile.at(4),saveFile.at(5));
+  BP4.setCoords(saveFile.at(6),saveFile.at(7));
+  BP5.setCoords(saveFile.at(8),saveFile.at(9));
+  BP6.setCoords(saveFile.at(10),saveFile.at(11));
+  BP7.setCoords(saveFile.at(12),saveFile.at(13));
+  BP8.setCoords(saveFile.at(14),saveFile.at(15));
+
+  BQ.setCoords(saveFile.at(16),saveFile.at(17));
+
+  BK.setCoords(saveFile.at(18),saveFile.at(19));
+
+  BB1.setCoords(saveFile.at(20),saveFile.at(21));
+  BB2.setCoords(saveFile.at(22),saveFile.at(23));
+
+  BR1.setCoords(saveFile.at(24),saveFile.at(25));
+  BR2.setCoords(saveFile.at(26),saveFile.at(27));
+
+  BH1.setCoords(saveFile.at(28),saveFile.at(29));
+  BH2.setCoords(saveFile.at(30),saveFile.at(31));
+
+  WP1.setCoords(saveFile.at(32),saveFile.at(33));
+  WP2.setCoords(saveFile.at(34),saveFile.at(35));
+  WP3.setCoords(saveFile.at(36),saveFile.at(37));
+  WP4.setCoords(saveFile.at(38),saveFile.at(39));
+  WP5.setCoords(saveFile.at(40),saveFile.at(41));
+  WP6.setCoords(saveFile.at(42),saveFile.at(43));
+  WP7.setCoords(saveFile.at(44),saveFile.at(45));
+  WP8.setCoords(saveFile.at(46),saveFile.at(47));
+
+  WQ.setCoords(saveFile.at(48),saveFile.at(49));
+
+  WK.setCoords(saveFile.at(50),saveFile.at(51));
+
+  WB1.setCoords(saveFile.at(52),saveFile.at(53));
+  WB2.setCoords(saveFile.at(54),saveFile.at(55));
+
+  WR1.setCoords(saveFile.at(56),saveFile.at(57));
+  WR2.setCoords(saveFile.at(58),saveFile.at(59));
+
+  WH1.setCoords(saveFile.at(60),saveFile.at(61));
+  WH2.setCoords(saveFile.at(62),saveFile.at(63));
+
+  if(saveFile.at(64) == '1')
+  {
+    whiteTurn = true;
+  } else
+  {
+    whiteTurn = false;
+  }
+
+}
+
+void loadGame(){
+  load(); //temp
   while(loadGames){
     cout << "\e[8;22;50t";
     system("clear");
@@ -315,9 +388,9 @@ void instructions(){
   }
 }
 
-void options(){
+void modes(){
 
-  while(optionsMenu){
+  while(modeMenu){
     cout << "\e[8;22;50t";
     system("clear");
     if(incorectSelect == false){
@@ -353,7 +426,7 @@ void options(){
 
 
     if(menuSelect == "Exit"|| menuSelect == "exit"){
-      optionsMenu = false;
+      modeMenu = false;
     } else if(menuSelect == "Random" || menuSelect == "random") {
       mode = "Random";
     } else {
@@ -387,7 +460,7 @@ void startPage(){
     cout<<"                                                  "<< endl;
     cout<<"                   Instructions                   "<< endl;
     cout<<"                                                  "<< endl;
-    cout<<"                      Options                     "<< endl;
+    cout<<"                       Modes                      "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                       Exit                       "<< endl;
     cout<<"                                                  "<< endl;
@@ -406,12 +479,13 @@ void startPage(){
       instructionsMenu = true;
 
       instructions();
-    } else if(menuSelect == "Options"|| menuSelect == "options "){
-      optionsMenu = true;
-      options();
+    } else if(menuSelect == "Modes"|| menuSelect == "modes"){
+      modeMenu = true;
+      modes();
     } else if(menuSelect == "Exit"|| menuSelect == "exit"){
       startMenu = false;
       playing = false;
+        break;
     } else {
       incorectSelect = true;
     }
@@ -514,133 +588,168 @@ void display(){
 }
 
 void userInput(){
-
   inputting = true;
   while(inputting){
-    cout << "Type the location of a board piece to select it" << endl;
-    cout << "i.e. A1" << endl;
-    // make sure that selected space isn't empty
-    cin >> selection;
-    cout << "You selected " << selection << endl;
-    cout << "Confirm selection? y/n" << endl;
+  cout << "Type the location of a piece to select it, or a   command  ";
+  cout << "i.e. A1, or exit" << endl;
+  // make sure that selected space isn't empty
+  cin >> selection;
+  if (selection == "exit" || selection == "Exit" )
+  {
+    cout << "Are you sure you want to exit?" << endl;
+    cout << "All unsaved progress will be lost" << endl;
+    cout << "Are you sure? y/n" << endl;
     cin >> selectConfirm;
     if (selectConfirm == 'n') {
 
 
     } else if (selectConfirm == 'y') {
       inputting = false;
-      selConfOne = selection.substr(0,1);
-      selConfTwo = selection.substr(1,1);
-      if (selConfOne == "A" || selConfOne == "a") {
-        oldArrayX = 0;
-      } else if (selConfOne == "B" || selConfOne == "b") {
-        oldArrayX = 1;
-      } else if (selConfOne == "C" || selConfOne == "c") {
-        oldArrayX = 2;
-      } else if (selConfOne == "D" || selConfOne == "d") {
-        oldArrayX = 3;
-      } else if (selConfOne == "E" || selConfOne == "e") {
-        oldArrayX = 4;
-      } else if (selConfOne == "F" || selConfOne == "f") {
-        oldArrayX = 5;
-      } else if (selConfOne == "G" || selConfOne == "g") {
-        oldArrayX = 6;
-      } else if (selConfOne == "H" || selConfOne == "h") {
-        oldArrayX = 7;
-      } else
-      {
-        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-      }
-      if (selConfTwo == "1") {
-        oldArrayY = 7;
-      } else if (selConfTwo == "2") {
-        oldArrayY = 6;
-      } else if (selConfTwo == "3") {
-        oldArrayY = 5;
-      } else if (selConfTwo == "4") {
-        oldArrayY = 4;
-      } else if (selConfTwo == "5") {
-        oldArrayY = 3;
-      } else if (selConfTwo == "6") {
-        oldArrayY = 2;
-      } else if (selConfTwo == "7") {
-        oldArrayY = 1;
-      } else if (selConfTwo == "8") {
-        oldArrayY = 0;
-      } else
-      {
-        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-      }
+      startMenu = true;
+      startPage();
+        break;
+  }
+}else if(selection == "save" || selection == "Save" )
+{
+  save();
+}
+else {
 
+  cout << "You selected " << selection << endl;
+  cout << "Confirm selection? y/n" << endl;
+  cin >> selectConfirm;
+  if (selectConfirm == 'n') {
+
+
+  } else if (selectConfirm == 'y') {
+    inputting = false;
+    selConfOne = selection.substr(0,1);
+    selConfTwo = selection.substr(1,1);
+    if (selConfOne == "A" || selConfOne == "a") {
+      oldArrayX = 0;
+    } else if (selConfOne == "B" || selConfOne == "b") {
+      oldArrayX = 1;
+    } else if (selConfOne == "C" || selConfOne == "c") {
+      oldArrayX = 2;
+    } else if (selConfOne == "D" || selConfOne == "d") {
+      oldArrayX = 3;
+    } else if (selConfOne == "E" || selConfOne == "e") {
+      oldArrayX = 4;
+    } else if (selConfOne == "F" || selConfOne == "f") {
+      oldArrayX = 5;
+    } else if (selConfOne == "G" || selConfOne == "g") {
+      oldArrayX = 6;
+    } else if (selConfOne == "H" || selConfOne == "h") {
+      oldArrayX = 7;
     } else
     {
+      system("clear");
       cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+      display();
+
     }
+    if (selConfTwo == "1") {
+      oldArrayY = 7;
+    } else if (selConfTwo == "2") {
+      oldArrayY = 6;
+    } else if (selConfTwo == "3") {
+      oldArrayY = 5;
+    } else if (selConfTwo == "4") {
+      oldArrayY = 4;
+    } else if (selConfTwo == "5") {
+      oldArrayY = 3;
+    } else if (selConfTwo == "6") {
+      oldArrayY = 2;
+    } else if (selConfTwo == "7") {
+      oldArrayY = 1;
+    } else if (selConfTwo == "8") {
+      oldArrayY = 0;
+    } else
+    {
+      system("clear");
+      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+      display();
+    }
+
+  } else
+  {
+    system("clear");
+    cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+    display();
   }
-  inputting = true;
+}
+
+}
+inputting = true;
   for (int i = 0; i < arrayLength; i++)
   {
     if (pieces[i].getYpos() == oldArrayY && pieces[i].getXpos() == oldArrayX)
     {
       while(inputting){
-        cout << "Select the space to where you wish to move your selection" << endl;
-        cin >> selection;
-        cout << "You selected " << selection << endl;
-        cout << "Confirm selection? y/n" << endl;
-        cin >> selectConfirm;
-        if (selectConfirm == 'n') {
-        } else if (selectConfirm == 'y'){
-          inputting = false;
-          selConfOne = selection.substr(0,1);
-          selConfTwo = selection.substr(1,1);
-          //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
-          if (selConfOne == "A" || selConfOne == "a") {
-            newArrayX = 0;
-          } else if (selConfOne == "B" || selConfOne == "b") {
-            newArrayX = 1;
-          } else if (selConfOne == "C" || selConfOne == "c") {
-            newArrayX = 2;
-          } else if (selConfOne == "D" || selConfOne == "d") {
-            newArrayX = 3;
-          } else if (selConfOne == "E" || selConfOne == "e") {
-            newArrayX = 4;
-          } else if (selConfOne == "F" || selConfOne == "f") {
-            newArrayX = 5;
-          } else if (selConfOne == "G" || selConfOne == "g") {
-            newArrayX = 6;
-          } else if (selConfOne == "H" || selConfOne == "h") {
-            newArrayX = 7;
-          } else
-          {
-            cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-          }
-          if (selConfTwo == "1") {
-            newArrayY = 7;
-          } else if (selConfTwo == "2") {
-            newArrayY = 6;
-          } else if (selConfTwo == "3") {
-            newArrayY = 5;
-          } else if (selConfTwo == "4") {
-            newArrayY = 4;
-          } else if (selConfTwo == "5") {
-            newArrayY = 3;
-          } else if (selConfTwo == "6") {
-            newArrayY = 2;
-          } else if (selConfTwo == "7") {
-            newArrayY = 1;
-          } else if (selConfTwo == "8") {
-            newArrayY = 0;
-          } else
-          {
-            cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-          }
-        } else
-        {
-          cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-        }
+      cout << "Select the space to where you wish to move your selection" << endl;
+      cin >> selection;
+      cout << "You selected " << selection << endl;
+      cout << "Confirm selection? y/n" << endl;
+      cin >> selectConfirm;
+      if (selectConfirm == 'n') {
+      } else if (selectConfirm == 'y'){
+        inputting = false;
+      selConfOne = selection.substr(0,1);
+      selConfTwo = selection.substr(1,1);
+      //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
+      if (selConfOne == "A" || selConfOne == "a") {
+        newArrayX = 0;
+      } else if (selConfOne == "B" || selConfOne == "b") {
+        newArrayX = 1;
+      } else if (selConfOne == "C" || selConfOne == "c") {
+        newArrayX = 2;
+      } else if (selConfOne == "D" || selConfOne == "d") {
+        newArrayX = 3;
+      } else if (selConfOne == "E" || selConfOne == "e") {
+        newArrayX = 4;
+      } else if (selConfOne == "F" || selConfOne == "f") {
+        newArrayX = 5;
+      } else if (selConfOne == "G" || selConfOne == "g") {
+        newArrayX = 6;
+      } else if (selConfOne == "H" || selConfOne == "h") {
+        newArrayX = 7;
+      } else
+      {
+        system("clear");
+        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+        display();
       }
+      if (selConfTwo == "1") {
+        newArrayY = 7;
+      } else if (selConfTwo == "2") {
+        newArrayY = 6;
+      } else if (selConfTwo == "3") {
+        newArrayY = 5;
+      } else if (selConfTwo == "4") {
+        newArrayY = 4;
+      } else if (selConfTwo == "5") {
+        newArrayY = 3;
+      } else if (selConfTwo == "6") {
+        newArrayY = 2;
+      } else if (selConfTwo == "7") {
+        newArrayY = 1;
+      } else if (selConfTwo == "8") {
+        newArrayY = 0;
+      } else
+      {
+        system("clear");
+        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+        display();
+      }
+    } else
+    {
+      system("clear");
+      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+      display();
     }
   }
+}
+}
 
 }
 
@@ -1458,82 +1567,6 @@ void passTurn(){
   }
 }
 
-void save()
-{
-  ofstream outfile("save.txt");
-  for(int c = 0; c < arrayLength; c++){
-    outfile << pieces[c].getXpos() << pieces[c].getYpos();
-  }
-  outfile << whiteTurn;
-  outfile.close();
-}
-
-void load()
-{
-  ifstream infile;
-  infile.open("save.txt");
-
-  string saveFile;
-  infile >> saveFile;
-  infile.close();
-  // for(int c = 0; c < arrayLength; c++){
-  //     int p = 0;
-  //     pieces[c].setCoords(saveFile.at(p),saveFile.at(p+1));
-  //     p+=2;
-  // }
-  BP1.setCoords(saveFile.at(0),saveFile.at(1));
-  BP2.setCoords(saveFile.at(2),saveFile.at(3));
-  BP3.setCoords(saveFile.at(4),saveFile.at(5));
-  BP4.setCoords(saveFile.at(6),saveFile.at(7));
-  BP5.setCoords(saveFile.at(8),saveFile.at(9));
-  BP6.setCoords(saveFile.at(10),saveFile.at(11));
-  BP7.setCoords(saveFile.at(12),saveFile.at(13));
-  BP8.setCoords(saveFile.at(14),saveFile.at(15));
-
-  BQ.setCoords(saveFile.at(16),saveFile.at(17));
-
-  BK.setCoords(saveFile.at(18),saveFile.at(19));
-
-  BB1.setCoords(saveFile.at(20),saveFile.at(21));
-  BB2.setCoords(saveFile.at(22),saveFile.at(23));
-
-  BR1.setCoords(saveFile.at(24),saveFile.at(25));
-  BR2.setCoords(saveFile.at(26),saveFile.at(27));
-
-  BH1.setCoords(saveFile.at(28),saveFile.at(29));
-  BH2.setCoords(saveFile.at(30),saveFile.at(31));
-
-  WP1.setCoords(saveFile.at(32),saveFile.at(33));
-  WP2.setCoords(saveFile.at(34),saveFile.at(35));
-  WP3.setCoords(saveFile.at(36),saveFile.at(37));
-  WP4.setCoords(saveFile.at(38),saveFile.at(39));
-  WP5.setCoords(saveFile.at(40),saveFile.at(41));
-  WP6.setCoords(saveFile.at(42),saveFile.at(43));
-  WP7.setCoords(saveFile.at(44),saveFile.at(45));
-  WP8.setCoords(saveFile.at(46),saveFile.at(47));
-
-  WQ.setCoords(saveFile.at(48),saveFile.at(49));
-
-  WK.setCoords(saveFile.at(50),saveFile.at(51));
-
-  WB1.setCoords(saveFile.at(52),saveFile.at(53));
-  WB2.setCoords(saveFile.at(54),saveFile.at(55));
-
-  WR1.setCoords(saveFile.at(56),saveFile.at(57));
-  WR2.setCoords(saveFile.at(58),saveFile.at(59));
-
-  WH1.setCoords(saveFile.at(60),saveFile.at(61));
-  WH2.setCoords(saveFile.at(62),saveFile.at(63));
-
-  if(saveFile.at(64) == '1')
-  {
-    whiteTurn = true;
-  } else
-  {
-    whiteTurn = false;
-  }
-
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1554,7 +1587,10 @@ int main(){
     display();
     //pyae sone
     userInput();
-
+    if (playing == false)
+    {
+      break;
+    }
     //lucas zagal
     int i;
     for (int v = 0; v < arrayLength; v++)
