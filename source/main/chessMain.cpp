@@ -63,7 +63,7 @@ void Piece::setCoords(int newX, int newY)
 
   xpos = newX;
   ypos = newY;
-  firstMove = false;
+  //firstMove = false;
   cout << "\n\n\n\n\n\n\n\n";
 
 }
@@ -71,7 +71,7 @@ void Piece::setCoords(int newX, int newY)
 bool Piece::getFirst(void)
 {
   return firstMove;
-  //firstMove = false;
+  firstMove = false;
 }
 
 void Piece::setType(char input)
@@ -166,6 +166,7 @@ bool modeMenu = false;
 bool startSelections = false;
 bool loadGames = false;
 bool inputting = false;
+bool castle = false;
 
 // functions
 
@@ -891,6 +892,12 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
   {
     //move down
     validMove = true;
+  }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
+    if (WR2.getFirst())
+    {
+      validMove = true;
+      castle = true;
+    }
   }else{
     validMove = false;
   }
@@ -913,6 +920,10 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
+        if (castle)
+        {
+          pieces[28].setCoords(5,7);
+        }
       }
       return true;
     }
