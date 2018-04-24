@@ -1436,49 +1436,6 @@ void save()
   for(int c = 0; c < arrayLength; c++){
     outfile << pieces[c].getXpos() << pieces[c].getYpos();
   }
-  // outfile << BP1.getXpos() << BP1.getYpos();
-  // outfile << BP2.getXpos() << BP2.getYpos();
-  // outfile << BP3.getXpos() << BP3.getYpos();
-  // outfile << BP4.getXpos() << BP4.getYpos();
-  // outfile << BP5.getXpos() << BP5.getYpos();
-  // outfile << BP6.getXpos() << BP6.getYpos();
-  // outfile << BP7.getXpos() << BP7.getYpos();
-  // outfile << BP8.getXpos() << BP8.getYpos();
-  //
-  // outfile << BQ.getXpos() << BQ.getYpos();
-  //
-  // outfile << BK.getXpos() << BK.getYpos();
-  //
-  // outfile << BB1.getXpos() << BB1.getYpos();
-  // outfile << BB2.getXpos() << BB2.getYpos();
-  //
-  // outfile << BR1.getXpos() << BR1.getYpos();
-  // outfile << BR2.getXpos() << BR2.getYpos();
-  //
-  // outfile << BH1.getXpos() << BH1.getYpos();
-  // outfile << BH2.getXpos() << BH2.getYpos();
-  //
-  // outfile << WP1.getXpos() << WP1.getYpos();
-  // outfile << WP2.getXpos() << WP2.getYpos();
-  // outfile << WP3.getXpos() << WP3.getYpos();
-  // outfile << WP4.getXpos() << WP4.getYpos();
-  // outfile << WP5.getXpos() << WP5.getYpos();
-  // outfile << WP6.getXpos() << WP6.getYpos();
-  // outfile << WP7.getXpos() << WP7.getYpos();
-  // outfile << WP8.getXpos() << WP8.getYpos();
-  //
-  // outfile << WQ.getXpos() << WQ.getYpos();
-  //
-  // outfile << WK.getXpos() << WK.getYpos();
-  //
-  // outfile << WB1.getXpos() << WB1.getYpos();
-  // outfile << WB2.getXpos() << WB2.getYpos();
-  //
-  // outfile << WR1.getXpos() << WR1.getYpos();
-  // outfile << WR2.getXpos() << WR2.getYpos();
-  //
-  // outfile << WH1.getXpos() << WH1.getYpos();
-  // outfile << WH2.getXpos() << WH2.getYpos();
   outfile << whiteTurn;
   outfile.close();
 }
