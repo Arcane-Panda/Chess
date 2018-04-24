@@ -169,8 +169,7 @@ bool inputting = false;
 
 // functions
 
-void save()
-{
+void save(){
   ofstream outfile("save.txt");
   for(int c = 0; c < arrayLength; c++){
     outfile << pieces[c].getXpos() << pieces[c].getYpos();
@@ -263,7 +262,7 @@ void loadGame(){
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
-    cout<<"                           display the options for loaded fieles here                  "<< endl;
+    cout<<"   // display the options for loaded files here   "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -1251,24 +1250,31 @@ bool Horse(int i, int newX, int newY, bool moving, bool checkM){
 }
 
 void setRandomTypes(){
-
+  srand(time(NULL));
   for (int i = 0; i < arrayLength; i++)
   {
-    randomInt = rand();
-    randomInt = rand();
+    randomInt = rand() % 5;
     if(pieces[i].getType() != 'K')
     {
-      if (randomInt <= 1073741820)
+      if (randomInt == 0)
       {
         pieces[i].setType('P');
-      } else
+      } else if (randomInt==1)
       {
         pieces[i].setType('Q');
-      }
+      }else if(randomInt==2)
+      {
+        pieces[i].setType('B');
+      } else if(randomInt==3)
+      {
+        pieces[i].setType('H');
+      } else if(randomInt==4)
+      {
+       pieces[i].setType('R');
     }
   }
 }
-
+}
 
 bool check(bool white){
 
