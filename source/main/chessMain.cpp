@@ -1626,7 +1626,7 @@ int main(){
 
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
             promotion(i);
@@ -1638,7 +1638,7 @@ int main(){
         {
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
           }
@@ -1650,7 +1650,7 @@ int main(){
         {
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }
           passTurn();
         }
@@ -1661,7 +1661,7 @@ int main(){
         {
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }
           passTurn();
         }
@@ -1672,7 +1672,7 @@ int main(){
         {
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }
           passTurn();
         }
@@ -1683,7 +1683,7 @@ int main(){
         {
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }
           passTurn();
         }
@@ -1697,7 +1697,7 @@ int main(){
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
             promotion(i);
@@ -1709,7 +1709,7 @@ int main(){
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
           }
@@ -1721,7 +1721,7 @@ int main(){
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
           }
@@ -1733,7 +1733,7 @@ int main(){
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
           }
@@ -1745,7 +1745,7 @@ int main(){
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
           }
@@ -1758,7 +1758,7 @@ int main(){
         {
           if(check(false)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
-            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You cant move into check. Try again!\033[0m\n" << endl;
+            cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
           }else{
             passTurn();
           }
