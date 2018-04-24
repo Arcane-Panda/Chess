@@ -515,6 +515,8 @@ void display(){
 }
 
 void userInput(){
+  inputting = true;
+  while(inputting){
   cout << "Type the location of a board piece to select it" << endl;
   cout << "i.e. A1" << endl;
   // make sure that selected space isn't empty
@@ -524,8 +526,9 @@ void userInput(){
   cin >> selectConfirm;
   if (selectConfirm == 'n') {
 
-    cout << "i.e. A1" << endl;
+
   } else if (selectConfirm == 'y') {
+    inputting = false;
     selConfOne = selection.substr(0,1);
     selConfTwo = selection.substr(1,1);
     if (selConfOne == "A" || selConfOne == "a") {
@@ -544,6 +547,9 @@ void userInput(){
       oldArrayX = 6;
     } else if (selConfOne == "H" || selConfOne == "h") {
       oldArrayX = 7;
+    } else
+    {
+      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
     }
     if (selConfTwo == "1") {
       oldArrayY = 7;
@@ -561,19 +567,30 @@ void userInput(){
       oldArrayY = 1;
     } else if (selConfTwo == "8") {
       oldArrayY = 0;
+    } else
+    {
+      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
     }
 
   } else
   {
     cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
   }
-
+}
+inputting = true;
   for (int i = 0; i < arrayLength; i++)
   {
     if (pieces[i].getYpos() == oldArrayY && pieces[i].getXpos() == oldArrayX)
     {
+      while(inputting){
       cout << "Select the space to where you wish to move your selection" << endl;
       cin >> selection;
+      cout << "You selected " << selection << endl;
+      cout << "Confirm selection? y/n" << endl;
+      cin >> selectConfirm;
+      if (selectConfirm == 'n') {
+      } else if (selectConfirm == 'y'){
+        inputting = false;
       selConfOne = selection.substr(0,1);
       selConfTwo = selection.substr(1,1);
       //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
@@ -593,6 +610,9 @@ void userInput(){
         newArrayX = 6;
       } else if (selConfOne == "H" || selConfOne == "h") {
         newArrayX = 7;
+      } else
+      {
+        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
       }
       if (selConfTwo == "1") {
         newArrayY = 7;
@@ -610,12 +630,20 @@ void userInput(){
         newArrayY = 1;
       } else if (selConfTwo == "8") {
         newArrayY = 0;
+      } else
+      {
+        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
       }
+    } else
+    {
+      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
     }
   }
-
+}
+}
 
 }
+
 
 
 bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
