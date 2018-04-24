@@ -10,22 +10,22 @@ using namespace std;
 //Lucas Zagal
 class Piece
 {
-public:
-  Piece(){};
-  Piece(char typ, int x, int y, bool isWhite) ;
-  char getType(void);
-  void setType(char input);
-  int getXpos(void);
-  int getYpos(void);
-  bool getWhite(void);
-  void setCoords(int newX, int newY);
-  bool getFirst(void);
+  public:
+    Piece(){};
+    Piece(char typ, int x, int y, bool isWhite) ;
+    char getType(void);
+    void setType(char input);
+    int getXpos(void);
+    int getYpos(void);
+    bool getWhite(void);
+    void setCoords(int newX, int newY);
+    bool getFirst(void);
 
-private:
-  int xpos, ypos;
-  char type;
-  bool white;
-  bool firstMove;
+  private:
+    int xpos, ypos;
+    char type;
+    bool white;
+    bool firstMove;
 
 
 };
@@ -422,10 +422,10 @@ void startPage(){
 
 void display(){
 
-  cout  << endl << endl<< "    A  B  C  D  E  F  G  H " << endl;
+  cout  << endl << endl<< "            A  B  C  D  E  F  G  H " << endl;
   for(int j=0;j < 8; j+=2){ // rows
 
-    cout<< " " << 8-j << " ";
+    cout<< "         " << 8-j << " ";
     for( int l =0; l < 8;l+=2 ){ //Columns
 
       for(int i = 0; i < arrayLength; i++){ // pieces
@@ -466,7 +466,7 @@ void display(){
     cout<< " " << 8-j << " ";
     printf("\n");
 
-    cout<< " " << 7-j << " ";
+    cout<< "         " << 7-j << " ";
     for( int l = 0; l < 8;l+=2 ){ // Columns
 
       for(int i = 0; i < arrayLength; i++){ // pieces
@@ -510,7 +510,7 @@ void display(){
     cout<< " " << 7-j << " ";
     printf("\n");
   }
-  cout<< "    A  B  C  D  E  F  G  H " << endl << endl;
+  cout<< "            A  B  C  D  E  F  G  H " << endl << endl;
 
 }
 
@@ -1114,29 +1114,19 @@ bool Horse(int i, int newX, int newY, bool moving, bool checkM){
 }
 
 void setRandomTypes(){
-srand(time(NULL));
+
   for (int i = 0; i < arrayLength; i++)
   {
-
-    randomInt = rand() % 5;
-    cout << randomInt;
+    randomInt = rand();
+    randomInt = rand();
     if(pieces[i].getType() != 'K')
     {
-      if (randomInt == 0)
+      if (randomInt <= 1073741820)
       {
         pieces[i].setType('P');
-      } else if(randomInt==1)
+      } else
       {
         pieces[i].setType('Q');
-      } else if(randomInt==2)
-      {
-        pieces[i].setType('B');
-      } else if(randomInt==3)
-      {
-        pieces[i].setType('H');
-      } else if(randomInt==4)
-      {
-        pieces[i].setType('R');
       }
     }
   }
@@ -1521,7 +1511,7 @@ void load()
 
 int main(){
   startPage();
-
+  cout << "\e[8;22;50t";
   if (mode == "Random")
   {
     setRandomTypes();
@@ -1532,6 +1522,7 @@ int main(){
   {
 
     //by zach greenberg
+    cout << "\e[8;22;50t";
     display();
     //pyae sone
     userInput();
