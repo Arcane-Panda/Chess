@@ -6,26 +6,28 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 //Lucas Zagal
 class Piece
 {
-  public:
-    Piece(){};
-    Piece(char typ, int x, int y, bool isWhite) ;
-    char getType(void);
-    void setType(char input);
-    int getXpos(void);
-    int getYpos(void);
-    bool getWhite(void);
-    void setCoords(int newX, int newY);
-    bool getFirst(void);
+public:
+  Piece(){};
+  Piece(char typ, int x, int y, bool isWhite) ;
+  char getType(void);
+  void setType(char input);
+  int getXpos(void);
+  int getYpos(void);
+  bool getWhite(void);
+  void setCoords(int newX, int newY);
+  bool getFirst(void);
 
-  private:
-    int xpos, ypos;
-    char type;
-    bool white;
-    bool firstMove;
+private:
+  int xpos, ypos;
+  char type;
+  bool white;
+  bool firstMove;
 
 
 };
@@ -71,7 +73,7 @@ void Piece::setCoords(int newX, int newY)
 bool Piece::getFirst(void)
 {
   return firstMove;
-  firstMove = false;
+  firstMove = false;   // i think this is the problem for the casteling
 }
 
 void Piece::setType(char input)
@@ -168,6 +170,7 @@ bool loadGames = false;
 bool inputting = false;
 bool whiteCastle = false;
 bool blackCastle = false;
+int castleRook;
 
 // functions
 
@@ -239,7 +242,7 @@ void load()
   {
     whiteTurn = false;
   }
-
+ infile.close();
 }
 
 void loadGame(){
@@ -486,7 +489,7 @@ void startPage(){
     } else if(menuSelect == "Exit"|| menuSelect == "exit"){
       startMenu = false;
       playing = false;
-        break;
+      break;
     } else {
       incorectSelect = true;
     }
@@ -591,166 +594,166 @@ void display(){
 void userInput(){
   inputting = true;
   while(inputting){
-  cout << "Type the location of a piece to select it, or a   command  ";
-  cout << "i.e. A1, or exit" << endl;
-  // make sure that selected space isn't empty
-  cin >> selection;
-  if (selection == "exit" || selection == "Exit" )
-  {
-    cout << "Are you sure you want to exit?" << endl;
-    cout << "All unsaved progress will be lost" << endl;
-    cout << "Are you sure? y/n" << endl;
-    cin >> selectConfirm;
-    if (selectConfirm == 'n') {
+    cout << "Type the location of a piece to select it, or a   command  ";
+    cout << "i.e. A1, or exit" << endl;
+    // make sure that selected space isn't empty
+    cin >> selection;
+    if (selection == "exit" || selection == "Exit" )
+    {
+      cout << "Are you sure you want to exit?" << endl;
+      cout << "All unsaved progress will be lost" << endl;
+      cout << "Are you sure? y/n" << endl;
+      cin >> selectConfirm;
+      if (selectConfirm == 'n') {
 
 
-    } else if (selectConfirm == 'y') {
-      inputting = false;
-      startMenu = true;
-      startPage();
+      } else if (selectConfirm == 'y') {
+        inputting = false;
+        startMenu = true;
+        startPage();
         break;
-  }
-}else if(selection == "save" || selection == "Save" )
-{
-  save();
-}
-else {
-
-  cout << "You selected " << selection << endl;
-  cout << "Confirm selection? y/n" << endl;
-  cin >> selectConfirm;
-  if (selectConfirm == 'n') {
-
-
-  } else if (selectConfirm == 'y') {
-    inputting = false;
-    selConfOne = selection.substr(0,1);
-    selConfTwo = selection.substr(1,1);
-    if (selConfOne == "A" || selConfOne == "a") {
-      oldArrayX = 0;
-    } else if (selConfOne == "B" || selConfOne == "b") {
-      oldArrayX = 1;
-    } else if (selConfOne == "C" || selConfOne == "c") {
-      oldArrayX = 2;
-    } else if (selConfOne == "D" || selConfOne == "d") {
-      oldArrayX = 3;
-    } else if (selConfOne == "E" || selConfOne == "e") {
-      oldArrayX = 4;
-    } else if (selConfOne == "F" || selConfOne == "f") {
-      oldArrayX = 5;
-    } else if (selConfOne == "G" || selConfOne == "g") {
-      oldArrayX = 6;
-    } else if (selConfOne == "H" || selConfOne == "h") {
-      oldArrayX = 7;
-    } else
+      }
+    }else if(selection == "save" || selection == "Save" )
     {
-      system("clear");
-      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-      display();
-
+      save();
     }
-    if (selConfTwo == "1") {
-      oldArrayY = 7;
-    } else if (selConfTwo == "2") {
-      oldArrayY = 6;
-    } else if (selConfTwo == "3") {
-      oldArrayY = 5;
-    } else if (selConfTwo == "4") {
-      oldArrayY = 4;
-    } else if (selConfTwo == "5") {
-      oldArrayY = 3;
-    } else if (selConfTwo == "6") {
-      oldArrayY = 2;
-    } else if (selConfTwo == "7") {
-      oldArrayY = 1;
-    } else if (selConfTwo == "8") {
-      oldArrayY = 0;
-    } else
-    {
-      system("clear");
-      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-      display();
+    else {
+
+      cout << "You selected " << selection << endl;
+      cout << "Confirm selection? y/n" << endl;
+      cin >> selectConfirm;
+      if (selectConfirm == 'n') {
+
+
+      } else if (selectConfirm == 'y') {
+        inputting = false;
+        selConfOne = selection.substr(0,1);
+        selConfTwo = selection.substr(1,1);
+        if (selConfOne == "A" || selConfOne == "a") {
+          oldArrayX = 0;
+        } else if (selConfOne == "B" || selConfOne == "b") {
+          oldArrayX = 1;
+        } else if (selConfOne == "C" || selConfOne == "c") {
+          oldArrayX = 2;
+        } else if (selConfOne == "D" || selConfOne == "d") {
+          oldArrayX = 3;
+        } else if (selConfOne == "E" || selConfOne == "e") {
+          oldArrayX = 4;
+        } else if (selConfOne == "F" || selConfOne == "f") {
+          oldArrayX = 5;
+        } else if (selConfOne == "G" || selConfOne == "g") {
+          oldArrayX = 6;
+        } else if (selConfOne == "H" || selConfOne == "h") {
+          oldArrayX = 7;
+        } else
+        {
+          system("clear");
+          cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+          display();
+
+        }
+        if (selConfTwo == "1") {
+          oldArrayY = 7;
+        } else if (selConfTwo == "2") {
+          oldArrayY = 6;
+        } else if (selConfTwo == "3") {
+          oldArrayY = 5;
+        } else if (selConfTwo == "4") {
+          oldArrayY = 4;
+        } else if (selConfTwo == "5") {
+          oldArrayY = 3;
+        } else if (selConfTwo == "6") {
+          oldArrayY = 2;
+        } else if (selConfTwo == "7") {
+          oldArrayY = 1;
+        } else if (selConfTwo == "8") {
+          oldArrayY = 0;
+        } else
+        {
+          system("clear");
+          cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+          display();
+        }
+
+      } else
+      {
+        system("clear");
+        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+        display();
+      }
     }
 
-  } else
-  {
-    system("clear");
-    cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-    display();
   }
-}
-
-}
-inputting = true;
+  inputting = true;
   for (int i = 0; i < arrayLength; i++)
   {
     if (pieces[i].getYpos() == oldArrayY && pieces[i].getXpos() == oldArrayX)
     {
       while(inputting){
-      cout << "Select the space to where you wish to move your selection" << endl;
-      cin >> selection;
-      cout << "You selected " << selection << endl;
-      cout << "Confirm selection? y/n" << endl;
-      cin >> selectConfirm;
-      if (selectConfirm == 'n') {
-      } else if (selectConfirm == 'y'){
-        inputting = false;
-      selConfOne = selection.substr(0,1);
-      selConfTwo = selection.substr(1,1);
-      //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
-      if (selConfOne == "A" || selConfOne == "a") {
-        newArrayX = 0;
-      } else if (selConfOne == "B" || selConfOne == "b") {
-        newArrayX = 1;
-      } else if (selConfOne == "C" || selConfOne == "c") {
-        newArrayX = 2;
-      } else if (selConfOne == "D" || selConfOne == "d") {
-        newArrayX = 3;
-      } else if (selConfOne == "E" || selConfOne == "e") {
-        newArrayX = 4;
-      } else if (selConfOne == "F" || selConfOne == "f") {
-        newArrayX = 5;
-      } else if (selConfOne == "G" || selConfOne == "g") {
-        newArrayX = 6;
-      } else if (selConfOne == "H" || selConfOne == "h") {
-        newArrayX = 7;
-      } else
-      {
-        system("clear");
-        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-        display();
+        cout << "Select the space to where you wish to move your selection" << endl;
+        cin >> selection;
+        cout << "You selected " << selection << endl;
+        cout << "Confirm selection? y/n" << endl;
+        cin >> selectConfirm;
+        if (selectConfirm == 'n') {
+        } else if (selectConfirm == 'y'){
+          inputting = false;
+          selConfOne = selection.substr(0,1);
+          selConfTwo = selection.substr(1,1);
+          //  cout << "You wanna move it to " << selConfOne << selConfTwo << endl;
+          if (selConfOne == "A" || selConfOne == "a") {
+            newArrayX = 0;
+          } else if (selConfOne == "B" || selConfOne == "b") {
+            newArrayX = 1;
+          } else if (selConfOne == "C" || selConfOne == "c") {
+            newArrayX = 2;
+          } else if (selConfOne == "D" || selConfOne == "d") {
+            newArrayX = 3;
+          } else if (selConfOne == "E" || selConfOne == "e") {
+            newArrayX = 4;
+          } else if (selConfOne == "F" || selConfOne == "f") {
+            newArrayX = 5;
+          } else if (selConfOne == "G" || selConfOne == "g") {
+            newArrayX = 6;
+          } else if (selConfOne == "H" || selConfOne == "h") {
+            newArrayX = 7;
+          } else
+          {
+            system("clear");
+            cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+            display();
+          }
+          if (selConfTwo == "1") {
+            newArrayY = 7;
+          } else if (selConfTwo == "2") {
+            newArrayY = 6;
+          } else if (selConfTwo == "3") {
+            newArrayY = 5;
+          } else if (selConfTwo == "4") {
+            newArrayY = 4;
+          } else if (selConfTwo == "5") {
+            newArrayY = 3;
+          } else if (selConfTwo == "6") {
+            newArrayY = 2;
+          } else if (selConfTwo == "7") {
+            newArrayY = 1;
+          } else if (selConfTwo == "8") {
+            newArrayY = 0;
+          } else
+          {
+            system("clear");
+            cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+            display();
+          }
+        } else
+        {
+          system("clear");
+          cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
+          display();
+        }
       }
-      if (selConfTwo == "1") {
-        newArrayY = 7;
-      } else if (selConfTwo == "2") {
-        newArrayY = 6;
-      } else if (selConfTwo == "3") {
-        newArrayY = 5;
-      } else if (selConfTwo == "4") {
-        newArrayY = 4;
-      } else if (selConfTwo == "5") {
-        newArrayY = 3;
-      } else if (selConfTwo == "6") {
-        newArrayY = 2;
-      } else if (selConfTwo == "7") {
-        newArrayY = 1;
-      } else if (selConfTwo == "8") {
-        newArrayY = 0;
-      } else
-      {
-        system("clear");
-        cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-        display();
-      }
-    } else
-    {
-      system("clear");
-      cout << "\033[1;31mInvalid input. Try again!\033[0m\n" << endl;
-      display();
     }
   }
-}
-}
 
 }
 
@@ -860,6 +863,8 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
 bool King(int i, int newX, int newY, bool moving, bool checkM){
 
   validMove = false;
+  blackCastle = false;
+  whiteCastle = false;
 
   if(newY- pieces[i].getYpos() == -1 && newX == pieces[i].getXpos())
   {
@@ -896,16 +901,32 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
   }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
     if (WR2.getFirst())
     {
-      validMove = true;
+      validMove = true;  // add logic to check that the spaces are empty before moving
       whiteCastle = true;
+      castleRook = 2;
+    }
+  }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
+    if (WR1.getFirst())
+    {
+      validMove = true;  // add logic to check that the spaces are empty before moving
+      whiteCastle = true;
+      castleRook = 1;
     }
   }else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
+    if (BR2.getFirst())
+    {
+      validMove = true;  // add logic to check that the spaces are empty before moving
+      blackCastle = true;
+      castleRook = 2;
+    }
+  } else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
     if (BR1.getFirst())
     {
-      validMove = true;
+      validMove = true;    // add logic to check that the spaces are empty before moving
       blackCastle = true;
+      castleRook = 1;
     }
-  }  else{
+  } else{
     validMove = false;
   }
   if(validMove){
@@ -929,10 +950,20 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
         pieces[i].setCoords(newX,newY);
         if (whiteCastle)
         {
-          pieces[28].setCoords(5,7);
+          if(castleRook = 1){
+            pieces[29].setCoords(3,7);
+          }else{
+            pieces[28].setCoords(5,7);
+          }
+
         } else if(blackCastle)
         {
-          pieces[13].setCoords(5,0);
+          if(castleRook = 1){
+            pieces[12].setCoords(3,0);
+          }else{
+            pieces[13].setCoords(5,0);
+          }
+
         }
       }
       return true;
@@ -1291,10 +1322,10 @@ void setRandomTypes(){
         pieces[i].setType('H');
       } else if(randomInt==4)
       {
-       pieces[i].setType('R');
+        pieces[i].setType('R');
+      }
     }
   }
-}
 }
 
 bool check(bool white){
