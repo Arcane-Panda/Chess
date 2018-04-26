@@ -873,6 +873,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
   blackCastle = false;
   whiteCastle = false;
+  castleRook = 0;
 
   if(newY- pieces[i].getYpos() == -1 && newX == pieces[i].getXpos())
   {
@@ -1009,20 +1010,20 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
         pieces[i].setFirst();
         if (whiteCastle)
         {
-          if(castleRook = 1){
+          if(castleRook = 2){
             pieces[29].setCoords(3,7);
             pieces[29].setFirst();
-          }else{
+          }else if(castleRook = 1){
             pieces[28].setCoords(5,7);
             pieces[28].setFirst();
           }
 
         } else if(blackCastle)
         {
-          if(castleRook = 1){
+          if(castleRook = 2){
             pieces[12].setCoords(3,0);
             pieces[12].setFirst();
-          }else{
+          }else if(castleRook = 1){
             pieces[13].setCoords(5,0);
             pieces[13].setFirst();
           }
