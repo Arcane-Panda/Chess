@@ -909,30 +909,80 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
   }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
     if (WR2.getFirst())
     {
-      validMove = true;  // add logic to check that the spaces are empty before moving
-      whiteCastle = true;
-      castleRook = 2;
+
+    open = true;
+
+    for(int j = 0; j < arrayLength; j++){
+      if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 5 ){
+        open = false;
+      }else if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 6 ){
+        open = false;
+      }
+    }
+      if(open){
+        validMove = true;
+        whiteCastle = true;
+        castleRook = 2;
+      }
+
     }
   }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
     if (WR1.getFirst())
     {
-      validMove = true;  // add logic to check that the spaces are empty before moving
-      whiteCastle = true;
-      castleRook = 1;
+      open = true;
+      for(int j = 0; j < arrayLength; j++){
+        if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 1 ){
+          open = false;
+        }else if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 2 ){
+          open = false;
+        }else if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 3 ){
+          open = false;
+        }
+      }
+        if(open){
+          validMove = true;
+          whiteCastle = true;
+          castleRook = 1;
+        }
+
     }
   }else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
     if (BR2.getFirst())
     {
-      validMove = true;  // add logic to check that the spaces are empty before moving
-      blackCastle = true;
-      castleRook = 2;
+      open = true;
+      for(int j = 0; j < arrayLength; j++){
+        if(pieces[j].getYpos() == 0 && pieces[j].getXpos() == 5 ){
+          open = false;
+        }else if(pieces[j].getYpos() == 0 && pieces[j].getXpos() == 6 ){
+          open = false;
+        }
+      }
+        if(open){
+          validMove = true;
+          blackCastle = true;
+          castleRook = 2;
+        }
+
     }
   } else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
     if (BR1.getFirst())
     {
-      validMove = true;    // add logic to check that the spaces are empty before moving
-      blackCastle = true;
-      castleRook = 1;
+      open = true;
+      for(int j = 0; j < arrayLength; j++){
+        if(pieces[j].getYpos() == 0 && pieces[j].getXpos() == 1 ){
+          open = false;
+        }else if(pieces[j].getYpos() == 0 && pieces[j].getXpos() == 2 ){
+          open = false;
+        }else if(pieces[j].getYpos() == 0 && pieces[j].getXpos() == 3 ){
+          open = false;
+        }
+      }
+        if(open){
+          validMove = true;    // add logic to check that the spaces are empty before moving
+          blackCastle = true;
+          castleRook = 1;
+        }
+
     }
   } else{
     validMove = false;
@@ -959,7 +1009,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
         pieces[i].setFirst();
         if (whiteCastle)
         {
-          if(castleRook == 1){
+          if(castleRook = 1){
             pieces[29].setCoords(3,7);
             pieces[29].setFirst();
           }else{
@@ -969,7 +1019,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
 
         } else if(blackCastle)
         {
-          if(castleRook == 1){
+          if(castleRook = 1){
             pieces[12].setCoords(3,0);
             pieces[12].setFirst();
           }else{
