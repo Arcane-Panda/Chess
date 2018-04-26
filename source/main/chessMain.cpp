@@ -1,5 +1,4 @@
-
-
+#include <dirent.h>
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -74,7 +73,7 @@ void Piece::setCoords(int newX, int newY)
 bool Piece::getFirst(void)
 {
   return firstMove;
-  //firstMove = false;   // i think this is the problem for the casteling
+  //firstMove = false;   // i think this is the problem for the castling
 }
 
 void Piece::setFirst(void)
@@ -181,8 +180,8 @@ bool open;
 
 // functions
 
-void save(){
-  ofstream outfile("save.txt");
+void save(string file){
+  ofstream outfile("/Users/9625014/Programming1Folder/Term3/Chess/saves/"+file);
   for(int c = 0; c < arrayLength; c++){
     outfile << pieces[c].getXpos() << pieces[c].getYpos();
   }
@@ -190,10 +189,10 @@ void save(){
   outfile.close();
 }
 
-void load()
+void load(string file)
 {
   ifstream infile;
-  infile.open("save.txt");
+  infile.open(file);
 
   string saveFile;
   infile >> saveFile;
@@ -253,7 +252,7 @@ void load()
 }
 
 void loadGame(){
-  load(); //temp
+  //load(); //temp
   while(loadGames){
     cout << "\e[8;22;50t";
     system("clear");
@@ -271,11 +270,24 @@ void loadGame(){
     cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
     cout<<"              -----------------------             "<< endl;
-    cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
-    cout<<"   // display the options for loaded files here   "<< endl;
-    cout<<"                                                  "<< endl;
+    DIR *dir;
+    struct dirent *ent;
+    if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+    {
+      while((ent = readdir(dir)) != NULL)
+      {
+        printf ("%s\n", ent->d_name);
+      }
+      closedir(dir);
+    } else
+    {
+      perror("");
+    }
+  //  cout<<"                                                  "<< endl;
+    //cout<<"                                                  "<< endl;
+//    cout<<"                                                  "<< endl;
+//    cout<<"                                                  "<< endl;
+//    cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -296,7 +308,10 @@ void loadGame(){
 
     } else if(menuSelect == "Exit"|| menuSelect == "exit"){
       loadGames = false;
-    } else {
+    } else if(menuSelect != " " && menuSelect != " " && menuSelect != "Exit" && menuSelect != "exit"){
+      load(menuSelect);
+    }else
+    {
       incorectSelect = true;
     }
   }
@@ -505,7 +520,7 @@ void startPage(){
 
 
 void display(){
-
+cout << "\n\n\n\n\n\n\n\n\n";
   cout  << endl << endl<< "            A  B  C  D  E  F  G  H " << endl;
   for(int j=0;j < 8; j+=2){ // rows
 
@@ -622,7 +637,10 @@ void userInput(){
       }
     }else if(selection == "save" || selection == "Save" )
     {
-      save();
+      string fileName;
+      cout << "Name your file:";
+      cin >> fileName;
+      save(fileName);
     }
     else {
 
@@ -1541,7 +1559,6 @@ bool check(bool white){
   return false;
 }
 
-
 bool checkMate(bool colorW){
 
   if(check(colorW)){
@@ -1657,7 +1674,6 @@ bool checkMate(bool colorW){
   return false;
 }
 
-
 void promotion(int i){
   if (pieces[i].getWhite() && pieces[i].getYpos() == 0 && pieces[i].getType() == 'P'){
 
@@ -1703,8 +1719,8 @@ int main(){
   {
     setRandomTypes();
   }
-  save();
-  load();
+  //save("save.txt");
+  //load("save.txt");
   while(playing)
   {
 
