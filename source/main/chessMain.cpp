@@ -270,7 +270,7 @@ void loadGame(){
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"              -----------------------             "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -320,7 +320,7 @@ void gameStart(){
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"              -----------------------             "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                       New                        "<< endl;
@@ -371,8 +371,8 @@ void instructions(){
     cout<<"                 Welcome to Chess!                "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                   Instructions                   "<< endl;
+    cout<<"                   ------------                   "<< endl;
     cout<<"                        ...                       "<< endl;
-    cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -417,7 +417,7 @@ void modes(){
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                Please select a mode              "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"                --------------------              "<< endl;
     cout<<"                      Random                      "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -464,7 +464,7 @@ void startPage(){
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"              -----------------------             "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                       Start                      "<< endl;
@@ -697,7 +697,7 @@ void userInput(){
     if (pieces[i].getYpos() == oldArrayY && pieces[i].getXpos() == oldArrayX)
     {
       while(inputting){
-        cout << "Select the space to where you wish to move your selection" << endl;
+        cout << "Select the space to where you wish to move your   selection" << endl;
         cin >> selection;
         cout << "You selected " << selection << endl;
         cout << "Confirm selection? y/n" << endl;
