@@ -22,6 +22,7 @@ public:
   bool getWhite(void);
   void setCoords(int newX, int newY);
   bool getFirst(void);
+  void setFirst(void);
 
 private:
   int xpos, ypos;
@@ -76,7 +77,7 @@ bool Piece::getFirst(void)
   //firstMove = false;   // i think this is the problem for the casteling
 }
 
-void Piece::setFirst()
+void Piece::setFirst(void)
 {
   firstMove = false;
 }
@@ -957,7 +958,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
         pieces[i].setFirst();
         if (whiteCastle)
         {
-          if(castleRook = 1){
+          if(castleRook == 1){
             pieces[29].setCoords(3,7);
             pieces[29].setFirst();
           }else{
@@ -967,7 +968,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
 
         } else if(blackCastle)
         {
-          if(castleRook = 1){
+          if(castleRook == 1){
             pieces[12].setCoords(3,0);
             pieces[12].setFirst();
           }else{
