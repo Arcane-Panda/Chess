@@ -908,7 +908,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     //move down
     validMove = true;
   }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
-    if (WR2.getFirst())
+    if (pieces[28].getFirst())
     {
 
     open = true;
@@ -928,7 +928,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
 
     }
   }else if(pieces[i].getWhite() == true && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
-    if (WR1.getFirst())
+    if (pieces[29].getFirst())
     {
       open = true;
       for(int j = 0; j < arrayLength; j++){
@@ -948,7 +948,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
 
     }
   }else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
-    if (BR2.getFirst())
+    if (pieces[13].getFirst())
     {
       open = true;
       for(int j = 0; j < arrayLength; j++){
@@ -966,7 +966,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
 
     }
   } else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
-    if (BR1.getFirst())
+    if (pieces[12].getFirst())
     {
       open = true;
       for(int j = 0; j < arrayLength; j++){
@@ -979,7 +979,7 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
         if(open){
-          validMove = true;    // add logic to check that the spaces are empty before moving
+          validMove = true;
           blackCastle = true;
           castleRook = 1;
         }
@@ -1010,20 +1010,20 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
         pieces[i].setFirst();
         if (whiteCastle)
         {
-          if(castleRook = 2){
+          if(castleRook == 1){
             pieces[29].setCoords(3,7);
             pieces[29].setFirst();
-          }else if(castleRook = 1){
+          }else if(castleRook == 2){
             pieces[28].setCoords(5,7);
             pieces[28].setFirst();
           }
 
         } else if(blackCastle)
         {
-          if(castleRook = 2){
+          if(castleRook == 1){
             pieces[12].setCoords(3,0);
             pieces[12].setFirst();
-          }else if(castleRook = 1){
+          }else if(castleRook == 2){
             pieces[13].setCoords(5,0);
             pieces[13].setFirst();
           }
