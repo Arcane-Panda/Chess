@@ -177,6 +177,7 @@ bool inputting = false;
 bool whiteCastle = false;
 bool blackCastle = false;
 int castleRook;
+bool open;
 
 // functions
 
