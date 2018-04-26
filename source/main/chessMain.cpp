@@ -73,7 +73,12 @@ void Piece::setCoords(int newX, int newY)
 bool Piece::getFirst(void)
 {
   return firstMove;
-  firstMove = false;   // i think this is the problem for the casteling
+  //firstMove = false;   // i think this is the problem for the casteling
+}
+
+void Piece::setFirst()
+{
+  firstMove = false;
 }
 
 void Piece::setType(char input)
@@ -849,6 +854,7 @@ bool Pawn(int i, int newX, int newY, bool moving, bool checkM){
   if(validMove){
     if(moving){
       pieces[i].setCoords(newX,newY);
+      pieces[i].setFirst();
     }
     return true;
 
@@ -948,20 +954,25 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
+        pieces[i].setFirst();
         if (whiteCastle)
         {
           if(castleRook = 1){
             pieces[29].setCoords(3,7);
+            pieces[29].setFirst();
           }else{
             pieces[28].setCoords(5,7);
+            pieces[28].setFirst();
           }
 
         } else if(blackCastle)
         {
           if(castleRook = 1){
             pieces[12].setCoords(3,0);
+            pieces[12].setFirst();
           }else{
             pieces[13].setCoords(5,0);
+            pieces[13].setFirst();
           }
 
         }
@@ -1087,6 +1098,7 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
+        pieces[i].setFirst();
       }
       return true;
     }
@@ -1167,6 +1179,7 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
+        pieces[i].setFirst();
       }
       return true;
     }
@@ -1245,6 +1258,7 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
+        pieces[i].setFirst();
       }
       return true;
     }
@@ -1290,6 +1304,7 @@ bool Horse(int i, int newX, int newY, bool moving, bool checkM){
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
+        pieces[i].setFirst();
       }
       return true;
     }
