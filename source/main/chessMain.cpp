@@ -137,6 +137,7 @@ Piece WH2('H',6,7,true);
 
 vector<int> possibleMovesX;
 vector<int> possibleMovesY;
+vector<string> fileNames;
 int oldX;
 int oldY;
 bool playing = true;
@@ -191,64 +192,78 @@ void save(string file){
 
 void load(string file)
 {
+  cout<< file<< endl;
   ifstream infile;
-  infile.open(file);
-
-  string saveFile;
-  infile >> saveFile;
-  infile.close();
-  BP1.setCoords(saveFile.at(0),saveFile.at(1));
-  BP2.setCoords(saveFile.at(2),saveFile.at(3));
-  BP3.setCoords(saveFile.at(4),saveFile.at(5));
-  BP4.setCoords(saveFile.at(6),saveFile.at(7));
-  BP5.setCoords(saveFile.at(8),saveFile.at(9));
-  BP6.setCoords(saveFile.at(10),saveFile.at(11));
-  BP7.setCoords(saveFile.at(12),saveFile.at(13));
-  BP8.setCoords(saveFile.at(14),saveFile.at(15));
-
-  BQ.setCoords(saveFile.at(16),saveFile.at(17));
-
-  BK.setCoords(saveFile.at(18),saveFile.at(19));
-
-  BB1.setCoords(saveFile.at(20),saveFile.at(21));
-  BB2.setCoords(saveFile.at(22),saveFile.at(23));
-
-  BR1.setCoords(saveFile.at(24),saveFile.at(25));
-  BR2.setCoords(saveFile.at(26),saveFile.at(27));
-
-  BH1.setCoords(saveFile.at(28),saveFile.at(29));
-  BH2.setCoords(saveFile.at(30),saveFile.at(31));
-
-  WP1.setCoords(saveFile.at(32),saveFile.at(33));
-  WP2.setCoords(saveFile.at(34),saveFile.at(35));
-  WP3.setCoords(saveFile.at(36),saveFile.at(37));
-  WP4.setCoords(saveFile.at(38),saveFile.at(39));
-  WP5.setCoords(saveFile.at(40),saveFile.at(41));
-  WP6.setCoords(saveFile.at(42),saveFile.at(43));
-  WP7.setCoords(saveFile.at(44),saveFile.at(45));
-  WP8.setCoords(saveFile.at(46),saveFile.at(47));
-
-  WQ.setCoords(saveFile.at(48),saveFile.at(49));
-
-  WK.setCoords(saveFile.at(50),saveFile.at(51));
-
-  WB1.setCoords(saveFile.at(52),saveFile.at(53));
-  WB2.setCoords(saveFile.at(54),saveFile.at(55));
-
-  WR1.setCoords(saveFile.at(56),saveFile.at(57));
-  WR2.setCoords(saveFile.at(58),saveFile.at(59));
-
-  WH1.setCoords(saveFile.at(60),saveFile.at(61));
-  WH2.setCoords(saveFile.at(62),saveFile.at(63));
-
-  if(saveFile.at(64) == '1')
+  infile.open("/Users/9625014/Programming1Folder/Term3/Chess/saves/"+file);
+  //infile.open(file);
+  if (infile.is_open())
   {
-    whiteTurn = true;
+    string saveFile;
+    infile >> saveFile;
+    //infile.close();
+    cout << saveFile;
+    //cout <<"is the crash?" << endl;
+    pieces[0].setCoords(saveFile.at(0),saveFile.at(1));
+    cout << pieces[0].getXpos() << pieces[0].getYpos() << endl;
+    cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
+    pieces[1].setCoords(saveFile.at(2),saveFile.at(3));
+    pieces[2].setCoords(saveFile.at(4),saveFile.at(5));
+    pieces[3].setCoords(saveFile.at(6),saveFile.at(7));
+    pieces[4].setCoords(saveFile.at(8),saveFile.at(9));
+    pieces[5].setCoords(saveFile.at(10),saveFile.at(11));
+    pieces[6].setCoords(saveFile.at(12),saveFile.at(13));
+    pieces[7].setCoords(saveFile.at(14),saveFile.at(15));
+
+    pieces[8].setCoords(saveFile.at(16),saveFile.at(17));
+
+    pieces[9].setCoords(saveFile.at(18),saveFile.at(19));
+
+    pieces[10].setCoords(saveFile.at(20),saveFile.at(21));
+    pieces[11].setCoords(saveFile.at(22),saveFile.at(23));
+
+    pieces[12].setCoords(saveFile.at(24),saveFile.at(25));
+    pieces[13].setCoords(saveFile.at(26),saveFile.at(27));
+
+    pieces[14].setCoords(saveFile.at(28),saveFile.at(29));
+    pieces[15].setCoords(saveFile.at(30),saveFile.at(31));
+
+    pieces[16].setCoords(saveFile.at(32),saveFile.at(33));
+    pieces[17].setCoords(saveFile.at(34),saveFile.at(35));
+    pieces[18].setCoords(saveFile.at(36),saveFile.at(37));
+    pieces[19].setCoords(saveFile.at(38),saveFile.at(39));
+    pieces[20].setCoords(saveFile.at(40),saveFile.at(41));
+    pieces[21].setCoords(saveFile.at(42),saveFile.at(43));
+    pieces[22].setCoords(saveFile.at(44),saveFile.at(45));
+    pieces[23].setCoords(saveFile.at(46),saveFile.at(47));
+
+    pieces[24].setCoords(saveFile.at(48),saveFile.at(49));
+
+    pieces[25].setCoords(saveFile.at(50),saveFile.at(51));
+
+    pieces[26].setCoords(saveFile.at(52),saveFile.at(53));
+    pieces[27].setCoords(saveFile.at(54),saveFile.at(55));
+
+    pieces[28].setCoords(saveFile.at(56),saveFile.at(57));
+    pieces[29].setCoords(saveFile.at(58),saveFile.at(59));
+
+    pieces[30].setCoords(saveFile.at(60),saveFile.at(61));
+    pieces[31].setCoords(saveFile.at(62),saveFile.at(63));
+    for (int i = 0; i < arrayLength; i++)
+    {
+      cout << pieces[i].getXpos() << pieces[i].getYpos() << endl;
+    }
+    if(saveFile.at(64) == '1')
+    {
+      whiteTurn = true;
+    } else
+    {
+      whiteTurn = false;
+    }
   } else
   {
-    whiteTurn = false;
+    cout << "Error Loading File" << endl;
   }
- infile.close();
+  infile.close();
 }
 
 void loadGame(){
@@ -271,19 +286,21 @@ void loadGame(){
     cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
     cout<<"              -----------------------             "<< endl;
-    DIR *dir;
-    struct dirent *ent;
-    if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
-    {
-      while((ent = readdir(dir)) != NULL)
-      {
-        printf ("%s\n", ent->d_name);
-      }
-      closedir(dir);
-    } else
-    {
-      perror("");
-    }
+    // DIR *dir;
+    // struct dirent *ent;
+    // if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+    // {
+    //   fileNames.clear();
+    //   while((ent = readdir(dir)) != NULL)
+    //   {
+    //     printf ("%s\n", ent->d_name);
+    //     fileNames.push_back(ent->d_name);
+    //   }
+    //   closedir(dir);
+    // } else
+    // {
+    //   perror("");
+    // }
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -295,34 +312,47 @@ void loadGame(){
     incorectSelect = false;
     cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
     //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
-
-char fileName[255];
-
-   if(menuSelect == "Exit"|| menuSelect == "exit"){
-      loadGames = false;
-    } else if(menuSelect != "Exit" && menuSelect != "exit"){
-      DIR *dir;
-      struct dirent *ent;
-      while ((ent = readdir(dir)) != NULL)
-      {
-          strncpy(fileName, ent->d_name, 254);
-          fileName[254] = '\0';
-          if(fileName == menuSelect)
-          {
-            load(menuSelect);
-            loaded = true;
-          } else
-          {
-            //cout << "Invalid entry" << endl;          
-          }
-
-      }
-      closedir(dir);
-      //load(menuSelect);
-    }else if (loaded == false)
-    {
-      incorectSelect = true;
-    }
+    load(menuSelect);
+    // char fileName[255];
+    // loaded = false;
+    // for(int i = 0; i < fileNames.size(); i++){
+    //   if(fileNames[i] == menuSelect){
+    //     loaded = true;
+    //     load(menuSelect);
+    //   }
+    // }
+    // if (loaded == false)
+    // {
+    //   if(menuSelect == "Exit"|| menuSelect == "exit"){
+    //     loadGames = false;
+    //   }else{
+    //     incorectSelect = true;
+    //   }
+    //
+    //
+    // }
+    //  else if(menuSelect != "Exit" && menuSelect != "exit"){
+    //   DIR *dir;
+    //   struct dirent *ent;
+    //   if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+    //   {
+    //     while ((ent = readdir(dir)) != NULL)
+    //     {
+    //       strncpy(fileName, ent->d_name, 254);
+    //       fileName[254] = '\0';
+    //       if(fileName == menuSelect)
+    //       {
+    //         load(menuSelect);
+    //         loaded = true;
+    //       } else
+    //       {
+    //         //cout << "Invalid entry" << endl;
+    //       }
+    //     }
+    //   }
+    //   closedir(dir);
+    //   //load(menuSelect);
+    // }
   }
 }
 
@@ -529,7 +559,7 @@ void startPage(){
 
 
 void display(){
-cout << "\n\n\n\n\n\n\n\n\n";
+  cout << "\n\n\n\n\n\n\n\n\n";
   cout  << endl << endl<< "            A  B  C  D  E  F  G  H " << endl;
   for(int j=0;j < 8; j+=2){ // rows
 
@@ -938,15 +968,15 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
     if (pieces[28].getFirst())
     {
 
-    open = true;
+      open = true;
 
-    for(int j = 0; j < arrayLength; j++){
-      if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 5 ){
-        open = false;
-      }else if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 6 ){
-        open = false;
+      for(int j = 0; j < arrayLength; j++){
+        if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 5 ){
+          open = false;
+        }else if(pieces[j].getYpos() == 7 && pieces[j].getXpos() == 6 ){
+          open = false;
+        }
       }
-    }
       if(open){
         validMove = true;
         whiteCastle = true;
@@ -967,11 +997,11 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
           open = false;
         }
       }
-        if(open){
-          validMove = true;
-          whiteCastle = true;
-          castleRook = 1;
-        }
+      if(open){
+        validMove = true;
+        whiteCastle = true;
+        castleRook = 1;
+      }
 
     }
   }else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == 2){
@@ -985,11 +1015,11 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
           open = false;
         }
       }
-        if(open){
-          validMove = true;
-          blackCastle = true;
-          castleRook = 2;
-        }
+      if(open){
+        validMove = true;
+        blackCastle = true;
+        castleRook = 2;
+      }
 
     }
   } else if(pieces[i].getWhite() == false && pieces[i].getFirst() == true && newY - pieces[i].getYpos() == 0 && newX - pieces[i].getXpos() == -2){
@@ -1005,11 +1035,11 @@ bool King(int i, int newX, int newY, bool moving, bool checkM){
           open = false;
         }
       }
-        if(open){
-          validMove = true;
-          blackCastle = true;
-          castleRook = 1;
-        }
+      if(open){
+        validMove = true;
+        blackCastle = true;
+        castleRook = 1;
+      }
 
     }
   } else{
