@@ -252,8 +252,9 @@ void load(string file)
 }
 
 void loadGame(){
-  //load(); //temp
+  bool loaded = false;
   while(loadGames){
+    loaded = false;
     cout << "\e[8;22;50t";
     system("clear");
     if(incorectSelect == false){
@@ -283,11 +284,6 @@ void loadGame(){
     {
       perror("");
     }
-  //  cout<<"                                                  "<< endl;
-    //cout<<"                                                  "<< endl;
-//    cout<<"                                                  "<< endl;
-//    cout<<"                                                  "<< endl;
-//    cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -300,17 +296,30 @@ void loadGame(){
     cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
     //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
 
+char fileName[255];
 
-    if( menuSelect == " " || menuSelect == " " ) {
-      startSelections = false;
-      startMenu = false;
-    }else if(menuSelect == " "|| menuSelect == " " ){
-
-    } else if(menuSelect == "Exit"|| menuSelect == "exit"){
+   if(menuSelect == "Exit"|| menuSelect == "exit"){
       loadGames = false;
-    } else if(menuSelect != " " && menuSelect != " " && menuSelect != "Exit" && menuSelect != "exit"){
-      load(menuSelect);
-    }else
+    } else if(menuSelect != "Exit" && menuSelect != "exit"){
+      DIR *dir;
+      struct dirent *ent;
+      while ((ent = readdir(dir)) != NULL)
+      {
+          strncpy(fileName, ent->d_name, 254);
+          fileName[254] = '\0';
+          if(fileName == menuSelect)
+          {
+            load(menuSelect);
+            loaded = true;
+          } else
+          {
+            //cout << "Invalid entry" << endl;          
+          }
+
+      }
+      closedir(dir);
+      //load(menuSelect);
+    }else if (loaded == false)
     {
       incorectSelect = true;
     }
