@@ -203,56 +203,56 @@ void load(string file)
     //infile.close();
     cout << saveFile << endl;
     cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
-    pieces[0].setCoords(int(saveFile.at(0)),saveFile.at(1));
+    pieces[0].setCoords((int)saveFile.at(0) - '0',(int)saveFile.at(1) - '0');
     cout << pieces[0].getXpos() << pieces[0].getYpos() << endl;
     cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
-    pieces[1].setCoords(saveFile.at(2),saveFile.at(3));
-    pieces[2].setCoords(saveFile.at(4),saveFile.at(5));
-    pieces[3].setCoords(saveFile.at(6),saveFile.at(7));
-    pieces[4].setCoords(saveFile.at(8),saveFile.at(9));
-    pieces[5].setCoords(saveFile.at(10),saveFile.at(11));
-    pieces[6].setCoords(saveFile.at(12),saveFile.at(13));
-    pieces[7].setCoords(saveFile.at(14),saveFile.at(15));
+    pieces[1].setCoords((int)saveFile.at(2)- '0',(int)saveFile.at(3) - '0');
+    pieces[2].setCoords((int)saveFile.at(4) - '0',(int)saveFile.at(5) - '0');
+    pieces[3].setCoords((int)saveFile.at(6) - '0',(int)saveFile.at(7) - '0');
+    pieces[4].setCoords((int)saveFile.at(8) - '0',(int)saveFile.at(9) - '0');
+    pieces[5].setCoords((int)saveFile.at(10) - '0',(int)saveFile.at(11) - '0');
+    pieces[6].setCoords((int)saveFile.at(12) - '0',(int)saveFile.at(13) - '0');
+    pieces[7].setCoords((int)saveFile.at(14)- '0',(int)saveFile.at(15) - '0');
 
-    pieces[8].setCoords(saveFile.at(16),saveFile.at(17));
+    pieces[8].setCoords((int)saveFile.at(16) - '0',(int)saveFile.at(17) - '0');
 
-    pieces[9].setCoords(saveFile.at(18),saveFile.at(19));
+    pieces[9].setCoords((int)saveFile.at(18) - '0',(int)saveFile.at(19) - '0');
 
-    pieces[10].setCoords(saveFile.at(20),saveFile.at(21));
-    pieces[11].setCoords(saveFile.at(22),saveFile.at(23));
+    pieces[10].setCoords((int)saveFile.at(20) - '0',(int)saveFile.at(21) - '0');
+    pieces[11].setCoords((int)saveFile.at(22) - '0',(int)saveFile.at(23) - '0');
 
-    pieces[12].setCoords(saveFile.at(24),saveFile.at(25));
-    pieces[13].setCoords(saveFile.at(26),saveFile.at(27));
+    pieces[12].setCoords((int)saveFile.at(24) - '0',(int)saveFile.at(25) - '0');
+    pieces[13].setCoords((int)saveFile.at(26) - '0',(int)saveFile.at(27) - '0');
 
-    pieces[14].setCoords(saveFile.at(28),saveFile.at(29));
-    pieces[15].setCoords(saveFile.at(30),saveFile.at(31));
+    pieces[14].setCoords((int)saveFile.at(28) - '0',(int)saveFile.at(29) - '0');
+    pieces[15].setCoords((int)saveFile.at(30) - '0',(int)saveFile.at(31) - '0');
 
-    pieces[16].setCoords(saveFile.at(32),saveFile.at(33));
-    pieces[17].setCoords(saveFile.at(34),saveFile.at(35));
-    pieces[18].setCoords(saveFile.at(36),saveFile.at(37));
-    pieces[19].setCoords(saveFile.at(38),saveFile.at(39));
-    pieces[20].setCoords(saveFile.at(40),saveFile.at(41));
-    pieces[21].setCoords(saveFile.at(42),saveFile.at(43));
-    pieces[22].setCoords(saveFile.at(44),saveFile.at(45));
-    pieces[23].setCoords(saveFile.at(46),saveFile.at(47));
+    pieces[16].setCoords((int)saveFile.at(32) - '0',(int)saveFile.at(33) - '0');
+    pieces[17].setCoords((int)saveFile.at(34) - '0',(int)saveFile.at(35) - '0');
+    pieces[18].setCoords((int)saveFile.at(36) - '0',(int)saveFile.at(37) - '0');
+    pieces[19].setCoords((int)saveFile.at(38) - '0',(int)saveFile.at(39) - '0');
+    pieces[20].setCoords((int)saveFile.at(40) - '0',(int)saveFile.at(41) - '0');
+    pieces[21].setCoords((int)saveFile.at(42) - '0',(int)saveFile.at(43) - '0');
+    pieces[22].setCoords((int)saveFile.at(44) - '0',(int)saveFile.at(45) - '0');
+    pieces[23].setCoords((int)saveFile.at(46) - '0',(int)saveFile.at(47) - '0');
 
-    pieces[24].setCoords(saveFile.at(48),saveFile.at(49));
+    pieces[24].setCoords((int)saveFile.at(48) - '0',(int)saveFile.at(49) - '0');
 
-    pieces[25].setCoords(saveFile.at(50),saveFile.at(51));
+    pieces[25].setCoords((int)saveFile.at(50) - '0',(int)saveFile.at(51) - '0');
 
-    pieces[26].setCoords(saveFile.at(52),saveFile.at(53));
-    pieces[27].setCoords(saveFile.at(54),saveFile.at(55));
+    pieces[26].setCoords((int)saveFile.at(52) - '0',(int)saveFile.at(53) - '0');
+    pieces[27].setCoords((int)saveFile.at(54) - '0',(int)saveFile.at(55) - '0');
 
-    pieces[28].setCoords(saveFile.at(56),saveFile.at(57));
-    pieces[29].setCoords(saveFile.at(58),saveFile.at(59));
+    pieces[28].setCoords((int)saveFile.at(56) - '0',(int)saveFile.at(57) - '0');
+    pieces[29].setCoords((int)saveFile.at(58) - '0',(int)saveFile.at(59) - '0');
 
-    pieces[30].setCoords(saveFile.at(60),saveFile.at(61));
-    pieces[31].setCoords(saveFile.at(62),saveFile.at(63));
+    pieces[30].setCoords((int)saveFile.at(60) - '0',(int)saveFile.at(61) - '0');
+    pieces[31].setCoords((int)saveFile.at(62) - '0',(int)saveFile.at(63) - '0');
     for (int i = 0; i < arrayLength; i++)
     {
       cout << pieces[i].getXpos() << pieces[i].getYpos() << endl;
     }
-    if(saveFile.at(64) == '1')
+    if((int)saveFile.at(64) == '1')
     {
       whiteTurn = true;
     } else
@@ -312,47 +312,47 @@ void loadGame(){
     incorectSelect = false;
     cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
     //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
-    load(menuSelect);
-    // char fileName[255];
-    // loaded = false;
-    // for(int i = 0; i < fileNames.size(); i++){
-    //   if(fileNames[i] == menuSelect){
-    //     loaded = true;
-    //     load(menuSelect);
-    //   }
-    // }
-    // if (loaded == false)
-    // {
-    //   if(menuSelect == "Exit"|| menuSelect == "exit"){
-    //     loadGames = false;
-    //   }else{
-    //     incorectSelect = true;
-    //   }
-    //
-    //
-    // }
-    //  else if(menuSelect != "Exit" && menuSelect != "exit"){
-    //   DIR *dir;
-    //   struct dirent *ent;
-    //   if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
-    //   {
-    //     while ((ent = readdir(dir)) != NULL)
-    //     {
-    //       strncpy(fileName, ent->d_name, 254);
-    //       fileName[254] = '\0';
-    //       if(fileName == menuSelect)
-    //       {
-    //         load(menuSelect);
-    //         loaded = true;
-    //       } else
-    //       {
-    //         //cout << "Invalid entry" << endl;
-    //       }
-    //     }
-    //   }
-    //   closedir(dir);
-    //   //load(menuSelect);
-    // }
+  //  load(menuSelect);
+    char fileName[255];
+    loaded = false;
+    for(int i = 0; i < fileNames.size(); i++){
+      if(fileNames[i] == menuSelect){
+        loaded = true;
+        load(menuSelect);
+      }
+    }
+    if (loaded == false)
+    {
+      if(menuSelect == "Exit"|| menuSelect == "exit"){
+        loadGames = false;
+      }else{
+        incorectSelect = true;
+      }
+
+
+    }
+     else if(menuSelect != "Exit" && menuSelect != "exit"){
+      DIR *dir;
+      struct dirent *ent;
+      if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+      {
+        while ((ent = readdir(dir)) != NULL)
+        {
+          strncpy(fileName, ent->d_name, 254);
+          fileName[254] = '\0';
+          if(fileName == menuSelect)
+          {
+            load(menuSelect);
+            loaded = true;
+          } else
+          {
+            //cout << "Invalid entry" << endl;
+          }
+        }
+      }
+      closedir(dir);
+      //load(menuSelect);
+    }
   }
 }
 
