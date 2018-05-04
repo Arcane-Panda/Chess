@@ -199,11 +199,11 @@ void load(string file)
   if (infile.is_open())
   {
     string saveFile;
-    infile >> saveFile;
+    infile >> saveFile ;
     //infile.close();
-    cout << saveFile;
-    //cout <<"is the crash?" << endl;
-    pieces[0].setCoords(saveFile.at(0),saveFile.at(1));
+    cout << saveFile << endl;
+    cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
+    pieces[0].setCoords(int(saveFile.at(0)),saveFile.at(1));
     cout << pieces[0].getXpos() << pieces[0].getYpos() << endl;
     cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
     pieces[1].setCoords(saveFile.at(2),saveFile.at(3));
@@ -286,21 +286,21 @@ void loadGame(){
     cout<<"                                                  "<< endl;
     cout<<"              Please select an option             "<< endl;
     cout<<"              -----------------------             "<< endl;
-    // DIR *dir;
-    // struct dirent *ent;
-    // if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
-    // {
-    //   fileNames.clear();
-    //   while((ent = readdir(dir)) != NULL)
-    //   {
-    //     printf ("%s\n", ent->d_name);
-    //     fileNames.push_back(ent->d_name);
-    //   }
-    //   closedir(dir);
-    // } else
-    // {
-    //   perror("");
-    // }
+    DIR *dir;
+    struct dirent *ent;
+    if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+    {
+      fileNames.clear();
+      while((ent = readdir(dir)) != NULL)
+      {
+        printf ("%s\n", ent->d_name);
+        fileNames.push_back(ent->d_name);
+      }
+      closedir(dir);
+    } else
+    {
+      perror("");
+    }
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
