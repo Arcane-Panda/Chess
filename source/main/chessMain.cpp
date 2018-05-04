@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <limits.h>
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
@@ -179,10 +180,15 @@ bool blackCastle = false;
 int castleRook;
 bool open;
 
+string file_path = __FILE__;
+string dir_path = file_path.substr(0, file_path.rfind("\\"));
+
+
+
 // functions
 
 void save(string file){
-  ofstream outfile("/Users/9625014/Programming1Folder/Term3/Chess/saves/"+file);
+  ofstream outfile( "/Users/9526655/Programing1/term3/c++/chess/saves/"+file);
   for(int c = 0; c < arrayLength; c++){
     outfile << pieces[c].getXpos() << pieces[c].getYpos();
   }
@@ -194,7 +200,7 @@ void load(string file)
 {
   cout<< file<< endl;
   ifstream infile;
-  infile.open("/Users/9625014/Programming1Folder/Term3/Chess/saves/"+file);
+  infile.open("/Users/9526655/Programing1/term3/c++/chess/saves/"+file);
   //infile.open(file);
   if (infile.is_open())
   {
@@ -288,7 +294,7 @@ void loadGame(){
     cout<<"              -----------------------             "<< endl;
     DIR *dir;
     struct dirent *ent;
-    if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+    if((dir = opendir ("/Users/9526655/Programing1/term3/c++/chess/saves/")) != NULL)
     {
       fileNames.clear();
       while((ent = readdir(dir)) != NULL)
@@ -312,7 +318,7 @@ void loadGame(){
     incorectSelect = false;
     cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
     //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
-  //  load(menuSelect);
+    //  load(menuSelect);
     char fileName[255];
     loaded = false;
     for(int i = 0; i < fileNames.size(); i++){
@@ -331,26 +337,26 @@ void loadGame(){
 
 
     }
-     else if(menuSelect != "Exit" && menuSelect != "exit"){
-      DIR *dir;
-      struct dirent *ent;
-      if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
-      {
-        while ((ent = readdir(dir)) != NULL)
-        {
-          strncpy(fileName, ent->d_name, 254);
-          fileName[254] = '\0';
-          if(fileName == menuSelect)
-          {
-            load(menuSelect);
-            loaded = true;
-          } else
-          {
-            //cout << "Invalid entry" << endl;
-          }
-        }
-      }
-      closedir(dir);
+    else if(menuSelect != "Exit" && menuSelect != "exit"){
+      // DIR *dir;
+      // struct dirent *ent;
+      // if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+      // {
+      //   while ((ent = readdir(dir)) != NULL)
+      //   {
+      //     strncpy(fileName, ent->d_name, 254);
+      //     fileName[254] = '\0';
+      //     if(fileName == menuSelect)
+      //     {
+      //       load(menuSelect);
+      //       loaded = true;
+      //     } else
+      //     {
+      //       //cout << "Invalid entry" << endl;
+      //     }
+      //   }
+      // }
+      // closedir(dir);
       //load(menuSelect);
     }
   }
@@ -677,7 +683,7 @@ void userInput(){
     }else if(selection == "save" || selection == "Save" )
     {
       string fileName;
-      cout << "Name your file:";
+      cout << "Name your file: ";
       cin >> fileName;
       save(fileName);
     }
@@ -1752,6 +1758,7 @@ void passTurn(){
 ////////////////////////////////////////////////////////////////////////////////
 
 int main(){
+  cour<< dir_path;
   startPage();
   cout << "\e[8;22;50t";
   if (mode == "Random")
