@@ -182,13 +182,13 @@ bool open;
 
 string file_path = __FILE__;
 string dir_path = file_path.substr(0, file_path.rfind("\\"));
-
+string location = dir_path.substr(0, dir_path.size()-13);
 
 
 // functions
 
 void save(string file){
-  ofstream outfile( "/Users/9526655/Programing1/term3/c++/chess/saves/"+file);
+  ofstream outfile( location + "saves/"+file);
   for(int c = 0; c < arrayLength; c++){
     outfile << pieces[c].getXpos() << pieces[c].getYpos();
   }
@@ -200,7 +200,7 @@ void load(string file)
 {
   cout<< file<< endl;
   ifstream infile;
-  infile.open("/Users/9526655/Programing1/term3/c++/chess/saves/"+file);
+  infile.open(location + "saves/"+file);
   //infile.open(file);
   if (infile.is_open())
   {
@@ -294,7 +294,11 @@ void loadGame(){
     cout<<"              -----------------------             "<< endl;
     DIR *dir;
     struct dirent *ent;
-    if((dir = opendir ("/Users/9526655/Programing1/term3/c++/chess/saves/")) != NULL)
+//const char* path="D:\\banat";
+    string str = location + "saves/";
+    const char * path = str.c_str();
+    dir = opendir( path);
+    if((dir) != NULL)
     {
       fileNames.clear();
       while((ent = readdir(dir)) != NULL)
@@ -1758,11 +1762,8 @@ void passTurn(){
 ////////////////////////////////////////////////////////////////////////////////
 
 int main(){
-  cout<< dir_path;
 
-  dir_path.erase(dir_path.end() - 14,13);
-
-  cout<< dir_path;
+  cout<< location;
   startPage();
   cout << "\e[8;22;50t";
   if (mode == "Random")
