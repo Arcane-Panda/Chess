@@ -1758,7 +1758,11 @@ void passTurn(){
 ////////////////////////////////////////////////////////////////////////////////
 
 int main(){
-  cour<< dir_path;
+  cout<< dir_path;
+
+  dir_path.erase(dir_path.end() - 14,13);
+
+  cout<< dir_path;
   startPage();
   cout << "\e[8;22;50t";
   if (mode == "Random")
