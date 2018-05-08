@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <stdlib.h>
+#include <ctime>
 #include <time.h>
 using namespace std;
 //Lucas Zagal
@@ -177,7 +178,7 @@ bool whiteCastle = false;
 bool blackCastle = false;
 int castleRook;
 bool open;
-bool randomAI = false;
+bool randomAI = true;
 int randAIselect;
 bool AIloop = true;
 int randAIX;
@@ -1704,15 +1705,15 @@ void promotion(int i){
 void AI() {
 
 
-
+  srand(time(NULL));
   AIloop = true;
   while(AIloop){
     if (randomAI) {
-      srand (time(NULL));
+
       randAIselect = rand() % 16;
       randAIX = rand() % 8;
       randAIY = rand() % 8;
-
+    //  cout<< "x"<< randAIX << endl << "y"<< randAIY << endl << "piece"<< randAIselect<< endl;
     }
 
     if(pieces[randAIselect].getWhite() == false){
@@ -1722,7 +1723,7 @@ void AI() {
 
         if(Pawn(randAIselect, randAIX ,randAIY ,false, true)){
           Pawn(randAIselect, randAIX ,randAIY ,true, false);
-          AIloop = true;
+          AIloop = false;
 
         }
 
@@ -1730,7 +1731,7 @@ void AI() {
       }else if(pieces[randAIselect].getType() == 'Q'){
         if(Queen(randAIselect, randAIX,randAIY,false, true)){
           Queen(randAIselect, randAIX,randAIY,true, false);
-          AIloop = true;
+          AIloop = false;
         }
 
 
@@ -1740,7 +1741,7 @@ void AI() {
 
         if(Rook(randAIselect, randAIX,randAIY,false, true)){
           Rook(randAIselect, randAIX,randAIY,true, false);
-          AIloop = true;
+          AIloop = false;
         }
 
 
@@ -1749,7 +1750,7 @@ void AI() {
 
         if(Bishop(randAIselect, randAIX,randAIY,false, true)){
           Bishop(randAIselect, randAIX,randAIY,true, false);
-          AIloop = true;
+          AIloop = false;
         }
 
 
@@ -1758,7 +1759,7 @@ void AI() {
 
         if(Horse(randAIselect, randAIX,randAIY,false, true)){
           Horse(randAIselect, randAIX,randAIY,true, false);
-          AIloop = true;
+          AIloop = false;
 
         }
 
@@ -1768,7 +1769,7 @@ void AI() {
 
         if(King(randAIselect, randAIX,randAIY,false, true)){
           King(randAIselect, randAIX,randAIY,true, false);
-          AIloop = true;
+          AIloop = false;
 
         }
 
