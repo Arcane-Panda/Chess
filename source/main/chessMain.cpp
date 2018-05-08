@@ -171,7 +171,10 @@ string incorect;
 bool incorectSelect = false;
 bool startMenu = true;
 bool instructionsMenu = false;
+bool howToPlay = false;
 bool modeMenu = false;
+bool commandsMenu = false;
+bool savingAndLoadingMenu = false;
 bool startSelections = false;
 bool loadGames = false;
 bool inputting = false;
@@ -272,7 +275,8 @@ void load(string file)
   infile.close();
 }
 
-void loadGame(){
+void loadGame()
+{
   bool loaded = false;
   while(loadGames){
     loaded = false;
@@ -294,7 +298,7 @@ void loadGame(){
     cout<<"              -----------------------             "<< endl;
     DIR *dir;
     struct dirent *ent;
-//const char* path="D:\\banat";
+
     string str = location + "saves/";
     const char * path = str.c_str();
     dir = opendir( path);
@@ -342,26 +346,7 @@ void loadGame(){
 
     }
     else if(menuSelect != "Exit" && menuSelect != "exit"){
-      // DIR *dir;
-      // struct dirent *ent;
-      // if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
-      // {
-      //   while ((ent = readdir(dir)) != NULL)
-      //   {
-      //     strncpy(fileName, ent->d_name, 254);
-      //     fileName[254] = '\0';
-      //     if(fileName == menuSelect)
-      //     {
-      //       load(menuSelect);
-      //       loaded = true;
-      //     } else
-      //     {
-      //       //cout << "Invalid entry" << endl;
-      //     }
-      //   }
-      // }
-      // closedir(dir);
-      //load(menuSelect);
+
     }
   }
 }
@@ -418,6 +403,139 @@ void gameStart(){
   }
 }
 
+void howToPlayFunc(){
+
+  while(howToPlay){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                    How To Play                   "<< endl;
+    cout<<"                   ------------                   "<< endl;
+    cout<<"             Select a piece by typing             "<< endl;
+    cout<<"                  its coordinates                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"        Move it by typing the coordinates         "<< endl;
+    cout<<"        of the space you'd like to move to        "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"           If you've never played chess:          "<< endl;
+    cout<<"   https://www.chess.com/learn-how-to-play-chess  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      howToPlay = false;
+    }else {
+      incorectSelect = true;
+    }
+  }
+}
+void commands(){
+
+  while(commandsMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                     Commands                     "<< endl;
+    cout<<"                   ------------                   "<< endl;
+    cout<<"               Type these instead of              "<< endl;
+    cout<<"                selecting a piece                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"            save - saves your game so it          "<< endl;
+    cout<<"               can be loaded later                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"               exit - exits the game              "<< endl;
+    cout<<"                   without saving                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      commandsMenu = false;
+    } else {
+      incorectSelect = true;
+    }
+  }
+}
+void savingAndLoading(){
+
+  while(savingAndLoadingMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Saving & Loading                 "<< endl;
+    cout<<"                   ------------                   "<< endl;
+    cout<<"            Games are saved in a folder           "<< endl;
+    cout<<"          called \"saves\" and are loaded         "<< endl;
+    cout<<"                 from the same one                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"          Make sure the save folder is in         "<< endl;
+    cout<<"         the same place as the application        "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      savingAndLoading = false;
+    } else {
+      incorectSelect = true;
+    }
+  }
+}
+
 void instructions(){
 
   while(instructionsMenu){
@@ -436,11 +554,11 @@ void instructions(){
     cout<<"                                                  "<< endl;
     cout<<"                   Instructions                   "<< endl;
     cout<<"                   ------------                   "<< endl;
-    cout<<"                        ...                       "<< endl;
+    cout<<"                    How To Play                   "<< endl;
     cout<<"                                                  "<< endl;
+    cout<<"                     Commands                     "<< endl;
     cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"                 Saving & Loading                 "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -457,11 +575,24 @@ void instructions(){
 
     if(menuSelect == "Exit"|| menuSelect == "exit"){
       instructionsMenu = false;
-    }else {
+    }else if(menuSelect == "how"|| menuSelect == "How")
+    {
+      howToPlay = true;
+      howToPlayFunc();
+    } else if(menuSelect == "commands"|| menuSelect == "Commands")
+    {
+      commandsMenu = true;
+      commands();
+    }else if(menuSelect == "saving"|| menuSelect == "Saving")
+    {
+      savingAndLoadingMenu = true;
+      savingAndLoading();
+    } else {
       incorectSelect = true;
     }
   }
 }
+
 
 void modes(){
 
@@ -689,6 +820,7 @@ void userInput(){
       string fileName;
       cout << "Name your file: ";
       cin >> fileName;
+      fileName = fileName + ".txt";
       save(fileName);
     }
     else {
