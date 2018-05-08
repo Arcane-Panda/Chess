@@ -138,6 +138,7 @@ Piece WH2('H',6,7,true);
 
 vector<int> possibleMovesX;
 vector<int> possibleMovesY;
+vector<char> possibleMovesType;
 int oldX;
 int oldY;
 bool playing = true;
@@ -183,6 +184,21 @@ int randAIselect;
 bool AIloop = true;
 int randAIX;
 int randAIY;
+int whitek;
+int whitep;
+int whiteh;
+int whiter;
+int whiteb;
+int whiteq;
+int blackk;
+int blackp;
+int blackh;
+int blackr;
+int blackb;
+int blackq;
+double evaluation;
+int possibleMovesBlack;
+int possibleMovesWhite;
 // functions
 
 void save(string file){
@@ -1437,124 +1453,124 @@ bool check(bool white){
   for(int c = 0; c < arrayLength; c++){
 
     if(pieces[c].getWhite() != white){
+      if(pieces[c].getXpos() != 9 && pieces[c].getYpos() != 9){
+        if(pieces[c].getType() == 'P'){
 
-      if(pieces[c].getType() == 'P'){
-
-        if(pieces[c].getWhite()){
+          if(pieces[c].getWhite()){
 
 
-          if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() < 8){
+            if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() < 8){
 
-            // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() + 1);
-            possibleMovesY.push_back(pieces[c].getYpos() - 1);
-            //white pawn diagonal left
-            possibleMovesX.push_back( pieces[c].getXpos() - 1);
-            possibleMovesY.push_back( pieces[c].getYpos() - 1);
+              // white pawn diagonal right
+              possibleMovesX.push_back(pieces[c].getXpos() + 1);
+              possibleMovesY.push_back(pieces[c].getYpos() - 1);
+              //white pawn diagonal left
+              possibleMovesX.push_back( pieces[c].getXpos() - 1);
+              possibleMovesY.push_back( pieces[c].getYpos() - 1);
 
-          }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() < 8){
-            // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() + 1);
-            possibleMovesY.push_back(pieces[c].getYpos() - 1);
+            }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() < 8){
+              // white pawn diagonal right
+              possibleMovesX.push_back(pieces[c].getXpos() + 1);
+              possibleMovesY.push_back(pieces[c].getYpos() - 1);
 
-          }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() < 8){
-            // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() - 1);
-            possibleMovesY.push_back(pieces[c].getYpos() - 1);
+            }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() < 8){
+              // white pawn diagonal right
+              possibleMovesX.push_back(pieces[c].getXpos() - 1);
+              possibleMovesY.push_back(pieces[c].getYpos() - 1);
+
+            }
+
+          }else{
+
+            if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() > 0){
+
+              // white pawn diagonal right
+              possibleMovesX.push_back(pieces[c].getXpos() + 1);
+              possibleMovesY.push_back(pieces[c].getYpos() + 1);
+              //white pawn diagonal left
+              possibleMovesX.push_back( pieces[c].getXpos() - 1);
+              possibleMovesY.push_back( pieces[c].getYpos() + 1);
+
+            }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() > 0){
+              // white pawn diagonal right
+              possibleMovesX.push_back(pieces[c].getXpos() + 1);
+              possibleMovesY.push_back(pieces[c].getYpos() + 1);
+
+            }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() > 0){
+              // white pawn diagonal right
+              possibleMovesX.push_back(pieces[c].getXpos() - 1);
+              possibleMovesY.push_back(pieces[c].getYpos() + 1);
+
+            }
 
           }
 
-        }else{
+        }else if(pieces[c].getType() == 'Q'){
 
-          if(pieces[c].getXpos() > 0 && pieces[c].getXpos() < 8 && pieces[c].getYpos() > 0){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Queen(c, x,y,false, true)){
 
-            // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() + 1);
-            possibleMovesY.push_back(pieces[c].getYpos() + 1);
-            //white pawn diagonal left
-            possibleMovesX.push_back( pieces[c].getXpos() - 1);
-            possibleMovesY.push_back( pieces[c].getYpos() + 1);
-
-          }else if(pieces[c].getXpos() == 0 && pieces[c].getYpos() > 0){
-            // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() + 1);
-            possibleMovesY.push_back(pieces[c].getYpos() + 1);
-
-          }else if(pieces[c].getXpos() == 8 && pieces[c].getYpos() > 0){
-            // white pawn diagonal right
-            possibleMovesX.push_back(pieces[c].getXpos() - 1);
-            possibleMovesY.push_back(pieces[c].getYpos() + 1);
-
-          }
-
-        }
-
-      }else if(pieces[c].getType() == 'Q'){
-
-        for(int x = 0; x < 8; x++){
-          for(int y = 0; y < 8; y++){
-            if(Queen(c, x,y,false, true)){
-
-              possibleMovesX.push_back(x);
-              possibleMovesY.push_back(y);
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+              }
             }
           }
-        }
 
-      }else if(pieces[c].getType() == 'R'){
+        }else if(pieces[c].getType() == 'R'){
 
-        for(int x = 0; x < 8; x++){
-          for(int y = 0; y < 8; y++){
-            if(Rook(c, x,y,false, true)){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Rook(c, x,y,false, true)){
 
-              possibleMovesX.push_back(x);
-              possibleMovesY.push_back(y);
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+              }
             }
           }
-        }
 
-      }else if(pieces[c].getType() == 'B'){
+        }else if(pieces[c].getType() == 'B'){
 
-        for(int x = 0; x < 8; x++){
-          for(int y = 0; y < 8; y++){
-            if(Bishop(c, x,y,false, true)){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Bishop(c, x,y,false, true)){
 
-              possibleMovesX.push_back(x);
-              possibleMovesY.push_back(y);
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+              }
             }
           }
-        }
 
 
-      }else if(pieces[c].getType() == 'H'){
+        }else if(pieces[c].getType() == 'H'){
 
-        for(int x = 0; x < 8; x++){
-          for(int y = 0; y < 8; y++){
-            if(Horse(c, x,y,false, true)){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Horse(c, x,y,false, true)){
 
-              possibleMovesX.push_back(x);
-              possibleMovesY.push_back(y);
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+              }
             }
           }
-        }
 
 
-      }else if(pieces[c].getType() == 'K'){
+        }else if(pieces[c].getType() == 'K'){
 
-        for(int x = 0; x < 8; x++){
-          for(int y = 0; y < 8; y++){
-            if(King(c, x,y,false, true)){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(King(c, x,y,false, true)){
 
-              possibleMovesX.push_back(x);
-              possibleMovesY.push_back(y);
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+              }
             }
           }
+
         }
 
       }
-
     }
-
   }
 
 
@@ -1579,107 +1595,108 @@ bool checkMate(bool colorW){
   if(check(colorW)){
     for(int f = 0; f < arrayLength; f++){
       if(pieces[f].getWhite() == colorW){
-        oldX = pieces[f].getXpos();
-        oldY = pieces[f].getYpos();
+        if(pieces[f].getXpos() != 9 && pieces[f].getYpos() != 9){
+          oldX = pieces[f].getXpos();
+          oldY = pieces[f].getYpos();
 
-        if(pieces[f].getType() == 'P'){
+          if(pieces[f].getType() == 'P'){
 
-          for(int x = 0; x < 8; x++){
-            for(int y = 0; y < 8; y++){
-              if(Pawn(f, x,y,false, true)){
-                Pawn(f, x,y,true, true);
-                if(check(colorW) == false){
+            for(int x = 0; x < 8; x++){
+              for(int y = 0; y < 8; y++){
+                if(Pawn(f, x,y,false, true)){
+                  Pawn(f, x,y,true, true);
+                  if(check(colorW) == false){
+                    pieces[f].setCoords(oldX,oldY);
+                    return false;
+                  }
                   pieces[f].setCoords(oldX,oldY);
-                  return false;
                 }
-                pieces[f].setCoords(oldX,oldY);
               }
             }
-          }
 
 
-        }else if(pieces[f].getType() == 'Q'){
+          }else if(pieces[f].getType() == 'Q'){
 
 
-          for(int x = 0; x < 8; x++){
-            for(int y = 0; y < 8; y++){
-              if(Queen(f, x,y,false, true)){
-                Queen(f, x,y,true, true);
-                if(check(colorW) == false){
+            for(int x = 0; x < 8; x++){
+              for(int y = 0; y < 8; y++){
+                if(Queen(f, x,y,false, true)){
+                  Queen(f, x,y,true, true);
+                  if(check(colorW) == false){
+                    pieces[f].setCoords(oldX,oldY);
+                    return false;
+                  }
                   pieces[f].setCoords(oldX,oldY);
-                  return false;
                 }
-                pieces[f].setCoords(oldX,oldY);
               }
             }
-          }
 
-        }else if(pieces[f].getType() == 'R'){
+          }else if(pieces[f].getType() == 'R'){
 
 
-          for(int x = 0; x < 8; x++){
-            for(int y = 0; y < 8; y++){
-              if(Rook(f, x,y,false, true)){
-                Rook(f, x,y,true, true);
-                if(check(colorW) == false){
+            for(int x = 0; x < 8; x++){
+              for(int y = 0; y < 8; y++){
+                if(Rook(f, x,y,false, true)){
+                  Rook(f, x,y,true, true);
+                  if(check(colorW) == false){
+                    pieces[f].setCoords(oldX,oldY);
+                    return false;
+                  }
                   pieces[f].setCoords(oldX,oldY);
-                  return false;
                 }
-                pieces[f].setCoords(oldX,oldY);
               }
             }
-          }
 
 
-        }else if(pieces[f].getType() == 'B'){
+          }else if(pieces[f].getType() == 'B'){
 
 
-          for(int x = 0; x < 8; x++){
-            for(int y = 0; y < 8; y++){
-              if(Bishop(f, x,y,false, true)){
-                Bishop(f, x,y,true, true);
-                if(check(colorW) == false){
+            for(int x = 0; x < 8; x++){
+              for(int y = 0; y < 8; y++){
+                if(Bishop(f, x,y,false, true)){
+                  Bishop(f, x,y,true, true);
+                  if(check(colorW) == false){
+                    pieces[f].setCoords(oldX,oldY);
+                    return false;
+                  }
                   pieces[f].setCoords(oldX,oldY);
-                  return false;
                 }
-                pieces[f].setCoords(oldX,oldY);
               }
             }
-          }
 
-        }else if(pieces[f].getType() == 'H'){
+          }else if(pieces[f].getType() == 'H'){
 
 
-          for(int x = 0; x < 8; x++){
-            for(int y = 0; y < 8; y++){
-              if(Horse(f, x,y,false, true)){
-                Horse(f, x,y,true, true);
-                if(check(colorW) == false){
+            for(int x = 0; x < 8; x++){
+              for(int y = 0; y < 8; y++){
+                if(Horse(f, x,y,false, true)){
+                  Horse(f, x,y,true, true);
+                  if(check(colorW) == false){
+                    pieces[f].setCoords(oldX,oldY);
+                    return false;
+                  }
                   pieces[f].setCoords(oldX,oldY);
-                  return false;
                 }
-                pieces[f].setCoords(oldX,oldY);
               }
             }
-          }
 
-        }else if(pieces[f].getType() == 'K'){
+          }else if(pieces[f].getType() == 'K'){
 
-          for(int x = 0; x < 8; x++){
-            for(int y = 0; y < 8; y++){
-              if(King(f, x,y,false, true)){
-                King(f, x,y,true, true);
-                if(check(colorW) == false){
+            for(int x = 0; x < 8; x++){
+              for(int y = 0; y < 8; y++){
+                if(King(f, x,y,false, true)){
+                  King(f, x,y,true, true);
+                  if(check(colorW) == false){
+                    pieces[f].setCoords(oldX,oldY);
+                    return false;
+                  }
                   pieces[f].setCoords(oldX,oldY);
-                  return false;
                 }
-                pieces[f].setCoords(oldX,oldY);
               }
             }
-          }
 
+          }
         }
-
       }
 
     }
@@ -1702,21 +1719,193 @@ void promotion(int i){
   }
 }
 
-void AI() {
+void possibleMoves(bool white){
+
+  possibleMovesX.clear();
+  possibleMovesY.clear();
+  possibleMovesType.clear();
+
+  for(int c = 0; c < arrayLength; c++){
+    if(pieces[c].getXpos() != 9 && pieces[c].getYpos() != 9){
+      if(pieces[c].getWhite() == white){
+
+        if(pieces[c].getType() == 'P'){
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Pawn(c, x,y,false, true)){
+
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+                possibleMovesType.push_back('P');
+              }
+            }
+          }
 
 
-  srand(time(NULL));
+        }else if(pieces[c].getType() == 'Q'){
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Queen(c, x,y,false, true)){
+
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+                possibleMovesType.push_back('Q');
+
+              }
+            }
+          }
+
+        }else if(pieces[c].getType() == 'R'){
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Rook(c, x,y,false, true)){
+
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+                possibleMovesType.push_back('R');
+
+              }
+            }
+          }
+
+        }else if(pieces[c].getType() == 'B'){
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Bishop(c, x,y,false, true)){
+
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+                possibleMovesType.push_back('B');
+
+              }
+            }
+          }
+
+
+        }else if(pieces[c].getType() == 'H'){
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(Horse(c, x,y,false, true)){
+
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+                possibleMovesType.push_back('H');
+
+              }
+            }
+          }
+
+
+        }else if(pieces[c].getType() == 'K'){
+
+          for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+              if(King(c, x,y,false, true)){
+
+                possibleMovesX.push_back(x);
+                possibleMovesY.push_back(y);
+                possibleMovesType.push_back('K');
+
+              }
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+
+}
+
+double evaluateBoard(){
+  whitek =0;
+  whitep =0;
+  whiteh =0;
+  whiter =0;
+  whiteb =0;
+  whiteq =0;
+  blackk =0;
+  blackp =0;
+  blackh =0;
+  blackr =0;
+  blackb =0;
+  blackq =0;
+  evaluation = 0;
+  possibleMoves(false);
+  possibleMovesBlack = possibleMovesX.size();
+  possibleMoves(true);
+  possibleMovesWhite = possibleMovesX.size();
+  for(int o = 0; o < arrayLength; o++){
+    if(pieces[o].getXpos() != 9 && pieces[o].getYpos() != 9){
+      if(pieces[o].getWhite()){
+        switch(pieces[o].getType()) {
+          case 'P' :
+          whitep += 1;
+          break;       // and exits the switch
+          case 'K' :
+          whitek += 1;
+          break;
+          case 'Q' :
+          whiteq += 1;
+          break;
+          case 'R' :
+          whiter += 1;
+          break;
+          case 'H' :
+          whiteh += 1;
+          break;
+          case 'B' :
+          whiteb += 1;
+          break;
+        }
+      }else{
+        switch(pieces[o].getType()) {
+          case 'P' :
+          blackp += 1;
+          break;       // and exits the switch
+          case 'K' :
+          blackk += 1;
+          break;
+          case 'Q' :
+          blackq += 1;
+          break;
+          case 'R' :
+          blackr += 1;
+          break;
+          case 'H' :
+          blackh += 1;
+          break;
+          case 'B' :
+          blackb+= 1;
+          break;
+        }
+      }
+    }
+  }
+  evaluation = 200*(whitek - blackk) + 9*(whiteq-blackq) + 5*(whiter-blackr) + 3*(whiteb - blackb + whiteh - blackh) + 1*(whitep - blackp) + 0.1*(possibleMovesWhite  - possibleMovesBlack) ;
+
+
+  return evaluation;
+}
+
+void AI(bool white) {
+  cout<<"evaluation "<< evaluateBoard()<< endl;
+  possibleMoves(false);
+
   AIloop = true;
   while(AIloop){
-    if (randomAI) {
 
-      randAIselect = rand() % 16;
-      randAIX = rand() % 8;
-      randAIY = rand() % 8;
-    //  cout<< "x"<< randAIX << endl << "y"<< randAIY << endl << "piece"<< randAIselect<< endl;
-    }
+    randAIselect = rand() % 16;
+    randAIX = rand() % 8;
+    randAIY = rand() % 8;
 
-    if(pieces[randAIselect].getWhite() == false){
+
+    if(pieces[randAIselect].getWhite() == white){
 
       if(pieces[randAIselect].getType() == 'P'){
 
@@ -1776,8 +1965,9 @@ void AI() {
       }
 
     }
-  }
 
+  }
+  
 }
 
 void passTurn(){
@@ -1789,7 +1979,7 @@ void passTurn(){
     }
     else{
       if (randomAI) {
-        AI();
+        AI(false);
         whiteTurn = true;
       }else{
         whiteTurn = false;
@@ -1811,6 +2001,7 @@ void passTurn(){
 ////////////////////////////////////////////////////////////////////////////////
 
 int main(){
+  srand(time(NULL));
   startPage();
   cout << "\e[8;22;50t";
   if (mode == "Random")
