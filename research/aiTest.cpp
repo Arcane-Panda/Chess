@@ -138,7 +138,10 @@ Piece WH2('H',6,7,true);
 
 vector<int> possibleMovesX;
 vector<int> possibleMovesY;
-vector<char> possibleMovesType;
+vector<int> possibleMovesPiece;
+vector<int> possibleMoves1X;
+vector<int> possibleMoves1Y;
+vector<int> possibleMoves1Piece;
 int oldX;
 int oldY;
 bool playing = true;
@@ -199,6 +202,7 @@ int blackq;
 double evaluation;
 int possibleMovesBlack;
 int possibleMovesWhite;
+int aiLevel = 1;
 // functions
 
 void save(string file){
@@ -1723,7 +1727,7 @@ void possibleMoves(bool white){
 
   possibleMovesX.clear();
   possibleMovesY.clear();
-  possibleMovesType.clear();
+  possibleMovesPiece.clear();
 
   for(int c = 0; c < arrayLength; c++){
     if(pieces[c].getXpos() != 9 && pieces[c].getYpos() != 9){
@@ -1736,7 +1740,7 @@ void possibleMoves(bool white){
 
                 possibleMovesX.push_back(x);
                 possibleMovesY.push_back(y);
-                possibleMovesType.push_back('P');
+                possibleMovesPiece.push_back(c);
               }
             }
           }
@@ -1750,8 +1754,7 @@ void possibleMoves(bool white){
 
                 possibleMovesX.push_back(x);
                 possibleMovesY.push_back(y);
-                possibleMovesType.push_back('Q');
-
+                possibleMovesPiece.push_back(c);
               }
             }
           }
@@ -1764,7 +1767,7 @@ void possibleMoves(bool white){
 
                 possibleMovesX.push_back(x);
                 possibleMovesY.push_back(y);
-                possibleMovesType.push_back('R');
+                possibleMovesPiece.push_back(c);
 
               }
             }
@@ -1778,8 +1781,7 @@ void possibleMoves(bool white){
 
                 possibleMovesX.push_back(x);
                 possibleMovesY.push_back(y);
-                possibleMovesType.push_back('B');
-
+                possibleMovesPiece.push_back(c);
               }
             }
           }
@@ -1793,8 +1795,7 @@ void possibleMoves(bool white){
 
                 possibleMovesX.push_back(x);
                 possibleMovesY.push_back(y);
-                possibleMovesType.push_back('H');
-
+                possibleMovesPiece.push_back(c);
               }
             }
           }
@@ -1808,8 +1809,7 @@ void possibleMoves(bool white){
 
                 possibleMovesX.push_back(x);
                 possibleMovesY.push_back(y);
-                possibleMovesType.push_back('K');
-
+                possibleMovesPiece.push_back(c);
               }
             }
           }
@@ -1896,78 +1896,122 @@ double evaluateBoard(){
 void AI(bool white) {
   cout<<"evaluation "<< evaluateBoard()<< endl;
   possibleMoves(false);
+  if(aiLevel == 1){
+    AIloop = true;
+    while(AIloop){
 
-  AIloop = true;
-  while(AIloop){
+      randAIselect = rand() % 16;
+      randAIX = rand() % 8;
+      randAIY = rand() % 8;
 
-    randAIselect = rand() % 16;
-    randAIX = rand() % 8;
-    randAIY = rand() % 8;
+      if(pieces[randAIselect].getXpos() != 9 && pieces[randAIselect].getYpos() != 9){
+        if(pieces[randAIselect].getWhite() == white){
+
+          oldX = pieces[f].getXpos();
+          oldY = pieces[f].getYpos();
+
+          if(pieces[randAIselect].getType() == 'P'){
 
 
-    if(pieces[randAIselect].getWhite() == white){
+            if(Pawn(randAIselect, randAIX ,randAIY ,false, true)){
+              Pawn(randAIselect, randAIX ,randAIY ,true, false);
+              if(check(true)){
+                pieces[randAIselect].setCoords(oldX,oldY);
+              }else{
+                AIloop = false;
+              }
 
-      if(pieces[randAIselect].getType() == 'P'){
+
+            }
 
 
-        if(Pawn(randAIselect, randAIX ,randAIY ,false, true)){
-          Pawn(randAIselect, randAIX ,randAIY ,true, false);
-          AIloop = false;
+          }else if(pieces[randAIselect].getType() == 'Q'){
+            if(Queen(randAIselect, randAIX,randAIY,false, true)){
+              Queen(randAIselect, randAIX,randAIY,true, false);
+              if(check(true)){
+                pieces[randAIselect].setCoords(oldX,oldY);
+              }else{
+                AIloop = false;
+              }
+                        }
+
+
+
+          }else if(pieces[randAIselect].getType() == 'R'){
+
+
+            if(Rook(randAIselect, randAIX,randAIY,false, true)){
+              Rook(randAIselect, randAIX,randAIY,true, false);
+              if(check(true)){
+                pieces[randAIselect].setCoords(oldX,oldY);
+              }else{
+                AIloop = false;
+              }
+                        }
+
+
+          }else if(pieces[randAIselect].getType() == 'B'){
+
+
+            if(Bishop(randAIselect, randAIX,randAIY,false, true)){
+              Bishop(randAIselect, randAIX,randAIY,true, false);
+              if(check(true)){
+                pieces[randAIselect].setCoords(oldX,oldY);
+              }else{
+                AIloop = false;
+              }
+                        }
+
+
+
+          }else if(pieces[randAIselect].getType() == 'H'){
+
+            if(Horse(randAIselect, randAIX,randAIY,false, true)){
+              Horse(randAIselect, randAIX,randAIY,true, false);
+              if(check(true)){
+                pieces[randAIselect].setCoords(oldX,oldY);
+              }else{
+                AIloop = false;
+              }
+
+            }
+
+
+          }else if(pieces[randAIselect].getType() == 'K'){
+
+
+            if(King(randAIselect, randAIX,randAIY,false, true)){
+              King(randAIselect, randAIX,randAIY,true, false);
+              if(check(true)){
+                pieces[randAIselect].setCoords(oldX,oldY);
+              }else{
+                AIloop = false;
+              }
+                            
+            }
+
+          }
 
         }
-
-
-      }else if(pieces[randAIselect].getType() == 'Q'){
-        if(Queen(randAIselect, randAIX,randAIY,false, true)){
-          Queen(randAIselect, randAIX,randAIY,true, false);
-          AIloop = false;
-        }
-
-
-
-      }else if(pieces[randAIselect].getType() == 'R'){
-
-
-        if(Rook(randAIselect, randAIX,randAIY,false, true)){
-          Rook(randAIselect, randAIX,randAIY,true, false);
-          AIloop = false;
-        }
-
-
-      }else if(pieces[randAIselect].getType() == 'B'){
-
-
-        if(Bishop(randAIselect, randAIX,randAIY,false, true)){
-          Bishop(randAIselect, randAIX,randAIY,true, false);
-          AIloop = false;
-        }
-
-
-
-      }else if(pieces[randAIselect].getType() == 'H'){
-
-        if(Horse(randAIselect, randAIX,randAIY,false, true)){
-          Horse(randAIselect, randAIX,randAIY,true, false);
-          AIloop = false;
-
-        }
-
-
-      }else if(pieces[randAIselect].getType() == 'K'){
-
-
-        if(King(randAIselect, randAIX,randAIY,false, true)){
-          King(randAIselect, randAIX,randAIY,true, false);
-          AIloop = false;
-
-        }
-
       }
-
     }
 
+
+
+
   }
-  
+
+  else if(aiLevel == 2){
+
+
+
+
+
+
+  }
+
+
+
 }
 
 void passTurn(){
@@ -1981,6 +2025,12 @@ void passTurn(){
       if (randomAI) {
         AI(false);
         whiteTurn = true;
+
+
+
+
+
+
       }else{
         whiteTurn = false;
         cout << endl << endl << endl << endl << "\033[1;92mBlack Turn\033[0m\n" << endl;
@@ -2068,8 +2118,10 @@ int main(){
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
           }
-          passTurn();
+
         }
       }else if (pieces[i].getType() == 'R')
       {
@@ -2079,8 +2131,10 @@ int main(){
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
           }
-          passTurn();
+
         }
       }else if (pieces[i].getType() == 'B')
       {
@@ -2090,8 +2144,10 @@ int main(){
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
+          }else{
+            passTurn();
           }
-          passTurn();
+
         }
       }else if (pieces[i].getType() == 'H')
       {
@@ -2101,8 +2157,11 @@ int main(){
           if(check(true)){
             pieces[i].setCoords(oldArrayX,oldArrayY);
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. You can't move into check. Try again!\033[0m\n" << endl;
+          } else{
+            passTurn();
+
           }
-          passTurn();
+
         }
       }
 
