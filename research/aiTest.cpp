@@ -2029,7 +2029,7 @@ void AI(bool white) {
       }
     }
     randAIPiece = rand() % (bestMove.size() -1);
-    //pieces[bestMove[randAIPiece]].setCoords(possibleMoves1X[z] ,);
+    pieces[possibleMoves1Piece[bestMove[randAIPiece]]].setCoords(possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]]);
 
   }
 
