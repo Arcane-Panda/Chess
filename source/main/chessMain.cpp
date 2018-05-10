@@ -432,7 +432,7 @@ void beginners(){
       cout<<"   Pieces can't move through other pieces, nor    "<< endl;
       cout<<"           onto pieces of the same color          "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      1 of _                      "<< endl;
+      cout<<"                      1 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -457,7 +457,7 @@ void beginners(){
       cout<<"                                                  "<< endl;
       cout<<"                                                  "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      2 of _                      "<< endl;
+      cout<<"                      2 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -482,7 +482,7 @@ void beginners(){
       cout<<"      If the king can be captured by another      "<< endl;
       cout<<"               piece, he's in check               "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      3 of _                      "<< endl;
+      cout<<"                      3 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -507,7 +507,7 @@ void beginners(){
       cout<<"     Make sure to protect him, as he is your      "<< endl;
       cout<<"                most important piece              "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      4 of _                      "<< endl;
+      cout<<"                      4 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -532,7 +532,7 @@ void beginners(){
       cout<<"                                                  "<< endl;
       cout<<"                                                  "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      5 of _                      "<< endl;
+      cout<<"                      5 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -557,7 +557,7 @@ void beginners(){
       cout<<"           and protecting each other.             "<< endl;
       cout<<"                                                  "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      6 of _                      "<< endl;
+      cout<<"                      6 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -582,7 +582,7 @@ void beginners(){
       cout<<"        square and must stick to that color       "<< endl;
       cout<<"     so bishops work well together because they   "<< endl;
       cout<<"            cover each others weaknesses          "<< endl;
-      cout<<"                      7 of _                      "<< endl;
+      cout<<"                      7 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -607,7 +607,7 @@ void beginners(){
       cout<<"                                                  "<< endl;
       cout<<"      They are also the only pieces that can      "<< endl;
       cout<<"          move through other pieces               "<< endl;
-      cout<<"                      8 of _                      "<< endl;
+      cout<<"                      8 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -632,7 +632,7 @@ void beginners(){
       cout<<"   forward two squares. Pawns can only capture    "<< endl;
       cout<<"    pieces that are diagonally in front of them   "<< endl;
       cout<<"     They can never move or capture backwards.    "<< endl;
-      cout<<"                      9 of _                      "<< endl;
+      cout<<"                     9 of 11                      "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -657,7 +657,7 @@ void beginners(){
       cout<<"      A pawn is usually promoted to a queen.      "<< endl;
       cout<<"                                                  "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                      9 of _                      "<< endl;
+      cout<<"                     10 of 11                     "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -682,7 +682,7 @@ void beginners(){
       cout<<"   This must be done immediatly after the first   "<< endl;
       cout<<"       pawns moves, or the option is lost.        "<< endl;
       cout<<"                                                  "<< endl;
-      cout<<"                     10 of _                      "<< endl;
+      cout<<"                     10 of 11                     "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<"                                                  "<< endl;
       cout<<incorect<< endl;
@@ -708,7 +708,7 @@ void beginners(){
       cout<<"  next to the king on the opposite side. It must  "<< endl;
       cout<<"   be both pieces first moves, and there can't    "<< endl;
       cout<<"         be any pieces in between them.           "<< endl;
-      cout<<"                     11 of _                      "<< endl;
+      cout<<"                     11 of 11                     "<< endl;
       cout<<"                       Exit                       "<< endl;
       cout<<incorect<< endl;
       incorectSelect = false;
@@ -735,7 +735,25 @@ void beginners(){
     } else if(menuSelect == "5")
     {
       pageNum = 5;
-    } else {
+    } else if(menuSelect == "6")
+    {
+      pageNum = 6;
+    } else if(menuSelect == "7")
+    {
+      pageNum = 7;
+    } else if(menuSelect == "8")
+    {
+      pageNum = 8;
+    } else if(menuSelect == "9")
+    {
+      pageNum = 9;
+    } else if(menuSelect == "10")
+    {
+      pageNum = 10;
+    } else if(menuSelect == "11")
+    {
+      pageNum = 11;
+    }  else {
       incorectSelect = true;
     }
   }
