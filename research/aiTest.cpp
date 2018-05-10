@@ -142,6 +142,7 @@ vector<int> possibleMovesPiece;
 vector<int> possibleMoves1X;
 vector<int> possibleMoves1Y;
 vector<int> possibleMoves1Piece;
+vector<int> bestMove;
 int oldX;
 int oldY;
 bool playing = true;
@@ -187,6 +188,7 @@ int randAIselect;
 bool AIloop = true;
 int randAIX;
 int randAIY;
+int randAIPiece;
 int whitek;
 int whitep;
 int whiteh;
@@ -203,6 +205,9 @@ double evaluation;
 int possibleMovesBlack;
 int possibleMovesWhite;
 int aiLevel = 1;
+double aiEval;
+int oldX1;
+int oldY1;
 // functions
 
 void save(string file){
@@ -1933,7 +1938,7 @@ void AI(bool white) {
               }else{
                 AIloop = false;
               }
-                        }
+            }
 
 
 
@@ -1947,7 +1952,7 @@ void AI(bool white) {
               }else{
                 AIloop = false;
               }
-                        }
+            }
 
 
           }else if(pieces[randAIselect].getType() == 'B'){
@@ -1960,7 +1965,7 @@ void AI(bool white) {
               }else{
                 AIloop = false;
               }
-                        }
+            }
 
 
 
@@ -1987,7 +1992,7 @@ void AI(bool white) {
               }else{
                 AIloop = false;
               }
-                            
+
             }
 
           }
@@ -2003,10 +2008,28 @@ void AI(bool white) {
 
   else if(aiLevel == 2){
 
+    aiEval = 0;
+    possibleMoves(false);
+    possibleMoves1X = possibleMoves1X;;
+    possibleMoves1Y =  possibleMovesY;
+    possibleMoves1Piece = possibleMovesPiece;
 
-
-
-
+    for(int z = 0; z <  possibleMoves1Piece.size() ; z++){
+      if(pieces[f].getWhite() == white){
+        if(pieces[f].getXpos() != 9 && pieces[f].getYpos() != 9){
+          oldX1 = pieces[possibleMoves1Piece[z]].getXpos();
+          oldY1 = pieces[possibleMoves1Piece[z]].getYpos();
+          pieces[possibleMoves1Piece[z]].setCoords(possibleMoves1X[z],possibleMoves1Y[z]);
+          if( evaluateBoard() <= aiEval ){
+            aiEval = evaluateBoard;
+            bestMove.push_back(z);
+          }
+          pieces[possibleMoves1Piece[z]].setCoords(oldX1,oldY1);
+        }
+      }
+    }
+    randAIPiece = rand() % (bestMove.size() -1);
+    //pieces[bestMove[randAIPiece]].setCoords(possibleMoves1X[z] ,);
 
   }
 
