@@ -613,6 +613,106 @@ void beginners(){
       cout<<incorect<< endl;
       incorectSelect = false;
       cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 9)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                   The Pawn (P)                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     Pawns are unusual, because they move and     "<< endl;
+      cout<<"  capture in different ways. Pawns can only move  "<< endl;
+      cout<<"    one square forward at a time, except for      "<< endl;
+      cout<<"   their very first move, where they can move     "<< endl;
+      cout<<"   forward two squares. Pawns can only capture    "<< endl;
+      cout<<"    pieces that are diagonally in front of them   "<< endl;
+      cout<<"     They can never move or capture backwards.    "<< endl;
+      cout<<"                      9 of _                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 10)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Special Rules                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Pawn Promotion                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"   When a pawn reaches the opposite side of the   "<< endl;
+      cout<<"       board, it can become any other piece.      "<< endl;
+      cout<<"      A pawn is usually promoted to a queen.      "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      9 of _                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 10)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                    En Passant                    "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"  If a pawn moves two squares on its first move,  "<< endl;
+      cout<<"     and by doing so lands to the side of an      "<< endl;
+      cout<<"  opponent's pawn, the other pawn has the option  "<< endl;
+      cout<<"    of capturing the first pawn as it passes by.  "<< endl;
+      cout<<"   This must be done immediatly after the first   "<< endl;
+      cout<<"       pawns moves, or the option is lost.        "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                     10 of _                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 11)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                     Castling                     "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"   Castling your king lets you do two important   "<< endl;
+      cout<<"   things. get your king to safety, and get your  "<< endl;
+      cout<<"     rook out of the corner and into the game.    "<< endl;
+      cout<<"    To castle, move your king two spaces over to  "<< endl;
+      cout<<"   one side, then move that side's rook to right  "<< endl;
+      cout<<"  next to the king on the opposite side. It must  "<< endl;
+      cout<<"   be both pieces first moves, and there can't    "<< endl;
+      cout<<"         be any pieces in between them.           "<< endl;
+      cout<<"                     11 of _                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
     }
 
     //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
