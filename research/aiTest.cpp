@@ -196,7 +196,11 @@ string incorect;
 bool incorectSelect = false;
 bool startMenu = true;
 bool instructionsMenu = false;
+bool howToPlay = false;
 bool modeMenu = false;
+bool commandsMenu = false;
+bool beginnersMenu = false;
+bool savingAndLoadingMenu = false;
 bool startSelections = false;
 bool loadGames = false;
 bool inputting = false;
@@ -230,6 +234,10 @@ double aiEval;
 int oldX1;
 int oldY1;
 bool aiFirst;
+
+string file_path = __FILE__;
+string dir_path = file_path.substr(0, file_path.rfind("\\"));
+string location = dir_path.substr(0, dir_path.size()-13);
 // functions
 
 void save(string file){
