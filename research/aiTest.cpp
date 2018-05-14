@@ -1,6 +1,3 @@
-// include the main stuff for pieces in the ai
-
-
 
 #include <dirent.h>
 #include <iostream>
@@ -1787,11 +1784,11 @@ void possibleMoves(bool white){
           for(int x = 0; x < 8; x++){
             for(int y = 0; y < 8; y++){
               if(Pawn(c, x,y,false, true)){
-                if(!check(white)){
+              if(check(white) == false){
                   possibleMovesX.push_back(x);
                   possibleMovesY.push_back(y);
                   possibleMovesPiece.push_back(c);
-                }
+              }
               }
             }
           }
@@ -1803,11 +1800,11 @@ void possibleMoves(bool white){
             for(int y = 0; y < 8; y++){
               if(Queen(c, x,y,false, true)){
 
-                if(!check(white)){
+               if(check(white) == false ){
                   possibleMovesX.push_back(x);
                   possibleMovesY.push_back(y);
                   possibleMovesPiece.push_back(c);
-                }
+               }
               }
             }
           }
@@ -1818,11 +1815,11 @@ void possibleMoves(bool white){
             for(int y = 0; y < 8; y++){
               if(Rook(c, x,y,false, true)){
 
-                if(!check(white)){
+               if(check(white) == false){
                   possibleMovesX.push_back(x);
                   possibleMovesY.push_back(y);
                   possibleMovesPiece.push_back(c);
-                }
+               }
               }
             }
           }
@@ -1833,11 +1830,11 @@ void possibleMoves(bool white){
             for(int y = 0; y < 8; y++){
               if(Bishop(c, x,y,false, true)){
 
-                if(!check(white)){
+              if(check(white) == false){
                   possibleMovesX.push_back(x);
                   possibleMovesY.push_back(y);
                   possibleMovesPiece.push_back(c);
-                }
+              }
               }
             }
           }
@@ -1849,11 +1846,11 @@ void possibleMoves(bool white){
             for(int y = 0; y < 8; y++){
               if(Horse(c, x,y,false, true)){
 
-                if(!check(white)){
+               if(check(white) == false){
                   possibleMovesX.push_back(x);
                   possibleMovesY.push_back(y);
                   possibleMovesPiece.push_back(c);
-                }
+              }
               }
             }
           }
@@ -1865,11 +1862,11 @@ void possibleMoves(bool white){
             for(int y = 0; y < 8; y++){
               if(King(c, x,y,false, true)){
 
-                if(!check(white)){
+               if(check(white) == false){
                   possibleMovesX.push_back(x);
                   possibleMovesY.push_back(y);
                   possibleMovesPiece.push_back(c);
-                }
+              }
               }
             }
           }
@@ -2101,7 +2098,7 @@ void AI(bool white) {
 
           for(int r = 0; r < arrayLength; r++){
 
-            if(pieces[r].getXpos() == possibleMoves1X[possibleMovesX[z]] && pieces[r].getYpos() == possibleMoves1Y[possibleMovesY[z]]){
+            if(pieces[r].getXpos() == possibleMoves1X[z] && pieces[r].getYpos() == possibleMoves1Y[z]){
 
               displacedX.push_back(pieces[r].getXpos());
               displacedY.push_back(pieces[r].getYpos());
@@ -2153,31 +2150,43 @@ void AI(bool white) {
     if(bestMove.size() > 1)  {
       randAIPiece = rand() % bestMove.size() ;
     }
-    //    pieces[possibleMoves1Piece[bestMove[randAIPiece]]].setCoords(possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]]);
 
-    if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'P')
-    {
-      Pawn(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    for(int r = 0; r < arrayLength; r++){
 
-    }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'K')
-    {
-      King(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+      if(pieces[r].getXpos() == possibleMoves1X[bestMove[randAIPiece]] && pieces[r].getYpos() == possibleMoves1Y[bestMove[randAIPiece]]){
 
-    } else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'Q')
-    {
-      Queen(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
 
-    }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'R')
-    {
-      Rook(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
-    }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'B')
-    {
-      Bishop(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+        pieces[r].setCoords(9,9);
 
-    }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'H')
-    {
-      Horse(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+      }
+
     }
+
+        pieces[possibleMoves1Piece[bestMove[randAIPiece]]].setCoords(possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]]);
+
+    // if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'P')
+    // {
+    //   Pawn(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    //
+    // }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'K')
+    // {
+    //   King(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    //
+    // } else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'Q')
+    // {
+    //   Queen(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    //
+    // }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'R')
+    // {
+    //   Rook(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    // }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'B')
+    // {
+    //   Bishop(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    //
+    // }else if (pieces[possibleMoves1Piece[bestMove[randAIPiece]]].getType() == 'H')
+    // {
+    //   Horse(possibleMoves1Piece[bestMove[randAIPiece]], possibleMoves1X[bestMove[randAIPiece]], possibleMoves1Y[bestMove[randAIPiece]], true, false);
+    // }
 
   }
 
