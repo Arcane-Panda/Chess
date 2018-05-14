@@ -233,7 +233,7 @@ bool aiFirst;
 // functions
 
 void save(string file){
-  ofstream outfile("/Users/9625014/Programming1Folder/Term3/Chess/saves/"+file);
+  ofstream outfile( location + "saves/"+file);
   for(int c = 0; c < arrayLength; c++){
     outfile << pieces[c].getXpos() << pieces[c].getYpos();
   }
@@ -243,67 +243,82 @@ void save(string file){
 
 void load(string file)
 {
+  cout<< file<< endl;
   ifstream infile;
-  infile.open(file);
-
-  string saveFile;
-  infile >> saveFile;
-  infile.close();
-  BP1.setCoords(saveFile.at(0),saveFile.at(1));
-  BP2.setCoords(saveFile.at(2),saveFile.at(3));
-  BP3.setCoords(saveFile.at(4),saveFile.at(5));
-  BP4.setCoords(saveFile.at(6),saveFile.at(7));
-  BP5.setCoords(saveFile.at(8),saveFile.at(9));
-  BP6.setCoords(saveFile.at(10),saveFile.at(11));
-  BP7.setCoords(saveFile.at(12),saveFile.at(13));
-  BP8.setCoords(saveFile.at(14),saveFile.at(15));
-
-  BQ.setCoords(saveFile.at(16),saveFile.at(17));
-
-  BK.setCoords(saveFile.at(18),saveFile.at(19));
-
-  BB1.setCoords(saveFile.at(20),saveFile.at(21));
-  BB2.setCoords(saveFile.at(22),saveFile.at(23));
-
-  BR1.setCoords(saveFile.at(24),saveFile.at(25));
-  BR2.setCoords(saveFile.at(26),saveFile.at(27));
-
-  BH1.setCoords(saveFile.at(28),saveFile.at(29));
-  BH2.setCoords(saveFile.at(30),saveFile.at(31));
-
-  WP1.setCoords(saveFile.at(32),saveFile.at(33));
-  WP2.setCoords(saveFile.at(34),saveFile.at(35));
-  WP3.setCoords(saveFile.at(36),saveFile.at(37));
-  WP4.setCoords(saveFile.at(38),saveFile.at(39));
-  WP5.setCoords(saveFile.at(40),saveFile.at(41));
-  WP6.setCoords(saveFile.at(42),saveFile.at(43));
-  WP7.setCoords(saveFile.at(44),saveFile.at(45));
-  WP8.setCoords(saveFile.at(46),saveFile.at(47));
-
-  WQ.setCoords(saveFile.at(48),saveFile.at(49));
-
-  WK.setCoords(saveFile.at(50),saveFile.at(51));
-
-  WB1.setCoords(saveFile.at(52),saveFile.at(53));
-  WB2.setCoords(saveFile.at(54),saveFile.at(55));
-
-  WR1.setCoords(saveFile.at(56),saveFile.at(57));
-  WR2.setCoords(saveFile.at(58),saveFile.at(59));
-
-  WH1.setCoords(saveFile.at(60),saveFile.at(61));
-  WH2.setCoords(saveFile.at(62),saveFile.at(63));
-
-  if(saveFile.at(64) == '1')
+  infile.open(location + "saves/"+file);
+  //infile.open(file);
+  if (infile.is_open())
   {
-    whiteTurn = true;
+    string saveFile;
+    infile >> saveFile ;
+    //infile.close();
+    cout << saveFile << endl;
+    cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
+    pieces[0].setCoords((int)saveFile.at(0) - '0',(int)saveFile.at(1) - '0');
+    cout << pieces[0].getXpos() << pieces[0].getYpos() << endl;
+    cout << saveFile.at(0) << saveFile.at(1) << "\n\n";
+    pieces[1].setCoords((int)saveFile.at(2)- '0',(int)saveFile.at(3) - '0');
+    pieces[2].setCoords((int)saveFile.at(4) - '0',(int)saveFile.at(5) - '0');
+    pieces[3].setCoords((int)saveFile.at(6) - '0',(int)saveFile.at(7) - '0');
+    pieces[4].setCoords((int)saveFile.at(8) - '0',(int)saveFile.at(9) - '0');
+    pieces[5].setCoords((int)saveFile.at(10) - '0',(int)saveFile.at(11) - '0');
+    pieces[6].setCoords((int)saveFile.at(12) - '0',(int)saveFile.at(13) - '0');
+    pieces[7].setCoords((int)saveFile.at(14)- '0',(int)saveFile.at(15) - '0');
+
+    pieces[8].setCoords((int)saveFile.at(16) - '0',(int)saveFile.at(17) - '0');
+
+    pieces[9].setCoords((int)saveFile.at(18) - '0',(int)saveFile.at(19) - '0');
+
+    pieces[10].setCoords((int)saveFile.at(20) - '0',(int)saveFile.at(21) - '0');
+    pieces[11].setCoords((int)saveFile.at(22) - '0',(int)saveFile.at(23) - '0');
+
+    pieces[12].setCoords((int)saveFile.at(24) - '0',(int)saveFile.at(25) - '0');
+    pieces[13].setCoords((int)saveFile.at(26) - '0',(int)saveFile.at(27) - '0');
+
+    pieces[14].setCoords((int)saveFile.at(28) - '0',(int)saveFile.at(29) - '0');
+    pieces[15].setCoords((int)saveFile.at(30) - '0',(int)saveFile.at(31) - '0');
+
+    pieces[16].setCoords((int)saveFile.at(32) - '0',(int)saveFile.at(33) - '0');
+    pieces[17].setCoords((int)saveFile.at(34) - '0',(int)saveFile.at(35) - '0');
+    pieces[18].setCoords((int)saveFile.at(36) - '0',(int)saveFile.at(37) - '0');
+    pieces[19].setCoords((int)saveFile.at(38) - '0',(int)saveFile.at(39) - '0');
+    pieces[20].setCoords((int)saveFile.at(40) - '0',(int)saveFile.at(41) - '0');
+    pieces[21].setCoords((int)saveFile.at(42) - '0',(int)saveFile.at(43) - '0');
+    pieces[22].setCoords((int)saveFile.at(44) - '0',(int)saveFile.at(45) - '0');
+    pieces[23].setCoords((int)saveFile.at(46) - '0',(int)saveFile.at(47) - '0');
+
+    pieces[24].setCoords((int)saveFile.at(48) - '0',(int)saveFile.at(49) - '0');
+
+    pieces[25].setCoords((int)saveFile.at(50) - '0',(int)saveFile.at(51) - '0');
+
+    pieces[26].setCoords((int)saveFile.at(52) - '0',(int)saveFile.at(53) - '0');
+    pieces[27].setCoords((int)saveFile.at(54) - '0',(int)saveFile.at(55) - '0');
+
+    pieces[28].setCoords((int)saveFile.at(56) - '0',(int)saveFile.at(57) - '0');
+    pieces[29].setCoords((int)saveFile.at(58) - '0',(int)saveFile.at(59) - '0');
+
+    pieces[30].setCoords((int)saveFile.at(60) - '0',(int)saveFile.at(61) - '0');
+    pieces[31].setCoords((int)saveFile.at(62) - '0',(int)saveFile.at(63) - '0');
+    for (int i = 0; i < arrayLength; i++)
+    {
+      cout << pieces[i].getXpos() << pieces[i].getYpos() << endl;
+    }
+    if((int)saveFile.at(64) == '1')
+    {
+      whiteTurn = true;
+    } else
+    {
+      whiteTurn = false;
+    }
   } else
   {
-    whiteTurn = false;
+    cout << "Error Loading File" << endl;
   }
   infile.close();
 }
 
-void loadGame(){
+void loadGame()
+{
   bool loaded = false;
   while(loadGames){
     loaded = false;
@@ -325,11 +340,17 @@ void loadGame(){
     cout<<"              -----------------------             "<< endl;
     DIR *dir;
     struct dirent *ent;
-    if((dir = opendir ("/Users/9625014/Programming1Folder/Term3/Chess/saves")) != NULL)
+
+    string str = location + "saves/";
+    const char * path = str.c_str();
+    dir = opendir( path);
+    if((dir) != NULL)
     {
+      fileNames.clear();
       while((ent = readdir(dir)) != NULL)
       {
         printf ("%s\n", ent->d_name);
+        fileNames.push_back(ent->d_name);
       }
       closedir(dir);
     } else
@@ -347,33 +368,27 @@ void loadGame(){
     incorectSelect = false;
     cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
     //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
-
+    //  load(menuSelect);
     char fileName[255];
-
-    if(menuSelect == "Exit"|| menuSelect == "exit"){
-      loadGames = false;
-    } else if(menuSelect != "Exit" && menuSelect != "exit"){
-      DIR *dir;
-      struct dirent *ent;
-      while ((ent = readdir(dir)) != NULL)
-      {
-        strncpy(fileName, ent->d_name, 254);
-        fileName[254] = '\0';
-        if(fileName == menuSelect)
-        {
-          load(menuSelect);
-          loaded = true;
-        } else
-        {
-          //cout << "Invalid entry" << endl;
-        }
-
+    loaded = false;
+    for(int i = 0; i < fileNames.size(); i++){
+      if(fileNames[i] == menuSelect){
+        loaded = true;
+        load(menuSelect);
       }
-      closedir(dir);
-      //load(menuSelect);
-    }else if (loaded == false)
+    }
+    if (loaded == false)
     {
-      incorectSelect = true;
+      if(menuSelect == "Exit"|| menuSelect == "exit"){
+        loadGames = false;
+      }else{
+        incorectSelect = true;
+      }
+
+
+    }
+    else if(menuSelect != "Exit" && menuSelect != "exit"){
+
     }
   }
 }
@@ -429,7 +444,498 @@ void gameStart(){
     }
   }
 }
+void beginners(){
+  int pageNum = 1;
+  while(beginnersMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+    if (pageNum == 1)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                   Introduction                   "<< endl;
+      cout<<"    Chess is a strategy game played on a board    "<< endl;
+      cout<<"      with 2 players, one white, one black.       "<< endl;
+      cout<<"    You play by moving the pieces of your color   "<< endl;
+      cout<<" around the board according to each piece's rules "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"   Pieces can't move through other pieces, nor    "<< endl;
+      cout<<"           onto pieces of the same color          "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      1 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 2)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     However, you can move pieces onto pieces     "<< endl;
+      cout<<"           of the opposite color, and             "<< endl;
+      cout<<"            replace or 'capture' them             "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"       You win by placing your opponents king     "<< endl;
+      cout<<"          in checkmate (explained on page 4)      "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      2 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 3)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                How the Pieces Move               "<< endl;
+      cout<<"                    The King (K)                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"        Can move one square in any direction      "<< endl;
+      cout<<"        (Up, Down, Left, Right, Diagonals)        "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"      If the king can be captured by another      "<< endl;
+      cout<<"               piece, he's in check               "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      3 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 4)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"        The king cannot be moved into check       "<< endl;
+      cout<<"      and if he's in check, he must be moved out  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     If the king can't move out of check he is    "<< endl;
+      cout<<"        in checkmate, and the game is over        "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     Make sure to protect him, as he is your      "<< endl;
+      cout<<"                most important piece              "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      4 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 5)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                   The Queen (Q)                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"      The Queen is the most powerful piece.       "<< endl;
+      cout<<"      She can move in a straight line as far      "<< endl;
+      cout<<"           as possible in one direction           "<< endl;
+      cout<<"    (forward, backwards, sideways, or diagonal)   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      5 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 6)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                   The Rook (R)                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     The rook can also move as far as he wants,   "<< endl;
+      cout<<"    but only forwards, backwards, and sideways    "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"   They are quite powerful when working together  "<< endl;
+      cout<<"           and protecting each other.             "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                      6 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 7)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                   The Bishop (B)                 "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     The bishop can move any number of spaces,    "<< endl;
+      cout<<"                   only diagonaly                 "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"      Each bishop starts on a black or white      "<< endl;
+      cout<<"        square and must stick to that color       "<< endl;
+      cout<<"     so bishops work well together because they   "<< endl;
+      cout<<"            cover each others weaknesses          "<< endl;
+      cout<<"                      7 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 8)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"               The Horse/Knight (H)               "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"         The horse moves unlike any other         "<< endl;
+      cout<<"   piece in the game. It moves two spaces in a    "<< endl;
+      cout<<" non diagonal direction, and then one more space  "<< endl;
+      cout<<"      at a 90 degree angle to form an L shape     "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"      They are also the only pieces that can      "<< endl;
+      cout<<"          move through other pieces               "<< endl;
+      cout<<"                      8 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 9)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                   The Pawn (P)                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"     Pawns are unusual, because they move and     "<< endl;
+      cout<<"  capture in different ways. Pawns can only move  "<< endl;
+      cout<<"    one square forward at a time, except for      "<< endl;
+      cout<<"   their very first move, where they can move     "<< endl;
+      cout<<"   forward two squares. Pawns can only capture    "<< endl;
+      cout<<"    pieces that are diagonally in front of them   "<< endl;
+      cout<<"     They can never move or capture backwards.    "<< endl;
+      cout<<"                     9 of 11                      "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 10)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Special Rules                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Pawn Promotion                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"   When a pawn reaches the opposite side of the   "<< endl;
+      cout<<"       board, it can become any other piece.      "<< endl;
+      cout<<"      A pawn is usually promoted to a queen.      "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                     10 of 11                     "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 10)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                    En Passant                    "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"  If a pawn moves two squares on its first move,  "<< endl;
+      cout<<"     and by doing so lands to the side of an      "<< endl;
+      cout<<"  opponent's pawn, the other pawn has the option  "<< endl;
+      cout<<"    of capturing the first pawn as it passes by.  "<< endl;
+      cout<<"   This must be done immediatly after the first   "<< endl;
+      cout<<"       pawns moves, or the option is lost.        "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                     10 of 11                     "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    } else if (pageNum == 11)
+    {
+      cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                 Welcome to Chess!                "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                  Beginners Guide                 "<< endl;
+      cout<<"                   ------------                   "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"                     Castling                     "<< endl;
+      cout<<"                                                  "<< endl;
+      cout<<"   Castling your king lets you do two important   "<< endl;
+      cout<<"   things. get your king to safety, and get your  "<< endl;
+      cout<<"     rook out of the corner and into the game.    "<< endl;
+      cout<<"    To castle, move your king two spaces over to  "<< endl;
+      cout<<"   one side, then move that side's rook to right  "<< endl;
+      cout<<"  next to the king on the opposite side. It must  "<< endl;
+      cout<<"   be both pieces first moves, and there can't    "<< endl;
+      cout<<"         be any pieces in between them.           "<< endl;
+      cout<<"                     11 of 11                     "<< endl;
+      cout<<"                       Exit                       "<< endl;
+      cout<<incorect<< endl;
+      incorectSelect = false;
+      cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    }
 
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      beginnersMenu = false;
+    } else if(menuSelect == "1")
+    {
+      pageNum = 1;
+    }else if(menuSelect == "2")
+    {
+      pageNum = 2;
+    } else if(menuSelect == "3")
+    {
+      pageNum = 3;
+    } else if(menuSelect == "4")
+    {
+      pageNum = 4;
+    } else if(menuSelect == "5")
+    {
+      pageNum = 5;
+    } else if(menuSelect == "6")
+    {
+      pageNum = 6;
+    } else if(menuSelect == "7")
+    {
+      pageNum = 7;
+    } else if(menuSelect == "8")
+    {
+      pageNum = 8;
+    } else if(menuSelect == "9")
+    {
+      pageNum = 9;
+    } else if(menuSelect == "10")
+    {
+      pageNum = 10;
+    } else if(menuSelect == "11")
+    {
+      pageNum = 11;
+    }  else {
+      incorectSelect = true;
+    }
+  }
+}
+
+void howToPlayFunc(){
+
+  while(howToPlay){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                    How To Play                   "<< endl;
+    cout<<"                   ------------                   "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"             Select a piece by typing             "<< endl;
+    cout<<"                  its coordinates                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"        Move it by typing the coordinates         "<< endl;
+    cout<<"        of the space you'd like to move to        "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"           If you've never played chess:          "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                  Beginners Guide                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+    //https://www.chess.com/learn-how-to-play-chess
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      howToPlay = false;
+    }else if(menuSelect == "Beginners"|| menuSelect == "beginners")
+    {
+      beginnersMenu = true;
+      beginners();
+    } else {
+      incorectSelect = true;
+    }
+  }
+}
+void commands(){
+
+  while(commandsMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                     Commands                     "<< endl;
+    cout<<"                   ------------                   "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"               Type these instead of              "<< endl;
+    cout<<"                selecting a piece                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"            save - saves your game so it          "<< endl;
+    cout<<"               can be loaded later                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"               exit - exits the game              "<< endl;
+    cout<<"                   without saving                 "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      commandsMenu = false;
+    } else {
+      incorectSelect = true;
+    }
+  }
+}
+void savingAndLoading(){
+
+  while(savingAndLoadingMenu){
+    cout << "\e[8;22;50t";
+    system("clear");
+    if(incorectSelect == false){
+      incorect = "                                                  ";
+    }else{
+      incorect = " Please select a valid menu                       ";
+    }
+
+    cout<<"/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\/\\|/\\"<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Welcome to Chess!                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                 Saving & Loading                 "<< endl;
+    cout<<"                   ------------                   "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"            Games are saved in a folder           "<< endl;
+    cout<<"          called \"saves\" and are loaded         "<< endl;
+    cout<<"                 from the same one                "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"          Make sure the save folder is in         "<< endl;
+    cout<<"         the same place as the application        "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<"                       Exit                       "<< endl;
+    cout<<"                                                  "<< endl;
+    cout<<incorect<< endl;
+    incorectSelect = false;
+    cout<<" Type the menu you wish to select: ", cin>> menuSelect, cout<< endl;
+    //cout<<"\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/\\/|\\/"<< endl;
+
+
+    if(menuSelect == "Exit"|| menuSelect == "exit"){
+      savingAndLoadingMenu = false;
+    } else {
+      incorectSelect = true;
+    }
+  }
+}
 void instructions(){
 
   while(instructionsMenu){
@@ -448,12 +954,12 @@ void instructions(){
     cout<<"                                                  "<< endl;
     cout<<"                   Instructions                   "<< endl;
     cout<<"                   ------------                   "<< endl;
-    cout<<"                        ...                       "<< endl;
     cout<<"                                                  "<< endl;
+    cout<<"                    How To Play                   "<< endl;
     cout<<"                                                  "<< endl;
+    cout<<"                     Commands                     "<< endl;
     cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
-    cout<<"                                                  "<< endl;
+    cout<<"                 Saving & Loading                 "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -469,12 +975,23 @@ void instructions(){
 
     if(menuSelect == "Exit"|| menuSelect == "exit"){
       instructionsMenu = false;
-    }else {
+    }else if(menuSelect == "how"|| menuSelect == "How")
+    {
+      howToPlay = true;
+      howToPlayFunc();
+    } else if(menuSelect == "commands"|| menuSelect == "Commands")
+    {
+      commandsMenu = true;
+      commands();
+    }else if(menuSelect == "saving"|| menuSelect == "Saving")
+    {
+      savingAndLoadingMenu = true;
+      savingAndLoading();
+    } else {
       incorectSelect = true;
     }
   }
 }
-
 void modes(){
 
   while(modeMenu){
@@ -494,9 +1011,9 @@ void modes(){
     cout<<"                                                  "<< endl;
     cout<<"                Please select a mode              "<< endl;
     cout<<"                --------------------              "<< endl;
+    cout<<"                                                  "<< endl;
     cout<<"                      Random                      "<< endl;
     cout<<"                                                  "<< endl;
-    cout<<"                        AI                        "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
     cout<<"                                                  "<< endl;
@@ -516,14 +1033,11 @@ void modes(){
       modeMenu = false;
     } else if(menuSelect == "Random" || menuSelect == "random") {
       mode = "Random";
-    } else if (menuSelect == "AI" || menuSelect == "ai") {
-      mode = "AI";
     } else {
       incorectSelect = true;
     }
   }
 }
-
 void startPage(){
 
   while(startMenu){
@@ -566,6 +1080,7 @@ void startPage(){
       gameStart();
     }else if(menuSelect == "Instructions"|| menuSelect == "instructions"){
       instructionsMenu = true;
+
       instructions();
     } else if(menuSelect == "Modes"|| menuSelect == "modes"){
       modeMenu = true;
@@ -579,8 +1094,6 @@ void startPage(){
     }
   }
 }
-
-
 void display(){
   cout << "\n\n\n\n\n\n\n\n\n";
   cout  << endl << endl<< "            A  B  C  D  E  F  G  H " << endl;
