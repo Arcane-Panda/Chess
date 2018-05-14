@@ -164,6 +164,7 @@ vector<int> bestMove;
 vector<int> displacedX;
 vector<int> displacedY;
 vector<int> displacedPiece;
+vector<string> fileNames;
 int oldX;
 int oldY;
 bool playing = true;
