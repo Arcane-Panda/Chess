@@ -895,7 +895,6 @@ void savingAndLoading(){
     }
   }
 }
-
 void instructions(){
 
   while(instructionsMenu){
@@ -952,8 +951,6 @@ void instructions(){
     }
   }
 }
-
-
 void modes(){
 
   while(modeMenu){
@@ -1000,7 +997,6 @@ void modes(){
     }
   }
 }
-
 void startPage(){
 
   while(startMenu){
@@ -2088,10 +2084,13 @@ bool check(bool white){
 
     if(white){
       if (pieces[25].getXpos() == possibleMovesX[c] && pieces[25].getYpos() == possibleMovesY[c]){
+        //cout << "Check test\n";
         return true;
+
       }
     }else{
       if(pieces[9].getXpos() == possibleMovesX[c] && pieces[9].getYpos() == possibleMovesY[c]){
+        //cout << "Check test\n";
         return true;
       }
     }
@@ -2116,6 +2115,7 @@ bool checkMate(bool colorW){
                 Pawn(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
+                  //cout << "Test\n";
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -2123,7 +2123,7 @@ bool checkMate(bool colorW){
             }
           }
 
-
+          //  start load puzzle1.txt exit new a1 y a8 y
         }else if(pieces[f].getType() == 'Q'){
 
 
@@ -2133,6 +2133,7 @@ bool checkMate(bool colorW){
                 Queen(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
+                  //cout << "Test\n";
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -2149,6 +2150,7 @@ bool checkMate(bool colorW){
                 Rook(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
+                  //  cout << "Test\n";
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -2166,6 +2168,7 @@ bool checkMate(bool colorW){
                 Bishop(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
+                  //  cout << "Test\n";
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -2182,6 +2185,7 @@ bool checkMate(bool colorW){
                 Horse(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
+                  //cout << "Test\n";
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
@@ -2197,19 +2201,23 @@ bool checkMate(bool colorW){
                 King(f, x,y,true, true);
                 if(check(colorW) == false){
                   pieces[f].setCoords(oldX,oldY);
+                  cout << "Test\n";
+                  // cout << pieces[12].getXpos() << pieces[12].getYpos() << endl;
+                  // cout << pieces[13].getXpos() << pieces[13].getYpos() << endl;
                   return false;
                 }
                 pieces[f].setCoords(oldX,oldY);
               }
             }
           }
+          //          start load puzzle1.txt exit new a1 y a8 y
 
         }
 
       }
 
     }
-
+    cout << "Test\n";
     return true;
   }
   return false;
