@@ -167,6 +167,8 @@ vector<int> displacedPiece;
 vector<string> fileNames;
 int oldX;
 int oldY;
+int oldXa;
+int oldYa;
 bool playing = true;
 Piece pieces[32] = {BP1, BP2, BP3, BP4, BP5, BP6 ,BP7, BP8, BQ, BK, BB1, BB2, BR1, BR2, BH1, BH2, WP1, WP2, WP3, WP4, WP5, WP6, WP7, WP8, WQ, WK, WB1, WB2, WR2, WR1, WH1, WH2};
 //                   0    1   2      3   4   5     6     7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22  23  24   25   26   27   28   29   30   31
@@ -209,7 +211,7 @@ bool whiteCastle = false;
 bool blackCastle = false;
 int castleRook;
 bool open;
-bool randomAI = true;
+bool randomAI = false;
 int randAIselect;
 bool AIloop = true;
 int randAIX;
@@ -1781,7 +1783,7 @@ bool Queen(int i, int newX, int newY, bool moving, bool checkM){
 
 bool Rook(int i, int newX, int newY, bool moving, bool checkM){
   validMove = false;
-
+  cout<< "i "<< i<< endl << "newX "<< newX<<endl<< "newY "<< newY<< endl<< "moving "<< moving<< endl<< "checM "<< checkM<< endl;
   if(newX == pieces[i].getXpos()) {
 
     validMove = true;
@@ -1829,6 +1831,7 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
   }else{
     validMove = false;
   }
+  cout<< "validMove "<< validMove<< endl;
   if(validMove == true){
     for(int j = 0; j < arrayLength; j++){
       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
@@ -1837,6 +1840,8 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
           if(moving){
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
           }
+          cout<< "validMove "<< validMove<< endl;
+
           return false;
         }else{
           if(moving && checkM == false){
@@ -1845,6 +1850,8 @@ bool Rook(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
+
+
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
@@ -1910,6 +1917,8 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
   }else{
     validMove = false;
   }
+
+
   if(validMove == true){
     for(int j = 0; j < arrayLength; j++){
       if(pieces[j].getYpos() == newY && pieces[j].getXpos() == newX){
@@ -1918,7 +1927,10 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
           if(moving){
             cout << endl << endl << endl << endl << "\033[1;31mInvalid move. Try again!\033[0m\n" << endl;
           }
+
+
           return false;
+
         }else{
           if(moving && checkM == false){
             pieces[j].setCoords(9,9);
@@ -1926,6 +1938,9 @@ bool Bishop(int i, int newX, int newY, bool moving, bool checkM){
         }
       }
     }
+
+    cout<< "validMove "<< validMove<< endl;
+
     if(validMove){
       if(moving){
         pieces[i].setCoords(newX,newY);
@@ -2474,8 +2489,8 @@ void AI(bool white) {
       if(pieces[randAIselect].getXpos() != 9 && pieces[randAIselect].getYpos() != 9){
         if(pieces[randAIselect].getWhite() == white){
 
-          oldX = pieces[randAIselect].getXpos();
-          oldY = pieces[randAIselect].getYpos();
+          oldXa = pieces[randAIselect].getXpos();
+          oldYa = pieces[randAIselect].getYpos();
 
           if(pieces[randAIselect].getType() == 'P'){
 
@@ -2483,7 +2498,7 @@ void AI(bool white) {
             if(Pawn(randAIselect, randAIX ,randAIY ,false, true)){
               Pawn(randAIselect, randAIX ,randAIY ,true, false);
               if(check(true)){
-                pieces[randAIselect].setCoords(oldX,oldY);
+                pieces[randAIselect].setCoords(oldXa,oldYa);
               }else{
                 AIloop = false;
               }
@@ -2496,7 +2511,7 @@ void AI(bool white) {
             if(Queen(randAIselect, randAIX,randAIY,false, true)){
               Queen(randAIselect, randAIX,randAIY,true, false);
               if(check(true)){
-                pieces[randAIselect].setCoords(oldX,oldY);
+                pieces[randAIselect].setCoords(oldXa,oldYa);
               }else{
                 AIloop = false;
               }
@@ -2510,7 +2525,7 @@ void AI(bool white) {
             if(Rook(randAIselect, randAIX,randAIY,false, true)){
               Rook(randAIselect, randAIX,randAIY,true, false);
               if(check(true)){
-                pieces[randAIselect].setCoords(oldX,oldY);
+                pieces[randAIselect].setCoords(oldXa,oldYa);
               }else{
                 AIloop = false;
               }
@@ -2523,7 +2538,7 @@ void AI(bool white) {
             if(Bishop(randAIselect, randAIX,randAIY,false, true)){
               Bishop(randAIselect, randAIX,randAIY,true, false);
               if(check(true)){
-                pieces[randAIselect].setCoords(oldX,oldY);
+                pieces[randAIselect].setCoords(oldXa,oldYa);
               }else{
                 AIloop = false;
               }
@@ -2536,7 +2551,7 @@ void AI(bool white) {
             if(Horse(randAIselect, randAIX,randAIY,false, true)){
               Horse(randAIselect, randAIX,randAIY,true, false);
               if(check(true)){
-                pieces[randAIselect].setCoords(oldX,oldY);
+                pieces[randAIselect].setCoords(oldXa,oldYa);
               }else{
                 AIloop = false;
               }
@@ -2550,7 +2565,7 @@ void AI(bool white) {
             if(King(randAIselect, randAIX,randAIY,false, true)){
               King(randAIselect, randAIX,randAIY,true, false);
               if(check(true)){
-                pieces[randAIselect].setCoords(oldX,oldY);
+                pieces[randAIselect].setCoords(oldXa,oldYa);
               }else{
                 AIloop = false;
               }
