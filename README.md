@@ -1,5 +1,7 @@
 # Chess
-ASCII-based Chess game written in C++
+ASCII-based terminal Chess game written in C++.
+
+![Chess App](https://github.com/Arcane-Panda/Chess/blob/master/chess.png)
 
 ### Preplanning
 
